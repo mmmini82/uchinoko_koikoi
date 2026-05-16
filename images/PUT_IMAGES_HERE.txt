@@ -22,7 +22,3 @@ itsuki_lose.png
 hin_normal.png
 hin_win.png
 hin_lose.png
-
-※ キャラ選択画面と対戦中の相手表示には *_normal.png を使います。
-※ minaho_win.png は「南帆がこいこい！」した時に使います。
-※ 対戦相手の *_win.png は「相手の勝利」と「相手のこいこい！」の両方で使います。
