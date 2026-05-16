@@ -3025,6 +3025,282 @@
       }
     }
 
+  
+    /* v26: transparent character art display fix */
+    /* Web: Minaho player icon should show as a full transparent standee, not a cropped bust */
+    .playerMiniPortrait{
+      height:300px !important;
+      overflow:visible !important;
+      position:relative;
+      background:
+        radial-gradient(ellipse at center bottom,rgba(216,170,68,.20),transparent 62%),
+        linear-gradient(135deg,#1b1c2e,#4f3b68 55%,#8db8de) !important;
+    }
+    .playerMiniPortrait .charImg{
+      width:100% !important;
+      height:100% !important;
+      object-fit:contain !important;
+      object-position:center bottom !important;
+      padding:8px 4px 0 !important;
+      transform:scale(.92);
+      transform-origin:center bottom;
+      filter:drop-shadow(0 18px 28px rgba(0,0,0,.36));
+    }
+
+    /* Desktop/tablet cut-ins: allow transparent art to feel larger without accidental cropping */
+    .cutinCard{
+      overflow:visible !important;
+    }
+    .cutinPortrait{
+      overflow:visible !important;
+    }
+    .cutinPortrait .charImg{
+      object-fit:contain !important;
+      object-position:center bottom !important;
+      padding:0 !important;
+      transform:scale(1.04);
+      transform-origin:center bottom;
+    }
+
+    /* Mobile: bold full-card cut-in layout for transparent character art */
+    @media(max-width:720px){
+      .cutin{
+        padding:8px !important;
+        overflow:hidden;
+      }
+      .cutinCard{
+        width:min(96vw,720px) !important;
+        height:min(74vh,560px) !important;
+        min-height:430px !important;
+        display:block !important;
+        position:relative !important;
+        overflow:visible !important;
+        border-radius:30px !important;
+      }
+      .cutinPortrait{
+        position:absolute !important;
+        inset:-18px auto -6px -16px !important;
+        width:68% !important;
+        height:calc(100% + 26px) !important;
+        min-height:0 !important;
+        z-index:2 !important;
+        display:block !important;
+        background:transparent !important;
+        border-right:0 !important;
+        overflow:visible !important;
+        pointer-events:none;
+      }
+      .cutinPortrait .charImg{
+        width:100% !important;
+        height:100% !important;
+        max-width:none !important;
+        object-fit:contain !important;
+        object-position:left bottom !important;
+        padding:0 !important;
+        transform:scale(1.10) !important;
+        transform-origin:left bottom !important;
+        filter:drop-shadow(0 24px 34px rgba(0,0,0,.62));
+      }
+      .cutinPortrait .portraitInner{
+        height:100% !important;
+        min-height:0 !important;
+        display:grid !important;
+        place-items:center !important;
+      }
+      .cutinPortrait .faceIcon{
+        font-size:110px !important;
+      }
+      .cutinText{
+        position:absolute !important;
+        inset:0 0 0 auto !important;
+        width:58% !important;
+        z-index:4 !important;
+        padding:28px 18px 28px 20px !important;
+        display:flex !important;
+        flex-direction:column !important;
+        justify-content:center !important;
+        align-items:flex-end !important;
+        text-align:right !important;
+        background:
+          linear-gradient(90deg,transparent 0%,rgba(10,8,12,.35) 22%,rgba(10,8,12,.78) 100%);
+        border-radius:0 30px 30px 0;
+      }
+      .cutinWord{
+        font-size:clamp(46px,15vw,76px) !important;
+        line-height:.92 !important;
+        letter-spacing:.03em !important;
+      }
+      .cutinLine{
+        font-size:14px !important;
+        line-height:1.55 !important;
+        max-width:100% !important;
+      }
+      .cutinSub{
+        font-size:12px !important;
+      }
+    }
+
+    @media(max-width:480px){
+      .cutinCard{
+        height:min(72vh,520px) !important;
+        min-height:390px !important;
+        border-radius:26px !important;
+      }
+      .cutinPortrait{
+        inset:-12px auto -4px -18px !important;
+        width:72% !important;
+        height:calc(100% + 18px) !important;
+      }
+      .cutinPortrait .charImg{
+        transform:scale(1.08) !important;
+      }
+      .cutinText{
+        width:61% !important;
+        padding:24px 13px 24px 18px !important;
+        border-radius:0 26px 26px 0;
+      }
+      .cutinWord{
+        font-size:clamp(40px,15vw,62px) !important;
+      }
+      .cutinLine{
+        font-size:12px !important;
+      }
+    }
+
+    /* Very narrow phones: reduce a touch so no face/upper body gets chopped too hard */
+    @media(max-width:380px){
+      .cutinPortrait{
+        width:70% !important;
+        left:-12px !important;
+      }
+      .cutinPortrait .charImg{
+        transform:scale(.98) !important;
+      }
+      .cutinText{
+        width:63% !important;
+      }
+    }
+
+  
+    /* v27: bold cut-ins on desktop too */
+    @media(min-width:721px){
+      .cutin{
+        padding:28px !important;
+        overflow:hidden;
+      }
+      .cutinCard{
+        width:min(980px,92vw) !important;
+        min-height:520px !important;
+        height:min(68vh,620px) !important;
+        display:block !important;
+        position:relative !important;
+        overflow:visible !important;
+        border-radius:38px !important;
+        background:
+          radial-gradient(circle at 22% 58%,rgba(255,255,255,.18),transparent 18rem),
+          linear-gradient(135deg,#351015,#9e242a 45%,#1b1013) !important;
+      }
+      .cutin.koi .cutinCard{
+        background:
+          radial-gradient(circle at 22% 58%,rgba(255,255,255,.20),transparent 18rem),
+          linear-gradient(135deg,#501018,#cf4648 48%,#201015) !important;
+      }
+      .cutin.win .cutinCard{
+        background:
+          radial-gradient(circle at 22% 58%,rgba(255,255,255,.22),transparent 18rem),
+          linear-gradient(135deg,#5f3d0e,#d8aa44 50%,#221506) !important;
+      }
+      .cutin.lose .cutinCard{
+        background:
+          radial-gradient(circle at 22% 58%,rgba(255,255,255,.16),transparent 18rem),
+          linear-gradient(135deg,#141820,#445166 50%,#11151d) !important;
+      }
+      .cutin.yaku .cutinCard{
+        background:
+          radial-gradient(circle at 22% 58%,rgba(255,255,255,.18),transparent 18rem),
+          linear-gradient(135deg,#342056,#8b4ec2 50%,#1c1230) !important;
+      }
+      .cutin.draw .cutinCard{
+        background:
+          radial-gradient(circle at 22% 58%,rgba(255,255,255,.16),transparent 18rem),
+          linear-gradient(135deg,#14394a,#3c8192 50%,#102a36) !important;
+      }
+      .cutinCard::before{
+        content:"";
+        position:absolute;
+        inset:18px;
+        border:1px solid rgba(255,242,185,.18);
+        border-radius:28px;
+        pointer-events:none;
+        z-index:5;
+      }
+      .cutinPortrait{
+        position:absolute !important;
+        inset:-38px auto -8px -34px !important;
+        width:58% !important;
+        height:calc(100% + 48px) !important;
+        min-height:0 !important;
+        z-index:2 !important;
+        display:block !important;
+        background:transparent !important;
+        border-right:0 !important;
+        overflow:visible !important;
+        pointer-events:none;
+      }
+      .cutinPortrait .charImg{
+        width:100% !important;
+        height:100% !important;
+        max-width:none !important;
+        object-fit:contain !important;
+        object-position:left bottom !important;
+        padding:0 !important;
+        transform:scale(1.14) !important;
+        transform-origin:left bottom !important;
+        filter:drop-shadow(0 30px 42px rgba(0,0,0,.66));
+      }
+      .cutinPortrait .portraitInner{
+        height:100% !important;
+        min-height:0 !important;
+        display:grid !important;
+        place-items:center !important;
+      }
+      .cutinPortrait .faceIcon{
+        font-size:150px !important;
+      }
+      .cutinText{
+        position:absolute !important;
+        inset:0 0 0 auto !important;
+        width:58% !important;
+        z-index:6 !important;
+        padding:52px 48px 52px 70px !important;
+        display:flex !important;
+        flex-direction:column !important;
+        justify-content:center !important;
+        align-items:flex-end !important;
+        text-align:right !important;
+        background:
+          linear-gradient(90deg,transparent 0%,rgba(10,8,12,.22) 18%,rgba(10,8,12,.78) 100%);
+        border-radius:0 38px 38px 0;
+      }
+      .cutinWord{
+        font-size:clamp(68px,8vw,118px) !important;
+        line-height:.88 !important;
+        letter-spacing:.04em !important;
+        text-shadow:
+          0 7px 0 rgba(0,0,0,.28),
+          0 0 24px rgba(255,222,132,.36) !important;
+      }
+      .cutinLine{
+        margin-top:20px !important;
+        font-size:18px !important;
+        line-height:1.75 !important;
+        max-width:480px !important;
+      }
+      .cutinSub{
+        font-size:14px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
