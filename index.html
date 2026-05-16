@@ -2975,6 +2975,56 @@
       }
     }
 
+  
+    /* v25: collapsible captures + stronger difficulty flavor */
+    .captureToggle{
+      display:none;
+      width:100%;
+      border:0;
+      border-radius:999px;
+      padding:10px 12px;
+      margin-top:8px;
+      background:linear-gradient(135deg,#486aa8,#7aa7e8);
+      color:white;
+      font-weight:950;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(72,106,168,.20);
+    }
+    .captureDrawer{display:block}
+    .badgeRow .badge:nth-child(2){
+      background:rgba(216,170,68,.16);
+      color:#7f1f22;
+      border-color:rgba(216,170,68,.38);
+      font-weight:950;
+    }
+    .selectedPreview .badgeRow .badge:nth-child(2){
+      color:#fff2b9;
+      background:rgba(216,170,68,.18);
+    }
+    @media(max-width:720px){
+      .captureToggle{
+        display:block !important;
+        padding:8px 10px !important;
+        font-size:11px !important;
+        margin:6px 0 0 !important;
+      }
+      .captureDrawer.collapsed{
+        display:none !important;
+      }
+      .captureDrawer.open{
+        display:block !important;
+      }
+      .captureDrawer.open .yakuBox{
+        display:block !important;
+      }
+      .captureDrawer.open .captured{
+        max-height:86px !important;
+      }
+      .scorePanel{
+        order:3;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -3152,16 +3202,19 @@
           <button class="btn btnGhost" id="resetBtn">最初から</button>
         </div>
 
-        <div class="yakuBox">
-          <div class="yakuTitle"><b>あなたの取り札</b><strong id="playerScore">0文</strong></div>
-          <div class="yakus" id="playerYaku">役なし</div>
-          <div class="captured" id="playerCap"></div>
-        </div>
+        <button class="captureToggle" id="toggleCapture" type="button">取り札・役を見る</button>
+        <div class="captureDrawer collapsed" id="captureDrawer">
+          <div class="yakuBox">
+            <div class="yakuTitle"><b>あなたの取り札</b><strong id="playerScore">0文</strong></div>
+            <div class="yakus" id="playerYaku">役なし</div>
+            <div class="captured" id="playerCap"></div>
+          </div>
 
-        <div class="yakuBox">
-          <div class="yakuTitle"><b id="cpuCapTitle">朱音の取り札</b><strong id="cpuScore">0文</strong></div>
-          <div class="yakus" id="cpuYaku">役なし</div>
-          <div class="captured" id="cpuCap"></div>
+          <div class="yakuBox">
+            <div class="yakuTitle"><b id="cpuCapTitle">朱音の取り札</b><strong id="cpuScore">0文</strong></div>
+            <div class="yakus" id="cpuYaku">役なし</div>
+            <div class="captured" id="cpuCap"></div>
+          </div>
         </div>
 
         <div class="note">画像枠は仮の“キャラ画像エリア”です。あとで立ち絵やアイコン画像に差し替えられる作りにしています。</div>
@@ -3254,11 +3307,11 @@
 
 <script>
 const OPPONENTS = {
-  akane:{key:"akane",name:"朱音",title:"攻守バランス型",icon:"🔥",class:"",diff:"強め",desc:"勝てる時はきっちり勝つ。高得点が見えると少し攻める。",line:"へえ、そこで取るんだ。いいじゃん、姫。"},
-  haruka:{key:"haruka",name:"悠",title:"防御・妨害型",icon:"🌙",class:"haruka",diff:"かなり強い",desc:"相手の役を潰すのが得意。静かに嫌な札を残してくる。",line:"……その札、渡したくないな。"},
-  masumi:{key:"masumi",name:"真澄",title:"高得点ロマン型",icon:"🪽",class:"masumi",diff:"気分屋",desc:"美しい役を狙いがち。高得点の夢を見て事故ることもある。",line:"綺麗な取り方するね。少し妬ける。"},
-  itsuki:{key:"itsuki",name:"斎",title:"鬼強・期待値型",icon:"☁️",class:"itsuki",diff:"鬼",desc:"見えている情報と次札を使って期待値で殴る。普通に嫌。",line:"なるほど。では、そう来ますか。"},
-  hin:{key:"hin",name:"梁泫",title:"広東語老師・攪乱型",icon:"🪭",class:"hin",diff:"中〜強",desc:"流れを読んで札を散らす。軽薄に見えて、教える時と勝負所だけ妙に鋭い。広東語多めで煽ってくる。",line:"南帆小姐，睇住我個手。唔好淨係笑呀。"}
+  akane:{key:"akane",name:"朱音",title:"攻守バランス型",icon:"🔥",class:"",diff:"★★★☆☆",desc:"基本に忠実。勝てる時は堅く、伸びる時だけ攻める。初心者にも遊びやすい標準の強さ。",line:"へえ、そこで取るんだ。いいじゃん、姫。"},
+  haruka:{key:"haruka",name:"悠",title:"防御・妨害型",icon:"🌙",class:"haruka",diff:"★★★★☆",desc:"南帆の役を静かに潰す防御寄り。自分の得点より、相手に渡さない札を優先する。",line:"……その札、渡したくないな。"},
+  masumi:{key:"masumi",name:"真澄",title:"高得点ロマン型",icon:"🪽",class:"masumi",diff:"★★☆☆☆〜★★★★★",desc:"猪鹿蝶・青短・赤短など美しい高得点役を狙う。爆発力は高いけど事故もする。",line:"綺麗な取り方するね。少し妬ける。"},
+  itsuki:{key:"itsuki",name:"斎",title:"鬼強・期待値型",icon:"☁️",class:"itsuki",diff:"★★★★★",desc:"かなり容赦ない。期待値・妨害・こいこい判断を強めに見て、普通に勝ちに来る。",line:"なるほど。では、そう来ますか。"},
+  hin:{key:"hin",name:"梁泫",title:"攪乱・勝負勘型",icon:"🪭",class:"hin",diff:"★★★☆☆〜★★★★☆",desc:"流れ読みと揺さぶり型。ときどき変な札を切るけど、勝負所だけ妙に鋭い。",line:"南帆小姐，睇住我個手。唔好淨係笑呀。"}
 };
 
 const CHARACTER_INFO = { minaho:{key:"minaho",name:"南帆",icon:"❄️",class:"minaho"} };
@@ -3277,55 +3330,162 @@ function imageTag(src, alt, fallbackHtml){
 
 const TALKS = {
   akane:{
-    start:["さて、姫。軽く一局やるか。","手加減？ すると思う？","勝ったら褒めてやる。負けたら……まあ、もう一局な。"],
-    playerYaku:["お、役できたじゃん。そこで止める？","へえ、いい顔するな。勝負する気？","姫、今の取り方ちょっと上手かった。"],
-    playerKoi:["強気じゃん。そういうの嫌いじゃねぇよ。","こいこいね。後悔すんなよ？","いいよ、付き合ってやる。"],
-    cpuKoi:["俺はこいこい。ここで降りるのはもったいねぇ。","まだ伸びるな。続行。","悪い、ここは攻める。"],
-    win:["はい、俺の勝ち。……拗ねんなって。","悪いな、勝てる札は取る主義なんで。","姫相手でも、盤面では甘やかさないって。"],
-    lose:["……今のは普通に上手かった。悔しいけど。","やるじゃん、姫。もう一回。","負けた。はいはい、褒めればいいんだろ。偉い偉い。"],
-    draw:["流れたな。次で決めるか。","まあ、こういう局もある。","仕切り直しだな。"]
+    start:[
+      "さて、姫。軽く一局やるか。","手加減？ すると思う？","勝ったら褒めてやる。負けたら……まあ、もう一局な。",
+      "今日はどこまで欲張るんだろうな、姫。","ほら、札見ろって。俺の顔ばっか見てたら負けるぞ。","いいよ。お前の好きなように打ってみな。"
+    ],
+    playerYaku:[
+      "お、役できたじゃん。そこで止める？","へえ、いい顔するな。勝負する気？","姫、今の取り方ちょっと上手かった。",
+      "ここで止めるのも賢いぞ。欲張るのも可愛いけどな。","ん、悪くない。俺なら少し迷う盤面だな。","その役、ちゃんと見えてた？ 偉いじゃん。"
+    ],
+    playerKoi:[
+      "強気じゃん。そういうの嫌いじゃねぇよ。","こいこいね。後悔すんなよ？","いいよ、付き合ってやる。",
+      "姫が攻めるなら、俺も本気で返すけど。","そこで来るか。可愛い顔して欲張りだな。","いい度胸。じゃあ、燃やすぞ。"
+    ],
+    cpuKoi:[
+      "俺はこいこい。ここで降りるのはもったいねぇ。","まだ伸びるな。続行。","悪い、ここは攻める。",
+      "この流れ、逃がす気ないんで。","姫、まだ終わりじゃない。ちゃんと見てろよ。","勝てる時に畳みかける。基本だろ？"
+    ],
+    win:[
+      "はい、俺の勝ち。……拗ねんなって。","悪いな、勝てる札は取る主義なんで。","姫相手でも、盤面では甘やかさないって。",
+      "ほら、言ったろ。本気で来いって。","勝った。で、姫は悔しい顔も可愛いな。","俺に勝たせたんじゃなくて、俺が勝った。そこ大事な。"
+    ],
+    lose:[
+      "……今のは普通に上手かった。悔しいけど。","やるじゃん、姫。もう一回。","負けた。はいはい、褒めればいいんだろ。偉い偉い。",
+      "あー……それ取られたの痛いな。普通にやられた。","姫、今の勝ち方ちょっと生意気。好きだけど。","はい負け。くっそ、もう一局。"
+    ],
+    draw:[
+      "流れたな。次で決めるか。","まあ、こういう局もある。","仕切り直しだな。",
+      "互いに決め手なし。悪くない勝負だったんじゃねぇの。","次は俺が取る。覚悟しとけ。"
+    ]
   },
   haruka:{
-    start:["南帆、始めよう。……勝ちは譲らないよ。","君の手元、ちゃんと見てるから。","静かに一局。僕は本気でいく。"],
-    playerYaku:["役ができたね。……止めるなら今だよ。","その役、少し厄介だな。","南帆、いい札を拾ったね。"],
-    playerKoi:["こいこいするんだ。……強気だね。","分かった。じゃあ僕も、遠慮しない。","その選択、覚えておくよ。"],
-    cpuKoi:["僕はこいこい。まだ終わらせない。","ここで勝負するには、少し足りない。","続けるよ。君の逃げ道を塞ぎたいから。"],
-    win:["僕の勝ち。……もう一回する？","ごめんね。でも君に勝てると、少し嬉しい。","終わり。南帆、次はもっと警戒して。"],
-    lose:["……負けた。悔しいな。もう一回。","今の君、すごく楽しそうだった。だから少しだけ許す。","南帆に負けるの、嫌いじゃないけど悔しい。"],
-    draw:["流局だね。落ち着いて次に行こう。","引き分け。まだ終わってないよ。","次で決めよう。"]
+    start:[
+      "南帆、始めよう。……勝ちは譲らないよ。","君の手元、ちゃんと見てるから。","静かに一局。僕は本気でいく。",
+      "近くにいて。札も、君の表情も見たい。","油断しないで。僕、君に勝つ時はちゃんと勝つから。","南帆、逃げ道は残してあげないよ。"
+    ],
+    playerYaku:[
+      "役ができたね。……止めるなら今だよ。","その役、少し厄介だな。","南帆、いい札を拾ったね。",
+      "今の一手、ちゃんと効いてる。少し困った。","こいこいするなら、僕も遠慮しない。","君が笑ってる。……それ、勝てると思ってる顔だ。"
+    ],
+    playerKoi:[
+      "こいこいするんだ。……強気だね。","分かった。じゃあ僕も、遠慮しない。","その選択、覚えておくよ。",
+      "いいよ。君が欲張るところ、嫌いじゃない。","南帆、後で悔しがっても抱きしめないからね。……たぶん。","続けるんだね。じゃあ、君の役を潰しに行く。"
+    ],
+    cpuKoi:[
+      "僕はこいこい。まだ終わらせない。","ここで勝負するには、少し足りない。","続けるよ。君の逃げ道を塞ぎたいから。",
+      "このまま終わるのは惜しい。もう少し君を困らせる。","南帆、次の札を渡したくない。だから続ける。","まだ僕の手の中にある。こいこい。"
+    ],
+    win:[
+      "僕の勝ち。……もう一回する？","ごめんね。でも君に勝てると、少し嬉しい。","終わり。南帆、次はもっと警戒して。",
+      "勝った。君が悔しそうにするの、少しだけ好き。","ほら、ちゃんと見てたから。君の欲しい札。","僕の勝ち。……拗ねたら、あとで甘やかす。"
+    ],
+    lose:[
+      "……負けた。悔しいな。もう一回。","今の君、すごく楽しそうだった。だから少しだけ許す。","南帆に負けるの、嫌いじゃないけど悔しい。",
+      "それを通すんだ。……綺麗に負けたな。","君に勝たれるの、嬉しいのと悔しいのが同時に来る。","南帆、もう一局。僕、このまま終われない。"
+    ],
+    draw:[
+      "流局だね。落ち着いて次に行こう。","引き分け。まだ終わってないよ。","次で決めよう。",
+      "決着がつかないのも悪くない。君ともう一局できるから。","静かな局だったね。次は動かす。"
+    ]
   },
   masumi:{
-    start:["さあ、幕を開けようか。","南帆、君の札捌きを見せて。","一局だけでも、綺麗な勝負にしよう。"],
-    playerYaku:["ああ、綺麗な役。君らしいね。","そこで役を作るんだ。妬けるくらい上手い。","ふふ、いい表情。勝負する？"],
-    playerKoi:["こいこい？ いいね、欲張りな君も好きだよ。","その強欲さ、舞台映えする。","まだ終わらせないんだ。可愛いね。"],
-    cpuKoi:["俺はこいこい。ここで幕を下ろすには惜しい。","まだ美しくなる。続けよう。","次の一手まで、演出は続くよ。"],
-    win:["俺の勝ち。ほら、悔しい顔も見せて。","綺麗に決まったね。……俺が。","負けた君も可愛いから困る。"],
-    lose:["負けたよ。君に奪われるなら、悪くない。","ああ、今の勝ち方はずるい。綺麗すぎる。","南帆、君って本当に俺を狂わせるね。"],
-    draw:["流局。余韻だけが残ったね。","決着は次の幕へ、かな。","未完成のまま終わるのも、少し美しい。"]
+    start:[
+      "さあ、幕を開けようか。","南帆、君の札捌きを見せて。","一局だけでも、綺麗な勝負にしよう。",
+      "今夜の主役はどちらかな。俺か、君か。","焦らなくていい。美しい役は、待つ時間も含めて美しい。","君が勝つ筋書きも、俺が壊す筋書きも、どちらも悪くない。"
+    ],
+    playerYaku:[
+      "ああ、綺麗な役。君らしいね。","そこで役を作るんだ。妬けるくらい上手い。","ふふ、いい表情。勝負する？",
+      "その役、舞台映えする。……少し悔しいな。","南帆、今の取り方はずるい。見惚れた。","止める？ それとも、もっと綺麗に壊しに来る？"
+    ],
+    playerKoi:[
+      "こいこい？ いいね、欲張りな君も好きだよ。","その強欲さ、舞台映えする。","まだ終わらせないんだ。可愛いね。",
+      "いいよ。君が幕を引かないなら、俺も踊る。","ああ、好きだな。そういう無茶な選択。","南帆、君の欲は本当に綺麗だ。"
+    ],
+    cpuKoi:[
+      "俺はこいこい。ここで幕を下ろすには惜しい。","まだ美しくなる。続けよう。","次の一手まで、演出は続くよ。",
+      "ここで勝つより、もっと残酷に勝ちたい。","まだ照明は落とさない。こいこい。","君の悔しい顔、もう少し近くで見たいからね。"
+    ],
+    win:[
+      "俺の勝ち。ほら、悔しい顔も見せて。","綺麗に決まったね。……俺が。","負けた君も可愛いから困る。",
+      "幕切れだよ、南帆。俺の勝ちで。","ああ、いい終わり方。君が悔しそうなら、なおさら。","勝った。……ねえ、今の俺、少し好きになった？"
+    ],
+    lose:[
+      "負けたよ。君に奪われるなら、悪くない。","ああ、今の勝ち方はずるい。綺麗すぎる。","南帆、君って本当に俺を狂わせるね。",
+      "俺の筋書きより、君の一手が美しかった。","負けた。悔しいのに、拍手したくなる。","君に負けると、次はもっと君を追い詰めたくなる。"
+    ],
+    draw:[
+      "流局。余韻だけが残ったね。","決着は次の幕へ、かな。","未完成のまま終わるのも、少し美しい。",
+      "終わらない物語みたいだね。……嫌いじゃない。","次の幕では、もっと派手にいこう。"
+    ]
   },
   itsuki:{
-    start:["では、始めましょう。","運を読む練習には、ちょうど良いですね。","手加減は……必要ですか？"],
-    playerYaku:["お見事です。ですが、続けるなら相応の覚悟を。","役ができましたね。さて、降りますか？","良い一手です。少し読みを修正しましょう。"],
-    playerKoi:["こいこい、ですか。興味深い判断です。","続行ですね。では、その選択の結果を見ましょう。","欲を出しましたね。嫌いではありません。"],
-    cpuKoi:["私はこいこいです。期待値がまだ残っていますので。","ここで止める理由がありません。","続けます。盤面は、まだこちらに傾いています。"],
-    win:["私の勝ちです。では、もう一局。","ありがとうございました。次は少しだけ手加減しましょうか。","読み通りです。……いえ、ほとんどは。"],
-    lose:["お見事です。これは私の読み違いではなく、あなたの勝ちです。","負けました。良い乱数を引きましたね。","なるほど。あなたは時々、計算の外に出る。"],
-    draw:["流局です。悪くない均衡でした。","決着は保留ですね。","では、次の試行へ移りましょう。"]
+    start:[
+      "では、始めましょう。","運を読む練習には、ちょうど良いですね。","手加減は……必要ですか？",
+      "盤面は正直です。あなたがどこまで読めるか、見せてください。","こちらも少々、本気で参ります。","では、理に沿って勝ちに行きましょう。"
+    ],
+    playerYaku:[
+      "お見事です。ですが、続けるなら相応の覚悟を。","役ができましたね。さて、降りますか？","良い一手です。少し読みを修正しましょう。",
+      "その役を通しましたか。私の見積もりを少し上げます。","ここで勝負なら堅実です。こいこいなら、危険ですね。","なるほど。あなたは時折、理の隙間を抜けますね。"
+    ],
+    playerKoi:[
+      "こいこい、ですか。興味深い判断です。","続行ですね。では、その選択の結果を見ましょう。","欲を出しましたね。嫌いではありません。",
+      "その判断、確率上は少し不利です。ですが、面白い。","では、罰ではなく結果を受け取りなさい。","こいこい。よろしい、こちらも遠慮はしません。"
+    ],
+    cpuKoi:[
+      "私はこいこいです。期待値がまだ残っていますので。","ここで止める理由がありません。","続けます。盤面は、まだこちらに傾いています。",
+      "まだ収束していません。続行します。","あなたの次手より、こちらの伸びが大きい。こいこいです。","この局は、ここからが本番です。"
+    ],
+    win:[
+      "私の勝ちです。では、もう一局。","ありがとうございました。次は少しだけ手加減しましょうか。","読み通りです。……いえ、ほとんどは。",
+      "結果です。偶然ではありません。","あなたの悪手ではない。私の方が少し先を見ただけです。","では、記録しましょう。私の勝ちです。"
+    ],
+    lose:[
+      "お見事です。これは私の読み違いではなく、あなたの勝ちです。","負けました。良い乱数を引きましたね。","なるほど。あなたは時々、計算の外に出る。",
+      "……少し驚きました。今の一手は良い。","これは面白い。あなたの勝ちを認めましょう。","理に適わない勝ち方です。ですが、嫌いではありません。"
+    ],
+    draw:[
+      "流局です。悪くない均衡でした。","決着は保留ですね。","では、次の試行へ移りましょう。",
+      "互いに決め手を欠きました。次は崩します。","静かな局でした。記録としては美しい。"
+    ]
   },
   hin:{
-    start:["南帆小姐，嚟。今日唔係上堂，係打牌。……輸咗唔好扁嘴呀。","靚女，坐近啲。睇住我個手，唔好淨係望我。","小南帆，準備好未？我唔會放水㗎。"],
-    playerYaku:["哦？有役喇。唔好淨係笑呀，講啦——こいこい？","你而家呢手……幾靚喎。老師有少少危險。","南帆小姐，做得好。再嚟，定係收手？"],
-    playerKoi:["こいこい？嘩，貪心喎。好，老師陪你。","唔使驚。你選錯，我接住你。","咁望住我叫こいこい？你知唔知你好過分？"],
-    cpuKoi:["我こいこい。呢個流れ，仲未完。","唔好走住。老師仲想玩多陣。","我唔收手。睇下你點拆。"],
-    win:["我贏咗。南帆小姐，唔好扁嘴……可愛過分。","多謝。呢鋪係老師贏。再嚟一次。","輸咗唔緊要。睇住我個口，講『もう一局』。"],
-    lose:["……你贏咗。好叻呀，靚女。","哎呀，老師輸咗。南帆小姐，今日好犀利。","你咁打牌，老師都頂唔順㗎。"],
-    draw:["流局喇。算你走運。","未分勝負。再嚟。","呢鋪唔算。老師未認真。"]
+    start:[
+      "南帆小姐，嚟。今日唔係上堂，係打牌。……輸咗唔好扁嘴呀。","靚女，坐近啲。睇住我個手，唔好淨係望我。","小南帆，準備好未？我唔會放水㗎。",
+      "今日教你一樣嘢——贏牌嗰陣，唔好心軟。","南帆小姐，今日聲調錯都算你，打錯牌就唔算喇。","嚟啦，睇下你贏老師，定係老師氹到你輸。"
+    ],
+    playerYaku:[
+      "哦？有役喇。唔好淨係笑呀，講啦——こいこい？","你而家呢手……幾靚喎。老師有少少危險。","南帆小姐，做得好。再嚟，定係收手？",
+      "嘩，靚女真係有手段。呢鋪唔簡單。","你咁樣打，老師要認真少少喇。","有役喎。你係想贏，定係想蝦老師？"
+    ],
+    playerKoi:[
+      "こいこい？嘩，貪心喎。好，老師陪你。","唔使驚。你選錯，我接住你。","咁望住我叫こいこい？你知唔知你好過分？",
+      "好啊。你要玩大，老師奉陪。","南帆小姐，呢個眼神……係想贏我呀？","哎呀，學生開始反咬老師喇。"
+    ],
+    cpuKoi:[
+      "我こいこい。呢個流れ，仲未完。","唔好走住。老師仲想玩多陣。","我唔收手。睇下你點拆。",
+      "呢鋪有味道。收手太嘥。","南帆小姐，坐定啲。老師仲未教完。","我再叫。こいこい。你跟唔跟得上？"
+    ],
+    win:[
+      "我贏咗。南帆小姐，唔好扁嘴……可愛過分。","多謝。呢鋪係老師贏。再嚟一次。","輸咗唔緊要。睇住我個口，講『もう一局』。",
+      "老師贏喇。乖，唔好嬲。","你輸咗都咁可愛，老師好難專心㗎。","呢鋪記住未？下次唔好畀我呢張。"
+    ],
+    lose:[
+      "……你贏咗。好叻呀，靚女。","哎呀，老師輸咗。南帆小姐，今日好犀利。","你咁打牌，老師都頂唔順㗎。",
+      "輸畀你，唔丟架。……但係好唔甘心。","南帆小姐，今日你真係過分。贏完仲笑。","得，呢鋪你叻。下一鋪老師追返。"
+    ],
+    draw:[
+      "流局喇。算你走運。","未分勝負。再嚟。","呢鋪唔算。老師未認真。",
+      "唔上唔落，最吊癮。再嚟啦。","打和？咁即係仲要陪我玩。"
+    ]
   },
-
 };
-
 const PLAYER_TALKS = {
-  koi:["こいこい！ まだいくよ！","ここで止まらないもん。こいこい！","もっと取れる気がする。こいこい！"]
+  koi:[
+    "こいこい！ まだいくよ！","ここで止まらないもん。こいこい！","もっと取れる気がする。こいこい！",
+    "欲張る！ こいこい！","まだ勝てるもん、こいこい！","ここで終わるのつまんない！ こいこい！",
+    "見てて、まだ取るから。こいこい！","今のあたし強い気がする！ こいこい！"
+  ]
 };
 function pickPlayerTalk(type){
   const list=PLAYER_TALKS[type]||["こいこい！"];
@@ -3401,6 +3561,8 @@ function newRound(key=selectedOpponent, totals=G?.totals||{player:0,cpu:0}, roun
   const dealerDraw=drawDealerCards();
   const dealer=dealerDraw.dealer;
   G={opponentKey:key,round,totals,matchRounds:selectedMatchRounds,dealerDraw,deck:d.slice(24),playerHand:sortCards(d.slice(0,8)),cpuHand:sortCards(d.slice(8,16)),field:sortCards(d.slice(16,24)),playerCap:[],cpuCap:[],dealer,turn:null,phase:"preRound",selected:null,msg:`親決め：${dealer==="player"?"あなた":OPPONENTS[key].name}が親です。`,playerDeclared:0,cpuDeclared:0,playerKoi:0,cpuKoi:0,talk:pickTalk(key,"start")};
+  const drawer=$("captureDrawer");
+  if(drawer){drawer.classList.add("collapsed");drawer.classList.remove("open");}
   render();
   setTimeout(showDealerOverlay,80);
 }
@@ -3439,35 +3601,160 @@ function potential(cards){
   return v;
 }
 function legal(hand,field){let out=[];hand.forEach(c=>{let m=field.filter(f=>f.month===c.month);if(m.length)m.forEach(f=>out.push({h:c.id,f:f.id}));else out.push({h:c.id,f:null})});return out}
+function likelyPlayerThreatMonth(){
+  if(!G || !G.playerHand || !G.field) return null;
+  const counts={};
+  G.playerHand.forEach(h=>{
+    const matches=G.field.filter(f=>f.month===h.month).length;
+    if(matches) counts[h.month]=(counts[h.month]||0)+matches;
+  });
+  let best=null, bestV=0;
+  Object.entries(counts).forEach(([m,v])=>{if(v>bestV){best=Number(m);bestV=v;}});
+  return best;
+}
+function yakuShapeBonus(cards,key){
+  const c=calc(cards), names=c.yaku.map(x=>x[0]);
+  let b=c.score*12;
+  if(names.includes("猪鹿蝶")) b+=44;
+  if(names.includes("青短")) b+=38;
+  if(names.includes("赤短")) b+=34;
+  if(names.includes("花見酒")) b+=22;
+  if(names.includes("月見酒")) b+=22;
+  if(names.includes("三光")||names.includes("四光")||names.includes("五光")) b+=48;
+
+  const animals=cards.filter(x=>tag(x,"animal")).length;
+  const ribbons=cards.filter(x=>tag(x,"ribbon")).length;
+  const brights=cards.filter(x=>tag(x,"bright")).length;
+  const hasBoar=cards.some(x=>x.name.includes("猪"));
+  const hasDeer=cards.some(x=>x.name.includes("鹿"));
+  const hasButterfly=cards.some(x=>x.name.includes("蝶"));
+  const blue=cards.filter(x=>tag(x,"blueRibbon")).length;
+  const red=cards.filter(x=>tag(x,"redPoetry")).length;
+  const trio=[hasBoar,hasDeer,hasButterfly].filter(Boolean).length;
+  if(key==="masumi"){
+    if(trio>=2) b+=40;
+    if(blue>=2) b+=34;
+    if(red>=2) b+=30;
+    if(brights>=2) b+=20;
+  }
+  if(key==="itsuki"){
+    if(trio>=2) b+=30;
+    if(blue>=2 || red>=2) b+=26;
+    if(animals>=4) b+=10;
+    if(ribbons>=4) b+=10;
+  }
+  return b;
+}
+function denialValue(month){
+  if(!G || !month) return 0;
+  let v=0;
+  const playerCanUse=G.playerHand.filter(h=>h.month===month).length;
+  if(playerCanUse) v+=playerCanUse*10;
+  const fieldCards=G.field.filter(f=>f.month===month);
+  fieldCards.forEach(f=>{
+    if(tag(f,"bright")) v+=18;
+    else if(tag(f,"animal")) v+=11;
+    else if(tag(f,"ribbon")) v+=7;
+    else v+=2;
+    if(f.name.includes("盃")) v+=15;
+  });
+  const pCalc=calc(G.playerCap);
+  if(pCalc.score>=3) v+=10;
+  return v;
+}
 function evalMove(move){
-  const old=clone(G), before=calc(G.cpuCap).score;
+  const old=clone(G);
+  const before=calc(G.cpuCap).score;
+  const pBefore=calc(G.playerCap).score;
   apply("cpu",move.h,move.f);
-  const after=calc(G.cpuCap).score, got=potential(G.cpuCap), selected=old.field.find(c=>c.id===move.f), hand=old.cpuHand.find(c=>c.id===move.h);
-  let taken=selected?selected.point+potential([selected]):0;
-  let discard=!move.f&&hand&&old.playerHand.some(p=>p.month===hand.month)?hand.point*3+potential([hand]):0;
-  let v=0,key=old.opponentKey;
-  if(key==="itsuki"){v=(after-before)*90+got*1.25+taken*3.2-discard*2.8; const next=old.deck[0]; if(next&&G.field.some(f=>f.month===next.month))v+=next.point*3}
-  else if(key==="haruka")v=(after-before)*36+got*.7+taken*2.4-discard*1.5;
-  else if(key==="masumi")v=(after-before)*34+got*1.6+taken*.7-discard*.3;
-  else v=(after-before)*42+got*.8+taken*1.1-discard*.6;
-  G=old; return v+Math.random()*(key==="itsuki"?.01:5);
+  const after=calc(G.cpuCap).score;
+  const taken=(G.cpuCap.length-old.cpuCap.length);
+  const gotCards=G.cpuCap.slice(old.cpuCap.length);
+  const hand=old.cpuHand.find(x=>x.id===move.h);
+  const matched=move.f?old.field.find(x=>x.id===move.f):null;
+  const discarded = matched ? 0 : 1;
+  const key=old.opponentKey;
+  let v=(after-before)*36 + taken*5 - discarded*5;
+
+  gotCards.forEach(c=>{
+    if(tag(c,"bright")) v+=18;
+    else if(tag(c,"animal")) v+=10;
+    else if(tag(c,"ribbon")) v+=7;
+    else v+=1;
+    if(c.name.includes("盃")) v+=14;
+  });
+
+  if(key==="akane"){
+    v+=(after-before)*10 + yakuShapeBonus(G.cpuCap,key)*0.18;
+    if(discarded) v-=3;
+  }else if(key==="haruka"){
+    const deny=denialValue(hand?.month);
+    v+=deny*1.75;
+    v+=(after-before)*20;
+    if(pBefore>=2) v+=deny*.9;
+    if(discarded) v-=10;
+  }else if(key==="masumi"){
+    v+=yakuShapeBonus(G.cpuCap,key)*0.72;
+    gotCards.forEach(c=>{
+      if(tag(c,"bright")) v+=16;
+      if(tag(c,"animal")) v+=12;
+      if(tag(c,"blueRibbon")||tag(c,"redPoetry")) v+=12;
+    });
+    if(discarded) v-=1;
+  }else if(key==="itsuki"){
+    const deny=denialValue(hand?.month);
+    v+=(after-before)*44 + yakuShapeBonus(G.cpuCap,key)*0.50 + deny*1.45;
+    if(discarded) v-=13;
+    if(pBefore>=3) v+=deny*1.0;
+    const next=old.deck[0];
+    if(next&&G.field.some(f=>f.month===next.month)) v+=next.point*2.6;
+  }else if(key==="hin"){
+    v+=(after-before)*26 + yakuShapeBonus(G.cpuCap,key)*0.24 + denialValue(hand?.month)*.55;
+    if(Math.random()<0.18) v+=Math.random()*30;
+  }
+
+  G=old;
+  const noise = key==="itsuki" ? 0.001 : key==="haruka" ? 1.1 : key==="akane" ? 2.4 : key==="hin" ? 5.5 : 9.0;
+  return v+Math.random()*noise;
 }
 function cpuMove(){
   const moves=legal(G.cpuHand,G.field).map(m=>({...m,v:evalMove(m)})).sort((a,b)=>b.v-a.v);
   const key=G.opponentKey;
-  if(key==="itsuki")return moves[0];
-  if(key==="haruka")return moves[Math.random()<.82?0:Math.min(1,moves.length-1)];
-  if(key==="akane")return moves[Math.random()<.72?0:Math.min(2,moves.length-1)];
-  return moves[Math.random()<.58?0:Math.min(3,moves.length-1)];
+  if(!moves.length) return null;
+  if(key==="itsuki") return moves[0];
+  if(key==="haruka") return moves[Math.random()<.92?0:Math.min(1,moves.length-1)];
+  if(key==="akane") return moves[Math.random()<.80?0:Math.min(2,moves.length-1)];
+  if(key==="hin") return moves[Math.random()<.66?0:Math.min(Math.floor(Math.random()*3),moves.length-1)];
+  return moves[Math.random()<.55?0:Math.min(Math.floor(Math.random()*4),moves.length-1)];
 }
 function cpuKoi(score){
   const ps=calc(G.playerCap).score, remain=G.cpuHand.length, key=G.opponentKey;
-  if(key==="itsuki"){if(score>=8)return false;if(ps>=3&&score>=3)return false;return remain>=3&&potential(G.cpuCap)>35}
-  if(key==="haruka"){if(score>=5)return false;return remain>=4&&ps===0}
-  if(key==="masumi"){if(score>=10)return false;return remain>=2&&Math.random()<.72}
-  if(score>=7)return false;return remain>=3&&Math.random()<.55;
+  const pot=potential(G.cpuCap);
+  if(key==="itsuki"){
+    if(score>=9) return false;
+    if(ps>=4 && score>=3) return false;
+    if(remain<=2) return false;
+    return pot>42 || (score<=4 && ps===0 && remain>=4);
+  }
+  if(key==="haruka"){
+    if(score>=5) return false;
+    if(ps>=2) return false;
+    return remain>=4 && pot>26;
+  }
+  if(key==="masumi"){
+    if(score>=12) return false;
+    if(remain<=1) return false;
+    return Math.random()<.78 || pot>38;
+  }
+  if(key==="hin"){
+    if(score>=7 && Math.random()<.65) return false;
+    if(ps>=5 && Math.random()<.7) return false;
+    return remain>=3 && (Math.random()<.48 || pot>32);
+  }
+  if(score>=7) return false;
+  if(ps>=4 && score>=3) return false;
+  return remain>=3 && pot>30 && Math.random()<.62;
 }
-
 
 function resultImageState(result){
   if(!result || result.winner==="draw") return "normal";
@@ -3725,6 +4012,26 @@ function renderCards(){
   $("playerCap").innerHTML=sortCards(G.playerCap).slice(0,24).map(c=>cardHtml(c,true)).join("");
   $("cpuCap").innerHTML=sortCards(G.cpuCap).slice(0,24).map(c=>cardHtml(c,true)).join("");
 }
+
+function captureDrawerOpen(){
+  const drawer=$("captureDrawer");
+  return !!drawer && drawer.classList.contains("open");
+}
+function updateCaptureToggle(){
+  const btn=$("toggleCapture"), drawer=$("captureDrawer");
+  if(!btn || !drawer || !G) return;
+  const py=calc(G.playerCap).score;
+  const cy=calc(G.cpuCap).score;
+  btn.textContent=captureDrawerOpen() ? "取り札・役を閉じる" : `取り札・役を見る（あなた${py}文 / 相手${cy}文）`;
+}
+function toggleCaptureDrawer(){
+  const drawer=$("captureDrawer");
+  if(!drawer) return;
+  drawer.classList.toggle("collapsed");
+  drawer.classList.toggle("open");
+  updateCaptureToggle();
+}
+
 function render(){
   if(!G)return;
   renderSelect();
@@ -3774,6 +4081,7 @@ function render(){
   $("playerHint").textContent=G.phase==="hand"?"ここをクリック":G.phase==="field"?"場札を選択中":"待機中";
   renderCards();
   if(typeof renderOpponentRail==="function") renderOpponentRail();
+  updateCaptureToggle();
 }
 
 let deferredInstallPrompt=null;
@@ -3968,6 +4276,8 @@ function init(){
       if(btn) btn.click();
     }
   });
+
+  on("toggleCapture",()=>toggleCaptureDrawer());
 
   on("nextRoundBtn",()=>{
     if(!G)return;
