@@ -973,6 +973,121 @@
       .scorePanel .heroActions{display:grid;grid-template-columns:1fr 1fr}
     }
 
+  
+    /* v14: opponent facedown hand rail above field */
+    .opponentRail{
+      position:relative;
+      z-index:1;
+      margin-bottom:8px;
+      padding:10px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg,rgba(0,0,0,.26),rgba(0,0,0,.14));
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+    .opponentRailHead{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+      margin-bottom:8px;
+      color:#fff6d9;
+      text-shadow:0 2px 4px rgba(0,0,0,.5);
+    }
+    .opponentRailHead b{
+      display:block;
+      font-size:14px;
+      line-height:1.2;
+    }
+    .opponentRailHead span{
+      display:block;
+      font-size:11px;
+      opacity:.78;
+      line-height:1.3;
+    }
+    .opponentBacks{
+      display:flex;
+      gap:5px;
+      min-height:48px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .railBack{
+      width:34px;
+      height:50px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 50% 30%,rgba(255,255,255,.08),transparent 1.5rem),
+        linear-gradient(135deg,#1e1919,#4e3c38);
+      color:#e9dac5;
+      display:grid;
+      place-items:center;
+      font-size:10px;
+      font-weight:950;
+      box-shadow:0 5px 10px rgba(0,0,0,.22);
+      transition:.18s transform,.18s opacity;
+    }
+    .railBack.justMoved{
+      animation:railMove .9s ease-out 1;
+    }
+    @keyframes railMove{
+      0%{transform:translateY(0) scale(1);opacity:1}
+      35%{transform:translateY(18px) scale(1.12);box-shadow:0 0 0 5px rgba(255,230,116,.25)}
+      100%{transform:translateY(0) scale(1);opacity:1}
+    }
+    .lastPlayedBox{
+      min-width:128px;
+      display:grid;
+      grid-template-columns:auto 46px;
+      gap:8px;
+      align-items:center;
+      justify-content:end;
+      color:#fff6d9;
+    }
+    .playedCardSlot{
+      width:42px;
+      height:62px;
+      border-radius:9px;
+      border:1px dashed rgba(255,255,255,.32);
+      display:grid;
+      place-items:center;
+      color:rgba(255,255,255,.66);
+      font-size:9px;
+      font-weight:950;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .playedCardSlot .miniCard{
+      width:40px;
+      height:60px;
+      border-radius:9px;
+      animation:playedDrop .7s ease-out 1;
+    }
+    @keyframes playedDrop{
+      0%{transform:translateY(-22px) rotate(-7deg);opacity:.2}
+      45%{transform:translateY(4px) rotate(2deg);opacity:1;filter:brightness(1.2)}
+      100%{transform:none;opacity:1}
+    }
+    @media(max-width:720px){
+      .opponentRailHead{
+        grid-template-columns:1fr;
+        gap:6px;
+      }
+      .lastPlayedBox{
+        justify-content:start;
+        grid-template-columns:auto 46px;
+      }
+      .opponentBacks{
+        min-height:42px;
+      }
+      .railBack{
+        width:28px;
+        height:42px;
+        font-size:9px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1080,6 +1195,17 @@
         </div>
 
         <div class="table">
+          <section class="opponentRail" id="opponentRail">
+            <div class="opponentRailHead">
+              <div><b id="opponentRailName">相手の手札</b><span id="opponentRailCount">8枚</span></div>
+              <div class="lastPlayedBox">
+                <span>直前に出した札</span>
+                <div id="opponentPlayedCard" class="playedCardSlot">---</div>
+              </div>
+            </div>
+            <div class="opponentBacks" id="opponentHandRail"></div>
+          </section>
+
           <section class="zone">
             <div class="zoneHead"><div><b>場札</b><span>同じ月の札で取れます</span></div><span id="deckCount">山札 24枚</span></div>
             <div class="cards" id="field"></div>
@@ -1428,6 +1554,25 @@ function renderSelect(){
     </button>`).join("");
   $("selectedText").textContent=`${OPPONENTS[selectedOpponent].name}を選択中`;
 }
+
+function renderOpponentRail(){
+  if(!$("opponentHandRail") || !G) return;
+  const op=OPPONENTS[G.opponentKey];
+  $("opponentRailName").textContent=`${op.name}の手札`;
+  $("opponentRailCount").textContent=`${G.cpuHand.length}枚`;
+  const moved = G.lastMove && G.lastMove.owner==="cpu";
+  $("opponentHandRail").innerHTML=G.cpuHand.map((_,idx)=>{
+    const cls = moved && idx===0 ? "railBack justMoved" : "railBack";
+    return `<div class="${cls}">花</div>`;
+  }).join("");
+  const slot=$("opponentPlayedCard");
+  if(G.lastMove && G.lastMove.owner==="cpu" && G.lastMove.hand){
+    slot.innerHTML=cardHtml(G.lastMove.hand,true,"");
+  }else{
+    slot.textContent="---";
+  }
+}
+
 function renderCards(){
   $("cpuHand").innerHTML=G.cpuHand.map(()=>`<div class="smallBack">花</div>`).join("");
   $("field").innerHTML=G.field.map(c=>{
@@ -1486,6 +1631,7 @@ function render(){
   $("stepNum").textContent=step[0];$("stepTitle").textContent=step[1];$("stepHelp").textContent=step[2];
   $("playerHint").textContent=G.phase==="hand"?"ここをクリック":G.phase==="field"?"場札を選択中":"待機中";
   renderCards();
+  renderOpponentRail();
 }
 
 let deferredInstallPrompt=null;
