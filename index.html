@@ -2466,6 +2466,515 @@
       }
     }
 
+  
+    /* v24: mobile compact UI, less scrolling */
+    @media(max-width:720px){
+      body{
+        padding:8px;
+      }
+      .app{
+        max-width:100%;
+      }
+
+      /* home compact */
+      .homeTopStage{
+        gap:10px !important;
+        padding:10px !important;
+      }
+      .homeVisual{
+        min-height:190px !important;
+        border-radius:20px !important;
+      }
+      .homeMenu{
+        padding:14px !important;
+        border-radius:20px !important;
+        gap:10px !important;
+      }
+      .homeMenuHead h2{
+        font-size:28px !important;
+        margin:4px 0 2px !important;
+      }
+      .homeMenuHead p{
+        font-size:12px !important;
+        line-height:1.5 !important;
+      }
+      .homeCurrentBox{
+        padding:9px 11px !important;
+        border-radius:16px !important;
+      }
+      .homeCurrentBox strong{
+        font-size:20px !important;
+      }
+      .homeBigButtons{
+        grid-template-columns:1fr 1fr;
+        gap:8px !important;
+      }
+      .homeBigBtn{
+        padding:12px 10px !important;
+        font-size:12px !important;
+      }
+      .homeTopStage .matchSettings{
+        gap:5px !important;
+      }
+      .matchBtn{
+        padding:6px 8px !important;
+        font-size:11px !important;
+      }
+      .installHint{
+        display:none !important;
+      }
+
+      /* select compact */
+      #selectView .pageHead{
+        padding:10px 12px !important;
+        border-radius:18px !important;
+        margin-bottom:8px !important;
+      }
+      #selectView .pageHead h1{
+        font-size:24px !important;
+      }
+      .selectStage{
+        gap:8px !important;
+      }
+      .selectRosterPanel{
+        padding:10px !important;
+        border-radius:20px !important;
+      }
+      .selectRosterHead{
+        font-size:16px !important;
+        padding:0 3px 8px !important;
+        margin-bottom:8px !important;
+      }
+      .selectGrid{
+        grid-template-columns:repeat(6, minmax(48px,1fr)) !important;
+        gap:6px !important;
+      }
+      .charIconBtn{
+        padding:5px 4px !important;
+        border-radius:13px !important;
+        gap:4px !important;
+      }
+      .charIconPortrait{
+        width:48px !important;
+        height:48px !important;
+        border-radius:11px !important;
+      }
+      .charIconBtn span{
+        font-size:10px !important;
+      }
+      .selectedPreview{
+        grid-template-columns:38% 1fr !important;
+        min-height:230px !important;
+        border-radius:22px !important;
+      }
+      .selectPreviewArt{
+        min-height:230px !important;
+      }
+      .selectPreviewArt .charImg{
+        transform:scale(.92);
+      }
+      .selectPreviewInfo{
+        padding:14px 12px !important;
+        gap:7px !important;
+      }
+      .selectPreviewInfo small{
+        font-size:10px !important;
+      }
+      .selectPreviewInfo h2{
+        font-size:28px !important;
+      }
+      .selectPreviewInfo p{
+        font-size:11px !important;
+        line-height:1.45 !important;
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+      .selectedPreview .badgeRow{
+        gap:4px !important;
+      }
+      .selectedPreview .badge{
+        font-size:9px !important;
+        padding:4px 6px !important;
+      }
+      .selectedPreview .selectedLine{
+        font-size:11px !important;
+        line-height:1.45 !important;
+        padding:8px 9px !important;
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+      .selectConfirmBtn{
+        padding:10px 12px !important;
+        font-size:12px !important;
+        margin-top:2px !important;
+      }
+      .selectFooter{
+        padding:10px 12px !important;
+        border-radius:18px !important;
+        margin-top:8px !important;
+      }
+
+      /* battle compact */
+      #battleView .pageHead{
+        display:none !important;
+      }
+      .gameHud{
+        position:sticky;
+        top:0;
+        z-index:30;
+        margin-bottom:6px !important;
+        border-radius:0 0 16px 16px !important;
+      }
+      .hudRow{
+        grid-template-columns:1.25fr .85fr !important;
+        padding:7px 10px !important;
+        min-height:40px !important;
+        gap:6px !important;
+      }
+      .hudRow .hudItem:nth-child(3),
+      .hudRow .hudItem:nth-child(4){
+        display:none !important;
+      }
+      .hudLabel{
+        font-size:9px !important;
+      }
+      .hudValue{
+        font-size:13px !important;
+      }
+      .koiStatusBar{
+        grid-template-columns:1fr 1fr !important;
+        padding:0 10px 8px !important;
+        gap:5px !important;
+      }
+      .koiChip{
+        padding:5px 6px !important;
+        font-size:10px !important;
+      }
+      .battleNotice{
+        margin-bottom:6px !important;
+        padding:8px 8px !important;
+        font-size:20px !important;
+        border-top-width:1px !important;
+        border-bottom-width:1px !important;
+      }
+
+      #battleView .battleTop{
+        grid-template-columns:1fr !important;
+        gap:6px !important;
+        margin-bottom:6px !important;
+      }
+      #battleView .opponentPanel{
+        display:grid !important;
+        grid-template-columns:72px minmax(0,1fr);
+        align-items:stretch;
+        border-radius:18px !important;
+        overflow:hidden;
+      }
+      #battleView .battlePortrait{
+        height:86px !important;
+        min-height:86px !important;
+        border-radius:0 !important;
+        background:
+          radial-gradient(ellipse at center bottom,rgba(216,170,68,.16),transparent 65%),
+          linear-gradient(135deg,rgba(21,21,33,.95),rgba(54,38,66,.95)) !important;
+      }
+      #battleView .battlePortrait .charImg{
+        transform:scale(.82) !important;
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        padding:2px 0 0 !important;
+      }
+      #battleView .opponentMeta{
+        padding:8px 9px !important;
+        border-top:0 !important;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+      }
+      #battleView .opponentMeta h2{
+        font-size:17px !important;
+        line-height:1.1 !important;
+        margin:0 !important;
+      }
+      #battleView .opponentMeta p{
+        display:none !important;
+      }
+      #battleView .opponentMeta .badgeRow{
+        display:none !important;
+      }
+      #battleView .opponentMeta .talkBubble{
+        margin-top:5px !important;
+        padding:6px 8px !important;
+        border-radius:12px !important;
+        font-size:10px !important;
+        line-height:1.35 !important;
+        -webkit-line-clamp:2 !important;
+      }
+
+      #battleView .statePanel{
+        padding:7px !important;
+        border-radius:18px !important;
+        gap:6px !important;
+      }
+      #battleView .statePanel .step{
+        display:none !important;
+      }
+      #battleView .statePanel .message{
+        max-height:44px !important;
+        min-height:0 !important;
+        padding:7px 8px !important;
+        font-size:10px !important;
+        line-height:1.35 !important;
+        border-radius:12px !important;
+      }
+      .moveLog{
+        padding:7px !important;
+        border-radius:13px !important;
+      }
+      .moveLogHead{
+        margin-bottom:4px !important;
+        font-size:9px !important;
+      }
+      .moveLogText{
+        font-size:10px !important;
+        line-height:1.35 !important;
+        min-height:0 !important;
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+      .moveLogCards{
+        display:none !important;
+      }
+
+      .battleShell{
+        grid-template-columns:1fr !important;
+        gap:7px !important;
+      }
+      .table{
+        padding:7px !important;
+        border-radius:18px !important;
+      }
+      .opponentRail{
+        padding:7px !important;
+        margin-bottom:5px !important;
+        border-radius:14px !important;
+      }
+      .opponentRailHead{
+        grid-template-columns:1fr auto !important;
+        gap:6px !important;
+        margin-bottom:5px !important;
+      }
+      .opponentRailHead b{
+        font-size:11px !important;
+      }
+      .opponentRailHead span{
+        font-size:9px !important;
+      }
+      .opponentBacks{
+        min-height:32px !important;
+        gap:3px !important;
+      }
+      .railBack{
+        width:22px !important;
+        height:32px !important;
+        border-radius:6px !important;
+        font-size:7px !important;
+      }
+      .lastPlayedBox{
+        min-width:88px !important;
+        grid-template-columns:auto 34px !important;
+        gap:5px !important;
+      }
+      .playedCardSlot{
+        width:32px !important;
+        height:46px !important;
+        border-radius:7px !important;
+      }
+      .playedCardSlot .miniCard{
+        width:30px !important;
+        height:44px !important;
+      }
+
+      .zone{
+        padding:6px !important;
+        margin-bottom:5px !important;
+        border-radius:14px !important;
+      }
+      .zoneHead{
+        margin-bottom:4px !important;
+      }
+      .zoneHead b{
+        font-size:11px !important;
+      }
+      .zoneHead span{
+        font-size:9px !important;
+      }
+      .cards{
+        min-height:70px !important;
+        gap:4px !important;
+      }
+      .playerZone .cards{
+        min-height:92px !important;
+        padding-top:6px !important;
+      }
+      .card{
+        width:48px !important;
+        height:74px !important;
+        border-radius:9px !important;
+      }
+      .card .m{
+        font-size:8px !important;
+      }
+      .card .n{
+        font-size:10px !important;
+      }
+      .card .k{
+        font-size:8px !important;
+      }
+      .card.canTake::before{
+        font-size:7px !important;
+        padding:1px 4px !important;
+        top:3px !important;
+        right:3px !important;
+      }
+
+      .scorePanel{
+        padding:8px !important;
+        border-radius:18px !important;
+        position:static !important;
+      }
+      .playerMiniPortrait{
+        display:none !important;
+      }
+      .scorePanel > b{
+        display:none !important;
+      }
+      .scoreMini{
+        display:grid !important;
+        grid-template-columns:1fr 1fr;
+        gap:6px !important;
+        margin:0 0 7px !important;
+      }
+      .scoreBox{
+        padding:7px !important;
+        border-radius:12px !important;
+      }
+      .scoreBox b{
+        font-size:18px !important;
+      }
+      .scoreBox span{
+        font-size:9px !important;
+      }
+      .scorePanel .heroActions{
+        grid-template-columns:1fr 1fr !important;
+        gap:6px !important;
+      }
+      .scorePanel .btn{
+        padding:8px 8px !important;
+        font-size:10px !important;
+        border-radius:999px !important;
+      }
+      .yakuBox{
+        margin-top:7px !important;
+        padding-top:7px !important;
+      }
+      .yakuTitle strong{
+        font-size:14px !important;
+      }
+      .yakus{
+        min-height:18px !important;
+        font-size:10px !important;
+        line-height:1.25 !important;
+      }
+      .captured{
+        max-height:54px !important;
+        gap:3px !important;
+      }
+      .captured .miniCard{
+        width:26px !important;
+        height:38px !important;
+        border-radius:6px !important;
+      }
+      .note{
+        display:none !important;
+      }
+
+      /* dialogs compact */
+      .decision{
+        padding:10px !important;
+      }
+      .decisionCard{
+        padding:16px !important;
+        border-radius:22px !important;
+      }
+      .decision h3{
+        font-size:26px !important;
+      }
+      .decision p{
+        font-size:12px !important;
+        line-height:1.45 !important;
+      }
+      .decisionYaku{
+        padding:9px !important;
+        border-radius:14px !important;
+        font-size:12px !important;
+      }
+      .choiceBtn{
+        min-height:74px !important;
+        padding:12px !important;
+        border-radius:18px !important;
+      }
+      .choiceBtn strong{
+        font-size:18px !important;
+      }
+      .choiceBtn span{
+        font-size:10px !important;
+        line-height:1.35 !important;
+      }
+
+      .roundResultCard,.matchResultCard{
+        max-height:92vh;
+        overflow:auto;
+      }
+      .richResultBody{
+        grid-template-columns:1fr !important;
+      }
+      .resultCharacterPane{
+        min-height:230px !important;
+      }
+      .resultCharacterArt{
+        min-height:170px !important;
+      }
+      .resultCharacterArt .charImg{
+        transform:scale(.88);
+      }
+    }
+
+    @media(max-width:390px){
+      .card{
+        width:44px !important;
+        height:68px !important;
+      }
+      .cards{
+        gap:3px !important;
+      }
+      .selectGrid{
+        grid-template-columns:repeat(3,1fr) !important;
+      }
+      .selectedPreview{
+        grid-template-columns:1fr !important;
+      }
+      .selectPreviewArt{
+        min-height:190px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
