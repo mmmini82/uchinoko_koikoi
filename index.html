@@ -1088,6 +1088,179 @@
       }
     }
 
+  
+    /* v15: real hanafuda images + dealer decision */
+    .cardImg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      z-index:3;
+      border-radius:inherit;
+      background:#fffdf8;
+    }
+    .card .m,.card .n,.card .k{
+      position:relative;
+      z-index:2;
+    }
+    .card:has(.cardImg[style*="display: none"]) .m,
+    .card:has(.cardImg[style*="display: none"]) .n,
+    .card:has(.cardImg[style*="display: none"]) .k{
+      z-index:4;
+    }
+    .smallBack,.railBack{
+      position:relative;
+      overflow:hidden;
+    }
+    .cardBackImg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      z-index:2;
+      border-radius:inherit;
+    }
+    .smallBack span,.railBack span{
+      position:relative;
+      z-index:1;
+    }
+
+    .dealerOverlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:80;
+      background:rgba(0,0,0,.58);
+      backdrop-filter:blur(5px);
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .dealerOverlay.show{
+      display:flex;
+    }
+    .dealerCard{
+      width:min(620px,100%);
+      border:3px solid rgba(216,170,68,.86);
+      border-radius:34px;
+      background:
+        radial-gradient(circle at 20% 10%,rgba(255,255,255,.16),transparent 10rem),
+        linear-gradient(135deg,#2a1512,#7f1f22 55%,#22100e);
+      color:white;
+      box-shadow:0 30px 90px rgba(0,0,0,.54);
+      padding:24px;
+      text-align:center;
+      animation:dealerPop .18s ease-out;
+    }
+    @keyframes dealerPop{from{opacity:.2;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+    .dealerLabel{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      background:rgba(216,170,68,.24);
+      border:1px solid rgba(216,170,68,.62);
+      padding:8px 12px;
+      color:#fff2b9;
+      font-size:13px;
+      font-weight:950;
+      letter-spacing:.08em;
+    }
+    .dealerTitle{
+      margin:14px 0 8px;
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+      font-size:clamp(34px,7vw,58px);
+      line-height:1.05;
+      font-weight:950;
+      color:#fff2b9;
+      text-shadow:0 4px 0 rgba(0,0,0,.25);
+    }
+    .dealerText{
+      margin:0 auto 16px;
+      max-width:440px;
+      color:rgba(255,255,255,.88);
+      line-height:1.8;
+      font-size:14px;
+      font-weight:800;
+    }
+    .dealerResult{
+      margin:14px auto;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:12px;
+      align-items:center;
+      max-width:460px;
+    }
+    .dealerSide{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      border-radius:20px;
+      padding:12px;
+      min-height:86px;
+      display:grid;
+      place-items:center;
+      gap:5px;
+      font-weight:950;
+    }
+    .dealerSide.active{
+      border-color:rgba(255,230,116,.92);
+      background:linear-gradient(135deg,rgba(207,70,72,.7),rgba(216,170,68,.28));
+      box-shadow:0 0 24px rgba(255,230,116,.24);
+    }
+    .dealerVs{
+      color:#fff2b9;
+      font-weight:950;
+      font-size:20px;
+    }
+    .dealerStartBtn{
+      border:0;
+      border-radius:999px;
+      padding:14px 22px;
+      margin-top:6px;
+      background:linear-gradient(135deg,#cf4648,#f07b5f);
+      color:white;
+      font-weight:950;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(0,0,0,.24);
+    }
+    .dealerStartBtn:hover{
+      filter:brightness(1.08);
+      transform:translateY(-1px);
+    }
+    @media(max-width:480px){
+      .dealerCard{padding:18px;border-radius:26px}
+      .dealerResult{grid-template-columns:1fr;gap:8px}
+      .dealerVs{font-size:14px}
+    }
+
+  
+    /* v16: burgundy plain card backs, no back image needed */
+    .smallBack,.railBack{
+      background:
+        radial-gradient(circle at 50% 28%, rgba(255,255,255,.08), transparent 1.35rem),
+        linear-gradient(135deg,#2a0e16,#6b1b2b 52%,#3a101b);
+      border-color:rgba(255,219,177,.28);
+      color:#f7dfc8;
+      box-shadow:0 5px 10px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .smallBack::after,.railBack::after{
+      content:"";
+      position:absolute;
+      inset:5px;
+      border:1px solid rgba(255,230,200,.25);
+      border-radius:inherit;
+      pointer-events:none;
+    }
+    .smallBack span,.railBack span{
+      color:#f7dfc8;
+      text-shadow:0 2px 4px rgba(0,0,0,.45);
+      z-index:3;
+    }
+
   </style>
 </head>
 <body>
@@ -1266,6 +1439,20 @@
     </div>
   </section>
 
+  <div class="dealerOverlay" id="dealerOverlay">
+    <div class="dealerCard">
+      <div class="dealerLabel">🎴 親決め</div>
+      <div class="dealerTitle" id="dealerTitle">親を決めます</div>
+      <p class="dealerText" id="dealerText">この局の先手を決めます。親になった方から札を出します。</p>
+      <div class="dealerResult">
+        <div class="dealerSide" id="dealerPlayerSide"><span>あなた</span><strong id="dealerPlayerMark">---</strong></div>
+        <div class="dealerVs">VS</div>
+        <div class="dealerSide" id="dealerCpuSide"><span id="dealerCpuName">相手</span><strong id="dealerCpuMark">---</strong></div>
+      </div>
+      <button class="dealerStartBtn" id="dealerStartBtn">この局を始める</button>
+    </div>
+  </div>
+
   <div class="cutin" id="cutin">
     <div class="cutinCard">
       <div class="cutinPortrait" id="cutinPortrait"></div>
@@ -1378,6 +1565,13 @@ const DEF=[
 [12,"桐に鳳凰","光",["bright","phoenix"]],[12,"桐のカス","カス",["chaff"]],[12,"桐のカス","カス",["chaff"]],[12,"桐のカス","カス",["chaff"]]
 ];
 const BASE_DECK=DEF.map((d,i)=>({id:"c"+i,month:d[0],name:d[1],kind:d[2],tags:d[3],point:d[3].includes("bright")?20:d[3].includes("animal")?10:d[3].includes("ribbon")?5:1}));
+function cardImageSrc(card){
+  const n=String(Number(card.id.replace("c",""))+1).padStart(2,"0");
+  return `images/cards/card_${n}.png`;
+}
+function cardBackImageTag(){
+  return "";
+}
 let selectedOpponent="akane";
 let G=null;
 function $(id){return document.getElementById(id)}
@@ -1404,8 +1598,10 @@ function calc(cards){
 }
 function newRound(key=selectedOpponent, totals=G?.totals||{player:0,cpu:0}, round=(G?.round||0)+1){
   const d=shuffle(BASE_DECK);
-  G={opponentKey:key,round,totals,deck:d.slice(24),playerHand:sortCards(d.slice(0,8)),cpuHand:sortCards(d.slice(8,16)),field:sortCards(d.slice(16,24)),playerCap:[],cpuCap:[],turn:"player",phase:"hand",selected:null,msg:`${OPPONENTS[key].name}と対局開始。下の手札から1枚選んでください。`,playerDeclared:0,cpuDeclared:0,playerKoi:0,cpuKoi:0,talk:pickTalk(key,"start")};
+  const dealer=Math.random()<0.5?"player":"cpu";
+  G={opponentKey:key,round,totals,deck:d.slice(24),playerHand:sortCards(d.slice(0,8)),cpuHand:sortCards(d.slice(8,16)),field:sortCards(d.slice(16,24)),playerCap:[],cpuCap:[],dealer,turn:null,phase:"preRound",selected:null,msg:`親決め：${dealer==="player"?"あなた":OPPONENTS[key].name}が親です。`,playerDeclared:0,cpuDeclared:0,playerKoi:0,cpuKoi:0,talk:pickTalk(key,"start")};
   render();
+  setTimeout(showDealerOverlay,80);
 }
 function startBattle(key=selectedOpponent){selectedOpponent=key;newRound(key,{player:0,cpu:0},1);show("battleView");}
 function clone(o){return JSON.parse(JSON.stringify(o))}
@@ -1497,7 +1693,15 @@ function runCpu(){
   G.phase="hand";G.turn="player";G.msg+=" あなたの手番です。";render();
 }
 function cardClass(c){return tag(c,"bright")?"bright":tag(c,"animal")?"animal":tag(c,"ribbon")?"ribbon":"chaff"}
-function cardHtml(c,mini=false,extra=""){return `<button class="card ${mini?"miniCard":""} ${cardClass(c)} ${extra}" data-card="${c.id}"><span class="m">${c.month}月 ${MONTHS[c.month-1]}</span><span class="n">${c.name}</span><span class="k">${c.kind}</span></button>`}
+function cardHtml(c,mini=false,extra=""){
+  const src=cardImageSrc(c);
+  return `<button class="card ${mini?"miniCard":""} ${cardClass(c)} ${extra}" data-card="${c.id}">
+    <img class="cardImg" src="${src}" alt="${c.name}" onerror="this.style.display='none'">
+    <span class="m">${c.month}月 ${MONTHS[c.month-1]}</span>
+    <span class="n">${c.name}</span>
+    <span class="k">${c.kind}</span>
+  </button>`;
+}
 function portraitHtml(op,small=false){
   const fallback=`<div class="portraitInner"><div class="faceIcon">${op.icon}</div><div class="imageNote">画像未設定</div></div>`;
   const src=IMAGE_PATHS[op.key]?.normal;
@@ -1563,7 +1767,7 @@ function renderOpponentRail(){
   const moved = G.lastMove && G.lastMove.owner==="cpu";
   $("opponentHandRail").innerHTML=G.cpuHand.map((_,idx)=>{
     const cls = moved && idx===0 ? "railBack justMoved" : "railBack";
-    return `<div class="${cls}">花</div>`;
+    return `<div class="${cls}">${cardBackImageTag()}<span>花</span></div>`;
   }).join("");
   const slot=$("opponentPlayedCard");
   if(G.lastMove && G.lastMove.owner==="cpu" && G.lastMove.hand){
@@ -1574,7 +1778,7 @@ function renderOpponentRail(){
 }
 
 function renderCards(){
-  $("cpuHand").innerHTML=G.cpuHand.map(()=>`<div class="smallBack">花</div>`).join("");
+  $("cpuHand").innerHTML=G.cpuHand.map(()=>`<div class="smallBack">${cardBackImageTag()}<span>花</span></div>`).join("");
   $("field").innerHTML=G.field.map(c=>{
     const match=G.phase==="field"&&G.selected&&c.month===G.selected.month;
     return cardHtml(c,false,match?"matchable":"");
@@ -1663,8 +1867,42 @@ function showCutin(kind,word,line="",sub="",key=null,state="normal"){
   clearTimeout(cutinTimer);
   cutinTimer=setTimeout(()=>{ el.className="cutin"; }, kind==="win"||kind==="lose" ? 1700 : 1250);
 }
+
+function showDealerOverlay(){
+  if(!$("dealerOverlay") || !G) return;
+  const op=OPPONENTS[G.opponentKey];
+  $("dealerCpuName").textContent=op.name;
+  $("dealerPlayerMark").textContent=G.dealer==="player"?"親":"子";
+  $("dealerCpuMark").textContent=G.dealer==="cpu"?"親":"子";
+  $("dealerPlayerSide").classList.toggle("active",G.dealer==="player");
+  $("dealerCpuSide").classList.toggle("active",G.dealer==="cpu");
+  $("dealerTitle").textContent=G.dealer==="player"?"あなたが親です":`${op.name}が親です`;
+  $("dealerText").textContent=G.dealer==="player"?"あなたから札を出します。準備ができたら始めてください。":`${op.name}から札を出します。準備ができたら始めてください。`;
+  $("dealerOverlay").classList.add("show");
+}
+function hideDealerOverlay(){
+  if($("dealerOverlay")) $("dealerOverlay").classList.remove("show");
+}
+function startRoundAfterDealer(){
+  if(!G || G.phase!=="preRound") return;
+  hideDealerOverlay();
+  if(G.dealer==="player"){
+    G.phase="hand";
+    G.turn="player";
+    G.msg="あなたが親です。下の手札から1枚選んでください。";
+    render();
+  }else{
+    G.phase="cpu";
+    G.turn="cpu";
+    G.msg=`${OPPONENTS[G.opponentKey].name}が親です。相手の手番から始まります。`;
+    render();
+    setTimeout(runCpu,820);
+  }
+}
+
 function phaseNotice(){
   if(!G) return "札を選んでください";
+  if(G.phase==="preRound") return "親を決めています";
   if(G.phase==="hand") return "札を選んでください";
   if(G.phase==="field") return "場札を選んでください";
   if(G.phase==="decision") return "勝負する？ こいこいする？";
@@ -1674,7 +1912,7 @@ function phaseNotice(){
 }
 function phaseLabel(){
   if(!G) return "準備";
-  return ({hand:"札選択",field:"場札選択",decision:"役成立",cpu:"相手手番",end:"局終了"}[G.phase]||"進行中");
+  return ({preRound:"親決め",hand:"札選択",field:"場札選択",decision:"役成立",cpu:"相手手番",end:"局終了"}[G.phase]||"進行中");
 }
 
 function init(){
@@ -1697,6 +1935,7 @@ function init(){
     window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
   }
 
+  $("dealerStartBtn").onclick=()=>startRoundAfterDealer();
   $("goSelect1").onclick=()=>show("selectView");
   $("quickStart").onclick=()=>startBattle("akane");
   $("backTop1").onclick=()=>show("topView");

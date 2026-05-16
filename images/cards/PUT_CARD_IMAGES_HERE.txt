@@ -1,0 +1,52 @@
+ここに花札画像を入れてください。
+
+card_back.png
+
+card_01.png : 松に鶴
+card_02.png : 松の赤短
+card_03.png : 松のカス
+card_04.png : 松のカス
+card_05.png : 梅に鶯
+card_06.png : 梅の赤短
+card_07.png : 梅のカス
+card_08.png : 梅のカス
+card_09.png : 桜に幕
+card_10.png : 桜の赤短
+card_11.png : 桜のカス
+card_12.png : 桜のカス
+card_13.png : 藤に時鳥
+card_14.png : 藤の短冊
+card_15.png : 藤のカス
+card_16.png : 藤のカス
+card_17.png : 菖蒲に八橋
+card_18.png : 菖蒲の短冊
+card_19.png : 菖蒲のカス
+card_20.png : 菖蒲のカス
+card_21.png : 牡丹に蝶
+card_22.png : 牡丹の青短
+card_23.png : 牡丹のカス
+card_24.png : 牡丹のカス
+card_25.png : 萩に猪
+card_26.png : 萩の短冊
+card_27.png : 萩のカス
+card_28.png : 萩のカス
+card_29.png : 芒に月
+card_30.png : 芒に雁
+card_31.png : 芒のカス
+card_32.png : 芒のカス
+card_33.png : 菊に盃
+card_34.png : 菊の青短
+card_35.png : 菊のカス
+card_36.png : 菊のカス
+card_37.png : 紅葉に鹿
+card_38.png : 紅葉の青短
+card_39.png : 紅葉のカス
+card_40.png : 紅葉のカス
+card_41.png : 柳に小野道風
+card_42.png : 柳に燕
+card_43.png : 柳の短冊
+card_44.png : 柳のカス
+card_45.png : 桐に鳳凰
+card_46.png : 桐のカス
+card_47.png : 桐のカス
+card_48.png : 桐のカス
