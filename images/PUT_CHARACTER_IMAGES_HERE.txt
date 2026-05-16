@@ -22,3 +22,8 @@ itsuki_lose.png
 hin_normal.png
 hin_win.png
 hin_lose.png
+
+TOP用：
+top_main.png
+（全員の勝利画像を合わせたホーム画面ビジュアル用）
+※ top_main.png が読み込めた場合、上にタイトル文字は重ねません。

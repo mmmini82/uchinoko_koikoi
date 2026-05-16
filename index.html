@@ -1919,41 +1919,592 @@
       }
     }
 
+  
+    /* v19: richer home page */
+    .homeTopStage{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);
+      gap:16px;
+      align-items:stretch;
+      min-height:560px;
+      padding:14px;
+      background:
+        radial-gradient(circle at 20% 8%,rgba(255,255,255,.14),transparent 18rem),
+        linear-gradient(135deg,#151521,#2a2d52 52%,#151521);
+      border:2px solid rgba(216,170,68,.55);
+      overflow:hidden;
+      position:relative;
+    }
+    .homeTopStage::before{
+      content:"";
+      position:absolute;
+      inset:16px;
+      border:1px solid rgba(255,242,185,.14);
+      border-radius:24px;
+      pointer-events:none;
+    }
+    .homeVisual{
+      position:relative;
+      border-radius:26px;
+      overflow:hidden;
+      min-height:520px;
+      background:
+        radial-gradient(circle at 50% 32%,rgba(255,255,255,.18),transparent 14rem),
+        linear-gradient(135deg,#4d2b3c,#3a4466 52%,#1a1d2d);
+      border:1px solid rgba(255,255,255,.10);
+      display:grid;
+      place-items:stretch;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .homeVisualImg{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+    .homeVisualFallback{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:end start;
+      padding:24px;
+      background:
+        linear-gradient(180deg,transparent 0%, rgba(0,0,0,.08) 50%, rgba(0,0,0,.48) 100%);
+      pointer-events:none;
+    }
+    .homeVisualTitle{
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+      font-size:clamp(34px,5vw,64px);
+      line-height:1;
+      color:#fff2b9;
+      text-shadow:0 5px 0 rgba(0,0,0,.25);
+      font-weight:950;
+    }
+    .homeVisualSub{
+      margin-top:8px;
+      color:rgba(255,255,255,.86);
+      font-size:14px;
+      font-weight:850;
+      line-height:1.7;
+    }
+    .homeMenu{
+      position:relative;
+      z-index:2;
+      border-radius:28px;
+      border:1px solid rgba(216,170,68,.36);
+      background:
+        radial-gradient(circle at 0% 0%,rgba(216,170,68,.10),transparent 10rem),
+        linear-gradient(180deg,rgba(20,19,29,.92),rgba(28,25,42,.96));
+      box-shadow:0 18px 46px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.05);
+      padding:22px;
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:16px;
+    }
+    .homeMenuHead small{
+      color:#fff2b9;
+      font-size:12px;
+      letter-spacing:.18em;
+      font-weight:950;
+    }
+    .homeMenuHead h2{
+      margin:8px 0 4px;
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+      font-size:clamp(30px,4vw,48px);
+      line-height:1;
+      color:#fff2b9;
+      text-shadow:0 4px 0 rgba(0,0,0,.25);
+    }
+    .homeMenuHead p{
+      margin:0;
+      color:rgba(255,255,255,.78);
+      font-size:14px;
+      line-height:1.75;
+      font-weight:850;
+    }
+    .homeCurrentBox{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:6px 10px;
+      align-items:center;
+      border-radius:20px;
+      padding:12px 14px;
+      background:rgba(255,255,255,.09);
+      border:1px solid rgba(255,242,185,.20);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .homeCurrentBox span{
+      color:rgba(255,255,255,.68);
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.08em;
+      grid-column:1/-1;
+    }
+    .homeCurrentBox strong{
+      color:white;
+      font-size:26px;
+      line-height:1.1;
+      font-weight:950;
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    }
+    .homeCurrentBox em{
+      justify-self:end;
+      font-style:normal;
+      color:#fff2b9;
+      font-size:13px;
+      font-weight:950;
+      border-radius:999px;
+      padding:6px 10px;
+      background:rgba(216,170,68,.12);
+      border:1px solid rgba(216,170,68,.34);
+    }
+    .homeBigButtons{
+      display:grid;
+      gap:10px;
+    }
+    .homeBigBtn{
+      border:0;
+      border-radius:999px;
+      padding:16px 20px;
+      color:white;
+      font-weight:950;
+      cursor:pointer;
+      font-size:15px;
+      box-shadow:0 14px 34px rgba(0,0,0,.24);
+      transition:.14s transform,.14s filter;
+    }
+    .homeBigBtn:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.07);
+    }
+    .homeBigBtn.primary{
+      background:linear-gradient(135deg,#486aa8,#7aa7e8);
+    }
+    .homeBigBtn.secondary{
+      background:linear-gradient(135deg,#b86d77,#d995a1);
+    }
+    .homeTopStage .matchSettings{
+      margin:0;
+      padding-top:2px;
+      color:white;
+    }
+    .homeTopStage .matchSettings span{
+      color:#fff2b9;
+    }
+    .homeTopStage .matchBtn{
+      background:rgba(255,255,255,.10);
+      color:white;
+      border-color:rgba(255,255,255,.12);
+      box-shadow:none;
+    }
+    .homeTopStage .matchBtn.active{
+      background:linear-gradient(135deg,#cf4648,#f07b5f);
+      border-color:transparent;
+    }
+
+    @media(max-width:960px){
+      .homeTopStage{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+      .homeVisual{
+        min-height:360px;
+      }
+    }
+    @media(max-width:520px){
+      .homeTopStage{
+        padding:10px;
+      }
+      .homeMenu{
+        padding:18px;
+      }
+      .homeVisual{
+        min-height:260px;
+      }
+      .homeCurrentBox strong{
+        font-size:22px;
+      }
+    }
+
+  
+    /* v20: fixed working home page */
+    .homeTopStage{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);
+      gap:16px;
+      align-items:stretch;
+      min-height:560px;
+      padding:14px;
+      background:
+        radial-gradient(circle at 20% 8%,rgba(255,255,255,.14),transparent 18rem),
+        linear-gradient(135deg,#151521,#2a2d52 52%,#151521);
+      border:2px solid rgba(216,170,68,.55);
+      overflow:hidden;
+      position:relative;
+    }
+    .homeTopStage::before{
+      content:"";
+      position:absolute;
+      inset:16px;
+      border:1px solid rgba(255,242,185,.14);
+      border-radius:24px;
+      pointer-events:none;
+    }
+    .homeVisual{
+      position:relative;
+      border-radius:26px;
+      overflow:hidden;
+      min-height:520px;
+      background:
+        radial-gradient(circle at 50% 32%,rgba(255,255,255,.18),transparent 14rem),
+        linear-gradient(135deg,#4d2b3c,#3a4466 52%,#1a1d2d);
+      border:1px solid rgba(255,255,255,.10);
+      display:grid;
+      place-items:stretch;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .homeVisualImg{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+    .homeVisualFallback{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:end start;
+      padding:24px;
+      background:
+        linear-gradient(180deg,transparent 0%, rgba(0,0,0,.08) 50%, rgba(0,0,0,.48) 100%);
+      pointer-events:none;
+    }
+    .homeVisualTitle{
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+      font-size:clamp(34px,5vw,64px);
+      line-height:1;
+      color:#fff2b9;
+      text-shadow:0 5px 0 rgba(0,0,0,.25);
+      font-weight:950;
+    }
+    .homeVisualSub{
+      margin-top:8px;
+      color:rgba(255,255,255,.86);
+      font-size:14px;
+      font-weight:850;
+      line-height:1.7;
+    }
+    .homeMenu{
+      position:relative;
+      z-index:2;
+      border-radius:28px;
+      border:1px solid rgba(216,170,68,.36);
+      background:
+        radial-gradient(circle at 0% 0%,rgba(216,170,68,.10),transparent 10rem),
+        linear-gradient(180deg,rgba(20,19,29,.92),rgba(28,25,42,.96));
+      box-shadow:0 18px 46px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.05);
+      padding:22px;
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:16px;
+    }
+    .homeMenuHead small{
+      color:#fff2b9;
+      font-size:12px;
+      letter-spacing:.18em;
+      font-weight:950;
+    }
+    .homeMenuHead h2{
+      margin:8px 0 4px;
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+      font-size:clamp(30px,4vw,48px);
+      line-height:1;
+      color:#fff2b9;
+      text-shadow:0 4px 0 rgba(0,0,0,.25);
+    }
+    .homeMenuHead p{
+      margin:0;
+      color:rgba(255,255,255,.78);
+      font-size:14px;
+      line-height:1.75;
+      font-weight:850;
+    }
+    .homeCurrentBox{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:6px 10px;
+      align-items:center;
+      border-radius:20px;
+      padding:12px 14px;
+      background:rgba(255,255,255,.09);
+      border:1px solid rgba(255,242,185,.20);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .homeCurrentBox span{
+      color:rgba(255,255,255,.68);
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.08em;
+      grid-column:1/-1;
+    }
+    .homeCurrentBox strong{
+      color:white;
+      font-size:26px;
+      line-height:1.1;
+      font-weight:950;
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    }
+    .homeCurrentBox em{
+      justify-self:end;
+      font-style:normal;
+      color:#fff2b9;
+      font-size:13px;
+      font-weight:950;
+      border-radius:999px;
+      padding:6px 10px;
+      background:rgba(216,170,68,.12);
+      border:1px solid rgba(216,170,68,.34);
+    }
+    .homeBigButtons{
+      display:grid;
+      gap:10px;
+    }
+    .homeBigBtn{
+      border:0;
+      border-radius:999px;
+      padding:16px 20px;
+      color:white;
+      font-weight:950;
+      cursor:pointer;
+      font-size:15px;
+      box-shadow:0 14px 34px rgba(0,0,0,.24);
+      transition:.14s transform,.14s filter;
+    }
+    .homeBigBtn:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.07);
+    }
+    .homeBigBtn.primary{
+      background:linear-gradient(135deg,#486aa8,#7aa7e8);
+    }
+    .homeBigBtn.secondary{
+      background:linear-gradient(135deg,#b86d77,#d995a1);
+    }
+    .homeTopStage .matchSettings{
+      margin:0;
+      padding-top:2px;
+      color:white;
+    }
+    .homeTopStage .matchSettings span{
+      color:#fff2b9;
+    }
+    .homeTopStage .matchBtn{
+      background:rgba(255,255,255,.10);
+      color:white;
+      border-color:rgba(255,255,255,.12);
+      box-shadow:none;
+    }
+    .homeTopStage .matchBtn.active{
+      background:linear-gradient(135deg,#cf4648,#f07b5f);
+      border-color:transparent;
+    }
+    @media(max-width:960px){
+      .homeTopStage{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+      .homeVisual{
+        min-height:360px;
+      }
+    }
+    @media(max-width:520px){
+      .homeTopStage{
+        padding:10px;
+      }
+      .homeMenu{
+        padding:18px;
+      }
+      .homeVisual{
+        min-height:260px;
+      }
+      .homeCurrentBox strong{
+        font-size:22px;
+      }
+    }
+
+  
+    /* v21: top fallback pointer safety */
+    .homeVisualFallback{pointer-events:none}
+  
+    /* v22: mobile battle character portrait fix */
+    #battleView .battlePortrait .charImg{
+      object-fit:contain;
+      object-position:center bottom;
+      padding:6px 0 0;
+    }
+    @media(max-width:720px){
+      #battleView .opponentPanel{
+        display:grid;
+        grid-template-columns:1fr;
+      }
+      #battleView .battlePortrait{
+        height:clamp(300px, 48vh, 430px) !important;
+        min-height:300px;
+        background:
+          radial-gradient(ellipse at center bottom,rgba(216,170,68,.20),transparent 62%),
+          linear-gradient(135deg,rgba(21,21,33,.92),rgba(54,38,66,.92));
+      }
+      #battleView .battlePortrait .charImg{
+        width:100%;
+        height:100%;
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        padding:10px 6px 0;
+        transform:scale(.92);
+        transform-origin:center bottom;
+      }
+      #battleView .battlePortrait .portraitInner{
+        display:grid;
+        place-items:center;
+        height:100%;
+      }
+      #battleView .opponentMeta{
+        padding:10px 12px;
+      }
+    }
+    @media(max-width:480px){
+      #battleView .battlePortrait{
+        height:clamp(320px, 52vh, 460px) !important;
+        min-height:320px;
+      }
+      #battleView .battlePortrait .charImg{
+        transform:scale(.88);
+        padding:8px 4px 0;
+      }
+    }
+
+  
+    /* v23: mobile cut-in character image enlargement */
+    @media(max-width:720px){
+      .cutin{
+        padding:10px;
+      }
+      .cutinCard{
+        width:min(96vw,680px) !important;
+        min-height:300px !important;
+        grid-template-columns:minmax(155px,44%) minmax(0,1fr) !important;
+        border-radius:26px !important;
+      }
+      .cutinPortrait{
+        min-height:300px;
+        overflow:hidden;
+        background:rgba(0,0,0,.20);
+        display:grid;
+        place-items:end center;
+      }
+      .cutinPortrait .charImg{
+        width:118% !important;
+        height:108% !important;
+        max-width:none;
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        padding:0 !important;
+        transform:scale(1.10);
+        transform-origin:center bottom;
+        filter:drop-shadow(0 18px 24px rgba(0,0,0,.48));
+      }
+      .cutinPortrait .portraitInner{
+        min-height:260px;
+        display:grid;
+        place-items:center;
+      }
+      .cutinPortrait .faceIcon{
+        font-size:86px !important;
+      }
+      .cutinText{
+        padding:22px 16px !important;
+      }
+      .cutinWord{
+        font-size:clamp(40px,12vw,62px) !important;
+      }
+      .cutinLine{
+        font-size:13px !important;
+        line-height:1.6 !important;
+      }
+    }
+    @media(max-width:480px){
+      .cutinCard{
+        min-height:280px !important;
+        grid-template-columns:minmax(145px,46%) minmax(0,1fr) !important;
+      }
+      .cutinPortrait{
+        min-height:280px;
+      }
+      .cutinPortrait .charImg{
+        width:128% !important;
+        height:110% !important;
+        transform:scale(1.12);
+      }
+      .cutinText{
+        padding:18px 12px !important;
+      }
+      .cutinWord{
+        font-size:clamp(36px,13vw,54px) !important;
+        letter-spacing:.04em !important;
+      }
+      .cutinLine{
+        font-size:12px !important;
+      }
+      .cutinSub{
+        font-size:11px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
 <div class="app">
   <section id="topView" class="view active">
-    <div class="topHero">
-      <div class="heroCard">
-        <div class="heroMain">
-          <span class="eyebrow">UCHINOKO KOIKOI</span>
-          <h1>うちの子<br>こいこい</h1>
-          <p class="lead">ストーリーなし。淡々と札を出して、役ができたら勝負か、こいこい。<br>朱音・悠・真澄・斎から相手を選んで遊ぶ、ブラウザだけで開ける試作版です。</p>
-                    <div class="matchSettings">
-            <span>対戦局数</span>
-            <button class="matchBtn active" data-rounds="6">6局</button>
-            <button class="matchBtn" data-rounds="3">3局</button>
-            <button class="matchBtn" data-rounds="12">12局</button>
-            <button class="matchBtn" data-rounds="0">無制限</button>
-          </div>
-          <div class="heroActions">
-            <button class="btn btnPrimary" id="goSelect1">対戦相手を選ぶ</button>
-            <button class="btn btnGhost" id="quickStart">朱音とすぐ対戦</button>
-            <button class="btn btnDark" id="installPwaBtn" style="display:none">アプリに追加</button>
-          </div>
-          <div class="installHint show" id="installHint">スマホでアプリ化する場合は、HTTPSで公開したページを開いて「ホーム画面に追加」。iPhoneはSafariの共有ボタンから追加できます。</div>
-        </div>
-        <div class="heroSide">
-          <div class="hanaGrid">
-            <div class="hanaTile">🌸</div><div class="hanaTile">🎴</div><div class="hanaTile">🌙</div>
-            <div class="hanaTile">🦌</div><div class="hanaTile">🍶</div><div class="hanaTile">🦋</div>
-            <div class="hanaTile">🔥</div><div class="hanaTile">🪽</div><div class="hanaTile">☁️</div>
-          </div>
-          <p class="sideCaption">TOP → 対戦キャラ選択 → 対戦画面。<br>対戦中は相手の手札を小さくして、キャラ画像枠を大きく見せるレイアウトに変更しています。</p>
+    <section class="panel heroPanel homeTopStage">
+      <div class="homeVisual">
+        <img src="images/top_main.png" alt="top visual" class="homeVisualImg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="homeVisualFallback">
+          <div class="homeVisualTitle">うちの子こいこい</div>
+          <div class="homeVisualSub">花札で、いつものみんなと遊ぶ。</div>
         </div>
       </div>
-    </div>
+      <div class="homeMenu">
+        <div class="homeMenuHead">
+          <small>HOME MENU</small>
+          <h2>対局メニュー</h2>
+          <p>対戦相手を選んで、こいこいを始めよう。</p>
+        </div>
+        <div class="homeCurrentBox">
+          <span>現在の対戦相手</span>
+          <strong id="homeCurrentOpponent">朱音</strong>
+          <em id="homeCurrentRounds">6局</em>
+        </div>
+        <div class="homeBigButtons">
+          <button class="homeBigBtn primary" id="homeStartBattle">現在の相手で対局開始</button>
+          <button class="homeBigBtn secondary" id="homeOpenSelect">対戦相手を選ぶ</button>
+        </div>
+        <div class="matchSettings">
+          <span>対戦局数</span>
+          <button class="matchBtn active" data-rounds="6">6局</button>
+          <button class="matchBtn" data-rounds="3">3局</button>
+          <button class="matchBtn" data-rounds="12">12局</button>
+          <button class="matchBtn" data-rounds="0">無制限</button>
+        </div>
+        <button class="btn btnDark" id="installPwaBtn" style="display:none">アプリに追加</button>
+        <div class="installHint show" id="installHint">スマホでアプリ化する場合は、HTTPSで公開したページを開いて「ホーム画面に追加」。iPhoneはSafariの共有ボタンから追加できます。</div>
+      </div>
+    </section>
   </section>
 
   <section id="selectView" class="view">
@@ -2569,6 +3120,13 @@ function moveLogSummary(){
 function matchLabel(){
   return selectedMatchRounds===0 ? "無制限" : `${selectedMatchRounds}局`;
 }
+
+function renderHomeCurrent(){
+  const op=OPPONENTS[selectedOpponent];
+  if($("homeCurrentOpponent")) $("homeCurrentOpponent").textContent=op.name;
+  if($("homeCurrentRounds")) $("homeCurrentRounds").textContent=matchLabel();
+}
+
 function renderMatchButtons(){
   document.querySelectorAll(".matchBtn").forEach(btn=>{
     btn.classList.toggle("active", Number(btn.dataset.rounds)===selectedMatchRounds);
@@ -2581,6 +3139,7 @@ function renderMatchButtons(){
       <button class="matchBtn ${selectedMatchRounds===12?"active":""}" data-rounds="12">12局</button>
       <button class="matchBtn ${selectedMatchRounds===0?"active":""}" data-rounds="0">無制限</button>`;
   }
+  renderHomeCurrent();
 }
 function handleMatchButtonClick(e){
   const btn=e.target.closest(".matchBtn");
@@ -2617,6 +3176,32 @@ function renderSelect(){
   $("selectedText").textContent=`${OPPONENTS[selectedOpponent].name}を選択中`;
   renderMatchButtons();
 }
+
+function renderOpponentRail(){
+  if(!G) return;
+  const rail=$("opponentHandRail");
+  if(!rail) return;
+  const op=OPPONENTS[G.opponentKey];
+
+  if($("opponentRailName")) $("opponentRailName").textContent=`${op.name}の手札`;
+  if($("opponentRailCount")) $("opponentRailCount").textContent=`${G.cpuHand.length}枚`;
+
+  const moved = G.lastMove && G.lastMove.owner==="cpu";
+  rail.innerHTML=G.cpuHand.map((_,idx)=>{
+    const cls = moved && idx===0 ? "railBack justMoved" : "railBack";
+    return `<div class="${cls}">${typeof cardBackImageTag==="function" ? cardBackImageTag() : ""}<span>花</span></div>`;
+  }).join("");
+
+  const slot=$("opponentPlayedCard");
+  if(slot){
+    if(G.lastMove && G.lastMove.owner==="cpu" && G.lastMove.hand){
+      slot.innerHTML=cardHtml(G.lastMove.hand,true,"");
+    }else{
+      slot.textContent="---";
+    }
+  }
+}
+
 function renderCards(){
   $("cpuHand").innerHTML=G.cpuHand.map(()=>`<div class="smallBack">${cardBackImageTag()}<span>花</span></div>`).join("");
   $("field").innerHTML=G.field.map(c=>{
@@ -2679,7 +3264,7 @@ function render(){
   $("stepNum").textContent=step[0];$("stepTitle").textContent=step[1];$("stepHelp").textContent=step[2];
   $("playerHint").textContent=G.phase==="hand"?"ここをクリック":G.phase==="field"?"場札を選択中":"待機中";
   renderCards();
-  renderOpponentRail();
+  if(typeof renderOpponentRail==="function") renderOpponentRail();
 }
 
 let deferredInstallPrompt=null;
@@ -2764,9 +3349,29 @@ function phaseLabel(){
 }
 
 function init(){
+  const on=(id,fn)=>{
+    const el=$(id);
+    if(el) el.onclick=fn;
+  };
+  const add=(id,type,fn)=>{
+    const el=$(id);
+    if(el) el.addEventListener(type,fn);
+  };
+
   renderMatchButtons();
-  document.addEventListener("click",handleMatchButtonClick);
+  renderHomeCurrent();
   renderSelect();
+
+  document.addEventListener("click",handleMatchButtonClick);
+
+  document.addEventListener("click",e=>{
+    const opBtn=e.target.closest("[data-op]");
+    if(opBtn&&opBtn.dataset.op){
+      selectedOpponent=opBtn.dataset.op;
+      renderSelect();
+      renderHomeCurrent();
+    }
+  });
 
   const installBtn=$("installPwaBtn");
   if(installBtn){
@@ -2781,48 +3386,89 @@ function init(){
       installBtn.style.display="none";
     };
   }
+
   if("serviceWorker" in navigator && location.protocol !== "file:"){
     window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
   }
 
-  $("dealerStartBtn").onclick=()=>startRoundAfterDealer();
+  on("homeOpenSelect",()=>show("selectView"));
+  on("homeStartBattle",()=>startBattle(selectedOpponent));
+  on("goSelect1",()=>show("selectView"));
+  on("quickStart",()=>startBattle("akane"));
 
-  $("resultCloseBtn").onclick=()=>hideRoundResult();
-  $("resultNextBtn").onclick=()=>{
+  on("dealerStartBtn",()=>startRoundAfterDealer());
+
+  on("resultCloseBtn",()=>hideRoundResult());
+  on("resultNextBtn",()=>{
     hideRoundResult();
     if(selectedMatchRounds>0 && G.round>=selectedMatchRounds) showMatchResult();
     else newRound(G.opponentKey,G.totals,G.round+1);
-  };
-  $("matchRestartBtn").onclick=()=>{hideMatchResult();newRound(G.opponentKey,{player:0,cpu:0},1);};
-  $("matchSelectBtn").onclick=()=>{hideMatchResult();show("selectView");};
+  });
+  on("matchRestartBtn",()=>{hideMatchResult();newRound(G.opponentKey,{player:0,cpu:0},1);});
+  on("matchSelectBtn",()=>{hideMatchResult();show("selectView");});
 
-  $("goSelect1").onclick=()=>show("selectView");
-  $("quickStart").onclick=()=>startBattle("akane");
-  $("backTop1").onclick=()=>show("topView");
-  $("backTop2").onclick=()=>show("topView");
-  $("backSelect").onclick=()=>{renderSelect();show("selectView")};
-  $("startBattle").onclick=()=>startBattle(selectedOpponent);
-  $("selectGrid").addEventListener("click",e=>{const card=e.target.closest(".charCard"); if(!card)return; selectedOpponent=card.dataset.op; renderSelect();});
-  $("playerHand").addEventListener("click",e=>{
-    const b=e.target.closest(".card"); if(!b||G.phase!=="hand"||G.turn!=="player")return;
-    const c=G.playerHand.find(x=>x.id===b.dataset.card); const matches=G.field.filter(f=>f.month===c.month);
-    if(matches.length>1){G.selected=c;G.phase="field";G.msg=`${c.month}月「${c.name}」で取る場札を選んでください。`;render();return}
-    apply("player",c.id,matches[0]?.id||null); afterPlayer();
+  on("backTop1",()=>show("topView"));
+  on("backTop2",()=>show("topView"));
+  on("backSelect",()=>{renderSelect();show("selectView")});
+  on("startBattle",()=>startBattle(selectedOpponent));
+
+  add("playerHand","click",e=>{
+    const b=e.target.closest(".card");
+    if(!b||!G||G.phase!=="hand"||G.turn!=="player")return;
+    const c=G.playerHand.find(x=>x.id===b.dataset.card);
+    if(!c)return;
+    const matches=G.field.filter(f=>f.month===c.month);
+    if(matches.length>1){
+      G.selected=c;G.phase="field";G.msg=`${c.month}月「${c.name}」で取る場札を選んでください。`;
+      render();
+      return;
+    }
+    apply("player",c.id,matches[0]?.id||null);
+    afterPlayer();
   });
-  $("field").addEventListener("click",e=>{
-    const b=e.target.closest(".card"); if(!b||G.phase!=="field"||!G.selected)return;
-    const f=G.field.find(x=>x.id===b.dataset.card); if(!f||f.month!==G.selected.month)return;
-    apply("player",G.selected.id,f.id);G.selected=null;afterPlayer();
+
+  add("field","click",e=>{
+    const b=e.target.closest(".card");
+    if(!b||!G||G.phase!=="field"||!G.selected)return;
+    const f=G.field.find(x=>x.id===b.dataset.card);
+    if(!f||f.month!==G.selected.month)return;
+    apply("player",G.selected.id,f.id);
+    G.selected=null;
+    afterPlayer();
   });
-  $("winBtn").onclick=()=>finish("player");
-  $("koiBtn").onclick=()=>{G.playerDeclared=calc(G.playerCap).score;G.playerKoi++;G.phase="cpu";G.turn="cpu";G.talk=pickTalk(G.opponentKey,"playerKoi");G.msg="あなたは、こいこいを選びました。勝負続行です。";render();showCutin("koi","こいこい！",pickPlayerTalk("koi"),"あなたが続行","minaho","win");setTimeout(runCpu,820)};
+
+  on("winBtn",()=>finish("player"));
+  on("koiBtn",()=>{
+    if(!G)return;
+    G.playerDeclared=calc(G.playerCap).score;
+    G.playerKoi++;
+    G.phase="cpu";
+    G.turn="cpu";
+    G.talk=pickTalk(G.opponentKey,"playerKoi");
+    G.msg="あなたは、こいこいを選びました。勝負続行です。";
+    render();
+    showCutin("koi","こいこい！",pickPlayerTalk("koi"),"あなたが続行","minaho","win");
+    setTimeout(runCpu,820);
+  });
+
   document.addEventListener("keydown",(e)=>{
     if(!G || G.phase!=="decision") return;
     if(e.key==="Enter"){ finish("player"); }
-    if(e.key.toLowerCase()==="k"){ $("koiBtn").click(); }
+    if(e.key.toLowerCase()==="k"){
+      const btn=$("koiBtn");
+      if(btn) btn.click();
+    }
   });
-  $("nextRoundBtn").onclick=()=>{ if(selectedMatchRounds>0 && G.round>=selectedMatchRounds && G.phase==="end") showMatchResult(); else newRound(G.opponentKey,G.totals,G.round+1); };
-  $("resetBtn").onclick=()=>newRound(G.opponentKey,{player:0,cpu:0},1);
+
+  on("nextRoundBtn",()=>{
+    if(!G)return;
+    if(selectedMatchRounds>0 && G.round>=selectedMatchRounds && G.phase==="end") showMatchResult();
+    else newRound(G.opponentKey,G.totals,G.round+1);
+  });
+  on("resetBtn",()=>{
+    if(!G)return;
+    newRound(G.opponentKey,{player:0,cpu:0},1);
+  });
 }
 init();
 </script>
