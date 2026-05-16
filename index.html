@@ -89,6 +89,62 @@
     .pageTitle b{font-size:28px}
     .crumb{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;font-weight:800}
     .selectGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+
+    .selectedPreview{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:14px;
+      align-items:stretch;
+      margin-bottom:14px;
+      border:1px solid var(--line);
+      background:rgba(255,250,242,.94);
+      border-radius:30px;
+      box-shadow:var(--soft);
+      overflow:hidden;
+    }
+    .selectedPreviewPortrait{min-height:260px;position:relative;overflow:hidden}
+    .selectedPreviewBody{
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:12px;
+    }
+    .selectedPreviewBody small{color:var(--red);font-size:12px;font-weight:950;letter-spacing:.18em}
+    .selectedPreviewBody h2{margin:0;font-size:clamp(30px,5vw,52px);line-height:1;letter-spacing:-.04em}
+    .selectedPreviewBody p{margin:0;color:#5d5149;line-height:1.75;font-size:14px}
+    .selectedLine{
+      border:1px solid rgba(207,70,72,.22);
+      background:#fff4f4;
+      border-radius:20px;
+      padding:12px 14px;
+      color:#53312f;
+      font-size:15px;
+      line-height:1.7;
+      font-weight:900;
+    }
+    /* v12: battle opponent stays visible */
+    #battleView .battleTop{grid-template-columns:320px minmax(0,1fr);align-items:stretch}
+    #battleView .opponentPanel{
+      display:block;
+      border:2px solid rgba(216,170,68,.55);
+      background:rgba(255,250,242,.96);
+      box-shadow:var(--shadow);
+    }
+    #battleView .battlePortrait{height:250px}
+    #battleView .opponentMeta{
+      background:linear-gradient(180deg,#fffaf2,#fff2e4);
+      border-top:1px solid var(--line);
+    }
+    #battleView .statePanel{
+      display:grid;
+      grid-template-rows:auto 1fr;
+      min-height:100%;
+    }
+    #battleView .statePanel .miniHandWrap{display:none}
+    #battleView .statePanel .step{margin-bottom:10px}
+    #battleView .statePanel .message{min-height:120px}
+
     .charCard{
       border:1px solid var(--line);border-radius:28px;background:rgba(255,250,242,.92);
       overflow:hidden;box-shadow:var(--soft);cursor:pointer;transition:.14s transform,.14s box-shadow,.14s border;
@@ -105,6 +161,7 @@
     .portrait.masumi{background:linear-gradient(135deg,#5e5a66,#5b2b75)}
     .portrait.itsuki{background:linear-gradient(135deg,#106b78,#20296a)}
     .portrait.hin{background:linear-gradient(135deg,#0d5f52,#2c8b73 55%,#6fc1a5)}
+    .portrait.minaho{background:linear-gradient(135deg,#1e2030,#5b4978 55%,#a7c7e7)}
     .portrait::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12);right:-60px;bottom:-60px}
     .portrait::after{content:"";position:absolute;inset:18px;border-radius:22px;border:1px solid rgba(255,255,255,.18)}
     .portraitInner{position:relative;z-index:1;text-align:center}
@@ -268,6 +325,34 @@
     .miniCard{width:39px;height:58px;border-radius:9px;font-size:8px;padding:4px;box-shadow:0 3px 8px rgba(18,8,0,.13)}
     .miniCard .m,.miniCard .k{font-size:7px}.miniCard .n{font-size:8px}
     .note{font-size:12px;line-height:1.65;color:var(--muted);margin-top:12px}
+
+
+    .charImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center bottom;
+      display:block;
+      position:relative;
+      z-index:2;
+      filter:drop-shadow(0 12px 22px rgba(0,0,0,.28));
+    }
+    .cutinPortrait .charImg{
+      padding:8px;
+      object-fit:contain;
+      object-position:center bottom;
+    }
+    .playerMiniPortrait{
+      height:120px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:linear-gradient(135deg,#221d24,#4b334f);
+      overflow:hidden;
+      margin-bottom:12px;
+      display:grid;
+      place-items:center;
+    }
+    .playerMiniPortrait .charImg{padding:4px}
 
     .gameHud{
       margin-bottom:14px;
@@ -465,15 +550,7 @@
     .cutin.yaku .cutinCard{background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.18),transparent 15rem),linear-gradient(135deg,#342056,#8b4ec2 50%,#1c1230)}
     .cutin.draw .cutinCard{background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.16),transparent 15rem),linear-gradient(135deg,#14394a,#3c8192 50%,#102a36)}
 
-    .opponentPanel{
-      display:none;
-    }
-    .battleTop{
-      grid-template-columns:minmax(0,1fr);
-    }
-    .statePanel{
-      display:none;
-    }
+    /* v12: opponent panel and state panel are visible */
     .table{
       min-height:calc(100vh - 250px);
       background:
@@ -522,6 +599,12 @@
       transform:translateY(-12px) scale(1.04);
     }
 
+    /* v12 final battle visibility overrides */
+    #battleView .battleTop{grid-template-columns:320px minmax(0,1fr);align-items:stretch}
+    #battleView .opponentPanel{display:block}
+    #battleView .statePanel{display:grid;grid-template-rows:auto 1fr}
+    #battleView .statePanel .miniHandWrap{display:none}
+
     @media(max-width:1040px){
       .heroCard{grid-template-columns:1fr}.heroSide{min-height:auto}
       .selectGrid{grid-template-columns:repeat(3,1fr)}
@@ -529,7 +612,35 @@
       .battleTop{grid-template-columns:260px 1fr}
     }
     @media(max-width:720px){
-      .gameHud{border-radius:0 0 20px 20px;margin-bottom:10px}
+  
+    .charImg{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center bottom;
+      display:block;
+      position:relative;
+      z-index:2;
+      filter:drop-shadow(0 12px 22px rgba(0,0,0,.28));
+    }
+    .cutinPortrait .charImg{
+      padding:8px;
+      object-fit:contain;
+      object-position:center bottom;
+    }
+    .playerMiniPortrait{
+      height:120px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:linear-gradient(135deg,#221d24,#4b334f);
+      overflow:hidden;
+      margin-bottom:12px;
+      display:grid;
+      place-items:center;
+    }
+    .playerMiniPortrait .charImg{padding:4px}
+
+    .gameHud{border-radius:0 0 20px 20px;margin-bottom:10px}
       .hudRow{grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 12px}
       .hudRow .hudItem:nth-child(4){display:none}
       .hudGear{display:none}
@@ -568,6 +679,9 @@
       .choiceBtn strong{font-size:22px}
     }
     @media(max-width:480px){
+      .selectedPreviewPortrait{min-height:180px}
+      .selectedLine{font-size:13px}
+      #battleView .battlePortrait{height:185px}
       .hudRow{grid-template-columns:1fr 1fr;gap:6px}
       .hudRow .hudItem:nth-child(3){display:none}
       .battleNotice{font-size:24px}
@@ -633,6 +747,7 @@
       </div>
       <div class="crumb">TOP <span>›</span> キャラ選択 <span>›</span> 対戦</div>
     </div>
+    <div class="selectedPreview" id="selectedPreview"></div>
     <div class="selectGrid" id="selectGrid"></div>
     <div class="selectFooter">
       <div class="selectedText" id="selectedText">朱音を選択中</div>
@@ -728,6 +843,7 @@
       </div>
 
       <aside class="scorePanel">
+        <div class="playerMiniPortrait" id="playerMiniPortrait"></div>
         <b>合計点</b>
         <div class="scoreMini">
           <div class="scoreBox"><span>あなた</span><b id="playerTotal">0</b></div>
@@ -775,6 +891,21 @@ const OPPONENTS = {
   itsuki:{key:"itsuki",name:"斎",title:"鬼強・期待値型",icon:"☁️",class:"itsuki",diff:"鬼",desc:"見えている情報と次札を使って期待値で殴る。普通に嫌。",line:"なるほど。では、そう来ますか。"},
   hin:{key:"hin",name:"梁泫",title:"広東語老師・攪乱型",icon:"🪭",class:"hin",diff:"中〜強",desc:"流れを読んで札を散らす。軽薄に見えて、教える時と勝負所だけ妙に鋭い。広東語多めで煽ってくる。",line:"南帆小姐，睇住我個手。唔好淨係笑呀。"}
 };
+
+const CHARACTER_INFO = { minaho:{key:"minaho",name:"南帆",icon:"❄️",class:"minaho"} };
+const IMAGE_PATHS = {
+  minaho:{ normal:"images/minaho_normal.png", win:"images/minaho_win.png" },
+  akane:{ normal:"images/akane_normal.png", win:"images/akane_win.png", lose:"images/akane_lose.png" },
+  haruka:{ normal:"images/haruka_normal.png", win:"images/haruka_win.png", lose:"images/haruka_lose.png" },
+  masumi:{ normal:"images/masumi_normal.png", win:"images/masumi_win.png", lose:"images/masumi_lose.png" },
+  itsuki:{ normal:"images/itsuki_normal.png", win:"images/itsuki_win.png", lose:"images/itsuki_lose.png" },
+  hin:{ normal:"images/hin_normal.png", win:"images/hin_win.png", lose:"images/hin_lose.png" }
+};
+function imageTag(src, alt, fallbackHtml){
+  const safe = fallbackHtml.replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/\n/g," ");
+  return `<img class="charImg" src="${src}" alt="${alt}" onerror="this.outerHTML='${safe}'">`;
+}
+
 const TALKS = {
   akane:{
     start:["さて、姫。軽く一局やるか。","手加減？ すると思う？","勝ったら褒めてやる。負けたら……まあ、もう一局な。"],
@@ -823,6 +954,15 @@ const TALKS = {
   },
 
 };
+
+const PLAYER_TALKS = {
+  koi:["こいこい！ まだいくよ！","ここで止まらないもん。こいこい！","もっと取れる気がする。こいこい！"]
+};
+function pickPlayerTalk(type){
+  const list=PLAYER_TALKS[type]||["こいこい！"];
+  return list[Math.floor(Math.random()*list.length)];
+}
+
 function pickTalk(key,type){
   const list=(TALKS[key]&&TALKS[key][type])||[OPPONENTS[key].line];
   return list[Math.floor(Math.random()*list.length)];
@@ -935,12 +1075,12 @@ function finish(winner){
   if(winner==="player")G.totals.player+=p;else G.totals.cpu+=p;
   G.phase="end";G.turn=null;G.talk=pickTalk(G.opponentKey,winner==="player"?"lose":"win");G.msg=`${winner==="player"?"あなた":OPPONENTS[G.opponentKey].name}の勝ち。${y.yaku.map(x=>x[0]).join("・")||"役なし扱い"}で${p}文。${mult>1?"相手のこいこい中なので倍付け。":""}`;
   render();
-  showCutin(winner==="player"?"win":"lose",winner==="player"?"勝利！":"敗北",G.talk,`${p}文`);
+  showCutin(winner==="player"?"win":"lose",winner==="player"?"勝利！":"敗北",G.talk,`${p}文`,G.opponentKey,winner==="player"?"lose":"win");
 }
-function drawEnd(){G.phase="end";G.turn=null;G.talk=pickTalk(G.opponentKey,"draw");G.msg="流局。今回は勝負がつきませんでした。";render();showCutin("draw","流局",G.talk,"勝負つかず")}
+function drawEnd(){G.phase="end";G.turn=null;G.talk=pickTalk(G.opponentKey,"draw");G.msg="流局。今回は勝負がつきませんでした。";render();showCutin("draw","流局",G.talk,"勝負つかず",G.opponentKey,"normal")}
 function afterPlayer(){
   const s=calc(G.playerCap).score;
-  if(s>G.playerDeclared&&s>0){G.phase="decision";G.turn="player";G.talk=pickTalk(G.opponentKey,"playerYaku");G.msg+=" 役ができました。勝負するか、こいこいするか選んでください。";render();showCutin("yaku","役成立",G.talk,`${s}文`);return}
+  if(s>G.playerDeclared&&s>0){G.phase="decision";G.turn="player";G.talk=pickTalk(G.opponentKey,"playerYaku");G.msg+=" 役ができました。勝負するか、こいこいするか選んでください。";render();showCutin("yaku","役成立",G.talk,`${s}文`,G.opponentKey,"normal");return}
   if(G.playerHand.length===0&&G.cpuHand.length===0){drawEnd();return}
   G.phase="cpu";G.turn="cpu";render();setTimeout(runCpu,520);
 }
@@ -950,7 +1090,7 @@ function runCpu(){
   apply("cpu",m.h,m.f);
   const s=calc(G.cpuCap).score;
   if(s>G.cpuDeclared&&s>0){
-    if(cpuKoi(s)){G.cpuDeclared=s;G.cpuKoi++;G.phase="hand";G.turn="player";G.talk=pickTalk(G.opponentKey,"cpuKoi");G.msg+=` ${OPPONENTS[G.opponentKey].name}は、こいこい。あなたの手番です。`;render();showCutin("koi","こいこい！",G.talk,`${OPPONENTS[G.opponentKey].name}が続行`);return}
+    if(cpuKoi(s)){G.cpuDeclared=s;G.cpuKoi++;G.phase="hand";G.turn="player";G.talk=pickTalk(G.opponentKey,"cpuKoi");G.msg+=` ${OPPONENTS[G.opponentKey].name}は、こいこい。あなたの手番です。`;render();showCutin("koi","こいこい！",G.talk,`${OPPONENTS[G.opponentKey].name}が続行`,G.opponentKey,"win");return}
     finish("cpu");return;
   }
   if(G.playerHand.length===0&&G.cpuHand.length===0){drawEnd();return}
@@ -958,8 +1098,31 @@ function runCpu(){
 }
 function cardClass(c){return tag(c,"bright")?"bright":tag(c,"animal")?"animal":tag(c,"ribbon")?"ribbon":"chaff"}
 function cardHtml(c,mini=false,extra=""){return `<button class="card ${mini?"miniCard":""} ${cardClass(c)} ${extra}" data-card="${c.id}"><span class="m">${c.month}月 ${MONTHS[c.month-1]}</span><span class="n">${c.name}</span><span class="k">${c.kind}</span></button>`}
-function portraitHtml(op,small=false){return `<div class="portraitInner"><div class="faceIcon">${op.icon}</div><div class="imageNote">キャラ画像エリア</div></div>`}
+function portraitHtml(op,small=false){
+  const fallback=`<div class="portraitInner"><div class="faceIcon">${op.icon}</div><div class="imageNote">画像未設定</div></div>`;
+  const src=IMAGE_PATHS[op.key]?.normal;
+  return src ? imageTag(src,op.name,fallback) : fallback;
+}
+function cutinPortraitHtml(key,state){
+  const op=OPPONENTS[key]||CHARACTER_INFO[key]||OPPONENTS.akane;
+  const fallback=`<div class="portraitInner"><div class="faceIcon">${op.icon}</div><div class="imageNote">画像未設定</div></div>`;
+  const src=IMAGE_PATHS[key]?.[state] || IMAGE_PATHS[key]?.normal;
+  return src ? imageTag(src,`${op.name}_${state}`,fallback) : fallback;
+}
 function renderSelect(){
+  const selected=OPPONENTS[selectedOpponent];
+  const preview=$("selectedPreview");
+  if(preview){
+    preview.innerHTML=`
+      <div class="selectedPreviewPortrait portrait ${selected.class}">${portraitHtml(selected)}</div>
+      <div class="selectedPreviewBody">
+        <small>SELECTED OPPONENT</small>
+        <h2>${selected.icon} ${selected.name}</h2>
+        <div class="badgeRow"><span class="badge">${selected.title}</span><span class="badge">難易度：${selected.diff}</span></div>
+        <p>${selected.desc}</p>
+        <div class="selectedLine">「${selected.line}」</div>
+      </div>`;
+  }
   $("selectGrid").innerHTML=Object.values(OPPONENTS).map(op=>`
     <button class="charCard ${selectedOpponent===op.key?"selected":""}" data-op="${op.key}">
       <div class="portrait ${op.class}">${portraitHtml(op)}</div>
@@ -986,6 +1149,8 @@ function render(){
   if(!G)return;
   renderSelect();
   const op=OPPONENTS[G.opponentKey], py=calc(G.playerCap), cy=calc(G.cpuCap);
+  const minahoFallback=`<div class="portraitInner"><div class="faceIcon">❄️</div><div class="imageNote">南帆画像未設定</div></div>`;
+  $("playerMiniPortrait").innerHTML=IMAGE_PATHS.minaho?.normal ? imageTag(IMAGE_PATHS.minaho.normal,"南帆",minahoFallback) : minahoFallback;
   $("battleTitle").textContent=`${op.name}と対戦中`;
   $("hudOpponent").textContent=`${op.icon} ${op.name} / ${op.diff}`;
   $("hudPlayerTotal").textContent=G.totals.player;
@@ -1034,18 +1199,19 @@ window.addEventListener("appinstalled",()=>{
 
 
 let cutinTimer=null;
-function showCutin(kind,word,line="",sub="",key=null){
-  const op=OPPONENTS[key||G?.opponentKey||selectedOpponent]||OPPONENTS.akane;
+function showCutin(kind,word,line="",sub="",key=null,state="normal"){
+  const targetKey=key||G?.opponentKey||selectedOpponent;
+  const op=OPPONENTS[targetKey]||CHARACTER_INFO[targetKey]||OPPONENTS.akane;
   const el=$("cutin");
   if(!el) return;
   el.className=`cutin show ${kind||""}`;
   $("cutinPortrait").className=`cutinPortrait portrait ${op.class}`;
-  $("cutinPortrait").innerHTML=portraitHtml(op);
+  $("cutinPortrait").innerHTML=cutinPortraitHtml(targetKey,state);
   $("cutinWord").textContent=word;
   $("cutinLine").textContent=line ? `「${line}」` : "";
   $("cutinSub").textContent=sub||"";
   clearTimeout(cutinTimer);
-  cutinTimer=setTimeout(()=>{ el.className="cutin"; }, kind==="win"||kind==="lose" ? 1600 : 1200);
+  cutinTimer=setTimeout(()=>{ el.className="cutin"; }, kind==="win"||kind==="lose" ? 1700 : 1250);
 }
 function phaseNotice(){
   if(!G) return "札を選んでください";
@@ -1100,7 +1266,7 @@ function init(){
     apply("player",G.selected.id,f.id);G.selected=null;afterPlayer();
   });
   $("winBtn").onclick=()=>finish("player");
-  $("koiBtn").onclick=()=>{G.playerDeclared=calc(G.playerCap).score;G.playerKoi++;G.phase="cpu";G.turn="cpu";G.talk=pickTalk(G.opponentKey,"playerKoi");G.msg="あなたは、こいこいを選びました。勝負続行です。";render();showCutin("koi","こいこい！",G.talk,"あなたが続行");setTimeout(runCpu,820)};
+  $("koiBtn").onclick=()=>{G.playerDeclared=calc(G.playerCap).score;G.playerKoi++;G.phase="cpu";G.turn="cpu";G.talk=pickTalk(G.opponentKey,"playerKoi");G.msg="あなたは、こいこいを選びました。勝負続行です。";render();showCutin("koi","こいこい！",pickPlayerTalk("koi"),"あなたが続行","minaho","win");setTimeout(runCpu,820)};
   document.addEventListener("keydown",(e)=>{
     if(!G || G.phase!=="decision") return;
     if(e.key==="Enter"){ finish("player"); }
