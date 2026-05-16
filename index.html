@@ -190,13 +190,69 @@
     .card.ribbon{border-color:#5aa6c8;background:#edf8ff}.card.chaff{border-color:#bcb0a1;background:#fffdf8}
     .card::after{content:"";position:absolute;right:-18px;bottom:-18px;width:54px;height:54px;border-radius:50%;background:rgba(207,70,72,.08)}
     .decision{
-      display:none;border:2px solid #f3a5c7;background:#fff0f6;border-radius:24px;padding:14px;margin-top:14px;
-      box-shadow:var(--soft)
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:50;
+      margin:0;
+      padding:18px;
+      background:rgba(31,24,22,.58);
+      backdrop-filter:blur(6px);
+      place-items:center;
     }
-    .decision.show{display:block}
-    .decision h3{margin:0 0 6px;color:#a31455;font-size:20px}
-    .decision p{margin:0 0 12px;color:#61414f;font-size:13px;line-height:1.6}
-    .decisionBtns{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .decision.show{display:grid}
+    .decisionCard{
+      width:min(620px,100%);
+      border:3px solid #f3a5c7;
+      background:linear-gradient(180deg,#fff7fb,#fff0f6);
+      border-radius:34px;
+      padding:24px;
+      box-shadow:0 28px 80px rgba(31,15,24,.36);
+      animation:popDecision .16s ease-out;
+    }
+    @keyframes popDecision{from{opacity:.2;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+    .decisionLabel{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      background:#a31455;
+      color:white;
+      padding:8px 12px;
+      font-size:13px;
+      font-weight:950;
+      letter-spacing:.04em;
+    }
+    .decision h3{margin:14px 0 8px;color:#a31455;font-size:clamp(26px,5vw,42px);line-height:1.05}
+    .decision p{margin:0 0 14px;color:#61414f;font-size:15px;line-height:1.75}
+    .decisionYaku{
+      border:1px solid rgba(163,20,85,.18);
+      background:white;
+      border-radius:22px;
+      padding:12px;
+      margin:14px 0;
+      color:#4d303d;
+      font-size:14px;
+      line-height:1.6;
+      font-weight:800;
+    }
+    .decisionBtns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .choiceBtn{
+      border:0;
+      border-radius:24px;
+      padding:18px 14px;
+      cursor:pointer;
+      box-shadow:0 12px 26px rgba(51,32,18,.18);
+      text-align:left;
+      transition:.12s transform,.12s filter;
+      min-height:112px;
+    }
+    .choiceBtn:hover{transform:translateY(-3px);filter:saturate(1.05)}
+    .choiceBtn strong{display:block;font-size:24px;line-height:1.1;margin-bottom:6px}
+    .choiceBtn span{display:block;font-size:13px;line-height:1.55;font-weight:800;opacity:.92}
+    .choiceWin{background:linear-gradient(135deg,#cf4648,#f07b5f);color:white}
+    .choiceKoi{background:linear-gradient(135deg,#282222,#534242);color:white}
+    .decisionMiniNote{margin-top:12px;color:#7c5e6c;font-size:12px;line-height:1.65}
     .scorePanel{
       border:1px solid var(--line);background:rgba(255,250,242,.94);
       border-radius:30px;padding:14px;box-shadow:var(--soft);position:sticky;top:14px;
@@ -212,6 +268,260 @@
     .miniCard{width:39px;height:58px;border-radius:9px;font-size:8px;padding:4px;box-shadow:0 3px 8px rgba(18,8,0,.13)}
     .miniCard .m,.miniCard .k{font-size:7px}.miniCard .n{font-size:8px}
     .note{font-size:12px;line-height:1.65;color:var(--muted);margin-top:12px}
+
+    .gameHud{
+      margin-bottom:14px;
+      border:2px solid rgba(216,170,68,.65);
+      border-radius:0 0 26px 26px;
+      background:
+        linear-gradient(180deg,#7f1f22,#4b1115 58%,#26100f);
+      color:white;
+      box-shadow:0 14px 30px rgba(38,16,15,.22);
+      overflow:hidden;
+      position:relative;
+    }
+    .gameHud::before,.gameHud::after{
+      content:"";
+      position:absolute;
+      bottom:-18px;
+      width:86px;
+      height:46px;
+      border:2px solid rgba(216,170,68,.65);
+      background:rgba(10,61,45,.85);
+      transform:skewX(-22deg);
+    }
+    .gameHud::before{left:-24px}
+    .gameHud::after{right:-24px}
+    .hudRow{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1.2fr .8fr .8fr .8fr auto;
+      gap:8px;
+      align-items:center;
+      padding:12px 16px;
+      min-height:58px;
+    }
+    .hudItem{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .hudLabel{
+      color:rgba(255,255,255,.62);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+    }
+    .hudValue{
+      font-size:18px;
+      font-weight:950;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      text-shadow:0 2px 4px rgba(0,0,0,.25);
+    }
+    .hudGear{
+      width:44px;
+      height:44px;
+      border-radius:15px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.10);
+      color:white;
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.14);
+    }
+    .koiStatusBar{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      padding:0 16px 14px;
+      position:relative;
+      z-index:1;
+    }
+    .koiChip{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.10);
+      color:rgba(255,255,255,.78);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:13px;
+      font-weight:950;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+    }
+    .koiChip.active{
+      color:#fff7cf;
+      border-color:rgba(255,211,103,.78);
+      background:linear-gradient(135deg,rgba(207,70,72,.82),rgba(216,170,68,.34));
+      box-shadow:0 0 18px rgba(255,211,103,.30), inset 0 0 0 1px rgba(255,255,255,.12);
+      animation:koiPulse 1.1s ease-in-out infinite alternate;
+    }
+    @keyframes koiPulse{from{filter:brightness(.96)}to{filter:brightness(1.18)}}
+
+    .battleNotice{
+      margin:0 0 14px;
+      border-top:2px solid rgba(216,170,68,.72);
+      border-bottom:2px solid rgba(216,170,68,.72);
+      background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.88),rgba(0,0,0,.72));
+      color:white;
+      text-align:center;
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+      font-weight:950;
+      font-size:clamp(24px,5vw,44px);
+      letter-spacing:.06em;
+      padding:18px 12px;
+      text-shadow:0 3px 6px rgba(0,0,0,.45);
+      box-shadow:0 10px 24px rgba(20,10,0,.18);
+    }
+
+    .cutin{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:70;
+      background:rgba(0,0,0,.58);
+      backdrop-filter:blur(4px);
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      pointer-events:none;
+    }
+    .cutin.show{display:flex}
+    .cutinCard{
+      width:min(760px,100%);
+      min-height:260px;
+      border:3px solid rgba(216,170,68,.88);
+      border-radius:32px;
+      background:
+        radial-gradient(circle at 18% 50%, rgba(255,255,255,.18), transparent 15rem),
+        linear-gradient(135deg,#3a1113,#9e242a 48%,#26100f);
+      color:white;
+      box-shadow:0 30px 90px rgba(0,0,0,.55);
+      overflow:hidden;
+      position:relative;
+      display:grid;
+      grid-template-columns:240px 1fr;
+      animation:cutinPop .22s ease-out;
+    }
+    .cutinCard::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg,transparent 0 28%,rgba(255,255,255,.16) 30%,transparent 44% 100%);
+      animation:cutinShine .9s ease-out;
+    }
+    @keyframes cutinPop{from{opacity:.15;transform:translateX(-26px) scale(.96)}to{opacity:1;transform:none}}
+    @keyframes cutinShine{from{transform:translateX(-80%)}to{transform:translateX(80%)}}
+    .cutinPortrait{
+      position:relative;
+      z-index:1;
+      display:grid;
+      place-items:center;
+      background:rgba(0,0,0,.18);
+      border-right:1px solid rgba(255,255,255,.16);
+    }
+    .cutinPortrait .faceIcon{font-size:96px}
+    .cutinText{
+      position:relative;
+      z-index:1;
+      padding:32px 30px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .cutinWord{
+      font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+      font-size:clamp(48px,9vw,84px);
+      line-height:.95;
+      font-weight:950;
+      letter-spacing:.08em;
+      color:#fff2b9;
+      text-shadow:0 5px 0 rgba(0,0,0,.24),0 0 22px rgba(255,222,132,.28);
+    }
+    .cutinLine{
+      margin-top:14px;
+      font-size:16px;
+      line-height:1.75;
+      font-weight:850;
+      color:rgba(255,255,255,.92);
+    }
+    .cutinSub{
+      margin-top:8px;
+      font-size:13px;
+      color:rgba(255,255,255,.70);
+      font-weight:900;
+      letter-spacing:.08em;
+    }
+    .cutin.koi .cutinCard{background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.18),transparent 15rem),linear-gradient(135deg,#511116,#cf4648 48%,#2b1114)}
+    .cutin.win .cutinCard{background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.22),transparent 15rem),linear-gradient(135deg,#5f3d0e,#d8aa44 50%,#3a2308)}
+    .cutin.lose .cutinCard{background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.14),transparent 15rem),linear-gradient(135deg,#141820,#445166 50%,#12151c)}
+    .cutin.yaku .cutinCard{background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.18),transparent 15rem),linear-gradient(135deg,#342056,#8b4ec2 50%,#1c1230)}
+    .cutin.draw .cutinCard{background:radial-gradient(circle at 18% 50%,rgba(255,255,255,.16),transparent 15rem),linear-gradient(135deg,#14394a,#3c8192 50%,#102a36)}
+
+    .opponentPanel{
+      display:none;
+    }
+    .battleTop{
+      grid-template-columns:minmax(0,1fr);
+    }
+    .statePanel{
+      display:none;
+    }
+    .table{
+      min-height:calc(100vh - 250px);
+      background:
+        radial-gradient(circle at 50% 62%, rgba(216,170,68,.12), transparent 17rem),
+        linear-gradient(180deg,#4b3a23,#6b5435 48%,#3b2d1d);
+      border-color:rgba(216,170,68,.55);
+      position:relative;
+    }
+    .table::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      opacity:.10;
+      background:
+        radial-gradient(circle at 18% 22%, transparent 0 42px, rgba(255,255,255,.55) 43px 44px, transparent 45px),
+        radial-gradient(circle at 78% 64%, transparent 0 62px, rgba(255,255,255,.45) 63px 64px, transparent 65px);
+      pointer-events:none;
+    }
+    .zone{
+      position:relative;
+      z-index:1;
+      background:transparent;
+      border:0;
+    }
+    .zoneHead{
+      color:#fff6d9;
+      text-shadow:0 2px 4px rgba(0,0,0,.5);
+    }
+    .playerZone .cards{
+      justify-content:center;
+      padding-top:14px;
+    }
+    .playerZone .card{
+      margin-left:-8px;
+      transform-origin:50% 120%;
+    }
+    .playerZone .card:nth-child(1){transform:rotate(-10deg) translateY(10px)}
+    .playerZone .card:nth-child(2){transform:rotate(-7deg) translateY(5px)}
+    .playerZone .card:nth-child(3){transform:rotate(-4deg) translateY(2px)}
+    .playerZone .card:nth-child(4){transform:rotate(-1deg)}
+    .playerZone .card:nth-child(5){transform:rotate(1deg)}
+    .playerZone .card:nth-child(6){transform:rotate(4deg) translateY(2px)}
+    .playerZone .card:nth-child(7){transform:rotate(7deg) translateY(5px)}
+    .playerZone .card:nth-child(8){transform:rotate(10deg) translateY(10px)}
+    .playerZone .card:hover,.playerZone .card.selected{
+      transform:translateY(-12px) scale(1.04);
+    }
+
     @media(max-width:1040px){
       .heroCard{grid-template-columns:1fr}.heroSide{min-height:auto}
       .selectGrid{grid-template-columns:repeat(3,1fr)}
@@ -219,6 +529,19 @@
       .battleTop{grid-template-columns:260px 1fr}
     }
     @media(max-width:720px){
+      .gameHud{border-radius:0 0 20px 20px;margin-bottom:10px}
+      .hudRow{grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 12px}
+      .hudRow .hudItem:nth-child(4){display:none}
+      .hudGear{display:none}
+      .hudValue{font-size:16px}
+      .koiStatusBar{grid-template-columns:1fr;padding:0 12px 12px}
+      .battleNotice{font-size:28px;padding:14px 10px;margin-bottom:10px}
+      .cutinCard{grid-template-columns:110px 1fr;min-height:190px;border-radius:24px}
+      .cutinPortrait .faceIcon{font-size:62px}
+      .cutinText{padding:20px 16px}
+      .cutinWord{font-size:44px}
+      .cutinLine{font-size:13px}
+
       .app{padding:10px}
       .heroMain{padding:30px}
       .pageHead{align-items:flex-start;flex-direction:column;border-radius:22px}
@@ -240,8 +563,20 @@
       .cards{gap:6px;min-height:100px}.playerZone .cards{min-height:106px}
       .scorePanel{border-radius:24px;padding:12px}
       .decisionBtns{grid-template-columns:1fr}
+      .decisionCard{padding:18px;border-radius:26px}
+      .choiceBtn{min-height:96px;padding:15px}
+      .choiceBtn strong{font-size:22px}
     }
     @media(max-width:480px){
+      .hudRow{grid-template-columns:1fr 1fr;gap:6px}
+      .hudRow .hudItem:nth-child(3){display:none}
+      .battleNotice{font-size:24px}
+      .cutin{padding:10px}
+      .cutinCard{grid-template-columns:86px 1fr;min-height:170px}
+      .cutinPortrait .faceIcon{font-size:48px}
+      .cutinWord{font-size:38px}
+      .cutinLine{font-size:12px}
+
       .heroMain{padding:24px}
       h1{font-size:44px}
       .lead{font-size:14px}
@@ -320,6 +655,22 @@
       </div>
     </div>
 
+    <div class="gameHud">
+      <div class="hudRow">
+        <div class="hudItem"><span class="hudLabel">相手</span><span class="hudValue" id="hudOpponent">朱音</span></div>
+        <div class="hudItem"><span class="hudLabel">合計</span><span class="hudValue"><span id="hudPlayerTotal">0</span> - <span id="hudCpuTotal">0</span>文</span></div>
+        <div class="hudItem"><span class="hudLabel">局</span><span class="hudValue" id="hudRound">1戦目</span></div>
+        <div class="hudItem"><span class="hudLabel">状態</span><span class="hudValue" id="hudPhase">札選択</span></div>
+        <button class="hudGear" type="button" aria-label="設定">⚙</button>
+      </div>
+      <div class="koiStatusBar">
+        <div class="koiChip" id="playerKoiChip">あなた：こいこいなし</div>
+        <div class="koiChip" id="cpuKoiChip">相手：こいこいなし</div>
+      </div>
+    </div>
+
+    <div class="battleNotice" id="battleNotice">札を選んでください</div>
+
     <div class="battleShell">
       <div>
         <div class="battleTop">
@@ -355,12 +706,23 @@
           </section>
         </div>
 
-        <div class="decision" id="decision">
-          <h3>役ができました</h3>
-          <p id="decisionText">勝負するか、こいこいするか選んでください。</p>
-          <div class="decisionBtns">
-            <button class="btn btnPrimary" id="winBtn">勝負する</button>
-            <button class="btn btnDark" id="koiBtn">こいこい</button>
+        <div class="decision" id="decision" role="dialog" aria-modal="true" aria-labelledby="decisionTitle">
+          <div class="decisionCard">
+            <div class="decisionLabel">🎴 役ができた！</div>
+            <h3 id="decisionTitle">ここで勝つ？<br>こいこいする？</h3>
+            <p>今の点で勝負を確定するか、続けてもっと高得点を狙うか選んでね。</p>
+            <div class="decisionYaku" id="decisionText">現在の役を表示します。</div>
+            <div class="decisionBtns">
+              <button class="choiceBtn choiceWin" id="winBtn">
+                <strong>勝負する</strong>
+                <span>今の役でこの局に勝つ。安全に点を取るならこっち。</span>
+              </button>
+              <button class="choiceBtn choiceKoi" id="koiBtn">
+                <strong>こいこい</strong>
+                <span>勝負を続ける。次に相手が勝つと痛いけど、高得点を狙える。</span>
+              </button>
+            </div>
+            <div class="decisionMiniNote">迷ったら「勝負する」でOK。欲張りたい時だけ「こいこい」。</div>
           </div>
         </div>
       </div>
@@ -392,6 +754,17 @@
       </aside>
     </div>
   </section>
+
+  <div class="cutin" id="cutin">
+    <div class="cutinCard">
+      <div class="cutinPortrait" id="cutinPortrait"></div>
+      <div class="cutinText">
+        <div class="cutinWord" id="cutinWord">こいこい！</div>
+        <div class="cutinLine" id="cutinLine"></div>
+        <div class="cutinSub" id="cutinSub"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -562,11 +935,12 @@ function finish(winner){
   if(winner==="player")G.totals.player+=p;else G.totals.cpu+=p;
   G.phase="end";G.turn=null;G.talk=pickTalk(G.opponentKey,winner==="player"?"lose":"win");G.msg=`${winner==="player"?"あなた":OPPONENTS[G.opponentKey].name}の勝ち。${y.yaku.map(x=>x[0]).join("・")||"役なし扱い"}で${p}文。${mult>1?"相手のこいこい中なので倍付け。":""}`;
   render();
+  showCutin(winner==="player"?"win":"lose",winner==="player"?"勝利！":"敗北",G.talk,`${p}文`);
 }
-function drawEnd(){G.phase="end";G.turn=null;G.talk=pickTalk(G.opponentKey,"draw");G.msg="流局。今回は勝負がつきませんでした。";render()}
+function drawEnd(){G.phase="end";G.turn=null;G.talk=pickTalk(G.opponentKey,"draw");G.msg="流局。今回は勝負がつきませんでした。";render();showCutin("draw","流局",G.talk,"勝負つかず")}
 function afterPlayer(){
   const s=calc(G.playerCap).score;
-  if(s>G.playerDeclared&&s>0){G.phase="decision";G.turn="player";G.talk=pickTalk(G.opponentKey,"playerYaku");G.msg+=" 役ができました。勝負するか、こいこいするか選んでください。";render();return}
+  if(s>G.playerDeclared&&s>0){G.phase="decision";G.turn="player";G.talk=pickTalk(G.opponentKey,"playerYaku");G.msg+=" 役ができました。勝負するか、こいこいするか選んでください。";render();showCutin("yaku","役成立",G.talk,`${s}文`);return}
   if(G.playerHand.length===0&&G.cpuHand.length===0){drawEnd();return}
   G.phase="cpu";G.turn="cpu";render();setTimeout(runCpu,520);
 }
@@ -576,7 +950,7 @@ function runCpu(){
   apply("cpu",m.h,m.f);
   const s=calc(G.cpuCap).score;
   if(s>G.cpuDeclared&&s>0){
-    if(cpuKoi(s)){G.cpuDeclared=s;G.cpuKoi++;G.phase="hand";G.turn="player";G.talk=pickTalk(G.opponentKey,"cpuKoi");G.msg+=` ${OPPONENTS[G.opponentKey].name}は、こいこい。あなたの手番です。`;render();return}
+    if(cpuKoi(s)){G.cpuDeclared=s;G.cpuKoi++;G.phase="hand";G.turn="player";G.talk=pickTalk(G.opponentKey,"cpuKoi");G.msg+=` ${OPPONENTS[G.opponentKey].name}は、こいこい。あなたの手番です。`;render();showCutin("koi","こいこい！",G.talk,`${OPPONENTS[G.opponentKey].name}が続行`);return}
     finish("cpu");return;
   }
   if(G.playerHand.length===0&&G.cpuHand.length===0){drawEnd();return}
@@ -613,6 +987,16 @@ function render(){
   renderSelect();
   const op=OPPONENTS[G.opponentKey], py=calc(G.playerCap), cy=calc(G.cpuCap);
   $("battleTitle").textContent=`${op.name}と対戦中`;
+  $("hudOpponent").textContent=`${op.icon} ${op.name} / ${op.diff}`;
+  $("hudPlayerTotal").textContent=G.totals.player;
+  $("hudCpuTotal").textContent=G.totals.cpu;
+  $("hudRound").textContent=`${G.round}戦目`;
+  $("hudPhase").textContent=phaseLabel();
+  $("battleNotice").textContent=phaseNotice();
+  $("playerKoiChip").textContent=G.playerKoi>0?`あなた：こいこい中 ×${G.playerKoi}`:"あなた：こいこいなし";
+  $("cpuKoiChip").textContent=G.cpuKoi>0?`${op.name}：こいこい中 ×${G.cpuKoi}`:`${op.name}：こいこいなし`;
+  $("playerKoiChip").classList.toggle("active",G.playerKoi>0);
+  $("cpuKoiChip").classList.toggle("active",G.cpuKoi>0);
   $("battlePortrait").className=`portrait battlePortrait ${op.class}`;
   $("battlePortrait").innerHTML=portraitHtml(op);
   $("opponentName").textContent=`${op.icon} ${op.name}`;
@@ -628,8 +1012,8 @@ function render(){
   $("playerYaku").textContent=py.yaku.length?py.yaku.map(x=>`${x[0]} ${x[1]}文`).join(" / "):"役なし";
   $("cpuYaku").textContent=cy.yaku.length?cy.yaku.map(x=>`${x[0]} ${x[1]}文`).join(" / "):"役なし";
   $("decision").classList.toggle("show",G.phase==="decision");
-  $("decisionText").textContent=py.yaku.map(x=>`${x[0]} ${x[1]}文`).join(" / ");
-  const step={hand:["1","あなたの手札を選ぶ","下の手札から1枚クリックしてね。"],field:["2","取る場札を選ぶ","黄色く光っている場札から取る札を選んでね。"],decision:["3","勝負する？こいこい？","役ができたので、下のボタンで選んでください。"],cpu:["…","相手の手番","少し待ってね。"],end:["終","局終了","次の局へ進めます。"]}[G.phase]||["1","あなたの手札を選ぶ","下の手札から1枚クリックしてね。"];
+  $("decisionText").textContent=`現在 ${py.score}文：` + (py.yaku.length ? py.yaku.map(x=>`${x[0]} ${x[1]}文`).join(" / ") : "役なし");
+  const step={hand:["1","あなたの手札を選ぶ","下の手札から1枚クリックしてね。"],field:["2","取る場札を選ぶ","黄色く光っている場札から取る札を選んでね。"],decision:["3","役ができた！選んでください","中央の大きなパネルで、勝負かこいこいを選んでね。"],cpu:["…","相手の手番","少し待ってね。"],end:["終","局終了","次の局へ進めます。"]}[G.phase]||["1","あなたの手札を選ぶ","下の手札から1枚クリックしてね。"];
   $("stepNum").textContent=step[0];$("stepTitle").textContent=step[1];$("stepHelp").textContent=step[2];
   $("playerHint").textContent=G.phase==="hand"?"ここをクリック":G.phase==="field"?"場札を選択中":"待機中";
   renderCards();
@@ -647,6 +1031,35 @@ window.addEventListener("appinstalled",()=>{
   if(btn) btn.style.display="none";
   deferredInstallPrompt=null;
 });
+
+
+let cutinTimer=null;
+function showCutin(kind,word,line="",sub="",key=null){
+  const op=OPPONENTS[key||G?.opponentKey||selectedOpponent]||OPPONENTS.akane;
+  const el=$("cutin");
+  if(!el) return;
+  el.className=`cutin show ${kind||""}`;
+  $("cutinPortrait").className=`cutinPortrait portrait ${op.class}`;
+  $("cutinPortrait").innerHTML=portraitHtml(op);
+  $("cutinWord").textContent=word;
+  $("cutinLine").textContent=line ? `「${line}」` : "";
+  $("cutinSub").textContent=sub||"";
+  clearTimeout(cutinTimer);
+  cutinTimer=setTimeout(()=>{ el.className="cutin"; }, kind==="win"||kind==="lose" ? 1600 : 1200);
+}
+function phaseNotice(){
+  if(!G) return "札を選んでください";
+  if(G.phase==="hand") return "札を選んでください";
+  if(G.phase==="field") return "場札を選んでください";
+  if(G.phase==="decision") return "勝負する？ こいこいする？";
+  if(G.phase==="cpu") return `${OPPONENTS[G.opponentKey].name}の手番`;
+  if(G.phase==="end") return "局終了";
+  return "札を選んでください";
+}
+function phaseLabel(){
+  if(!G) return "準備";
+  return ({hand:"札選択",field:"場札選択",decision:"役成立",cpu:"相手手番",end:"局終了"}[G.phase]||"進行中");
+}
 
 function init(){
   renderSelect();
@@ -687,7 +1100,12 @@ function init(){
     apply("player",G.selected.id,f.id);G.selected=null;afterPlayer();
   });
   $("winBtn").onclick=()=>finish("player");
-  $("koiBtn").onclick=()=>{G.playerDeclared=calc(G.playerCap).score;G.playerKoi++;G.phase="cpu";G.turn="cpu";G.talk=pickTalk(G.opponentKey,"playerKoi");G.msg="あなたは、こいこいを選びました。勝負続行です。";render();setTimeout(runCpu,520)};
+  $("koiBtn").onclick=()=>{G.playerDeclared=calc(G.playerCap).score;G.playerKoi++;G.phase="cpu";G.turn="cpu";G.talk=pickTalk(G.opponentKey,"playerKoi");G.msg="あなたは、こいこいを選びました。勝負続行です。";render();showCutin("koi","こいこい！",G.talk,"あなたが続行");setTimeout(runCpu,820)};
+  document.addEventListener("keydown",(e)=>{
+    if(!G || G.phase!=="decision") return;
+    if(e.key==="Enter"){ finish("player"); }
+    if(e.key.toLowerCase()==="k"){ $("koiBtn").click(); }
+  });
   $("nextRoundBtn").onclick=()=>newRound(G.opponentKey,G.totals,G.round+1);
   $("resetBtn").onclick=()=>newRound(G.opponentKey,{player:0,cpu:0},1);
 }

@@ -1,4 +1,4 @@
-const CACHE_NAME = "uchinoko-koikoi-v1";
+const CACHE_NAME = "uchinoko-koikoi-v8";
 const ASSETS = [
   "./",
   "./index.html",
