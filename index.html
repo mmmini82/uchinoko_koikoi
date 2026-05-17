@@ -3661,6 +3661,2821 @@
       }
     }
 
+  
+    /* v30: select screen pre-battle lines + difficulty order label */
+    .selectOrderNote{
+      display:inline-flex;
+      align-items:center;
+      margin-left:8px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,242,185,.28);
+      background:rgba(255,255,255,.08);
+      color:#fff2b9;
+      font-size:11px;
+      font-family:system-ui,-apple-system,sans-serif;
+      font-weight:950;
+      letter-spacing:.05em;
+      vertical-align:middle;
+    }
+    @media(max-width:720px){
+      .selectOrderNote{
+        font-size:9px !important;
+        padding:3px 6px !important;
+        margin-left:5px !important;
+      }
+    }
+
+  
+    /* v31: mobile hanafuda-app inspired battle UI */
+    @media(max-width:720px){
+      body{
+        padding:0 !important;
+        background:#050506 !important;
+      }
+      .app{
+        width:100%;
+        max-width:430px;
+        margin:0 auto;
+        min-height:100vh;
+        background:
+          linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,0) 18%),
+          radial-gradient(circle at 50% 26%,rgba(255,210,160,.20),transparent 12rem),
+          linear-gradient(180deg,#e8d0bc 0%,#c6a783 42%,#8b6f52 100%);
+        background-attachment:fixed;
+        padding:0 8px 10px;
+        box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 34px rgba(0,0,0,.55);
+      }
+
+      #battleView{
+        min-height:100vh;
+        padding-top:8px;
+      }
+
+      #battleView .pageHead{
+        display:none !important;
+      }
+
+      /* top tutorial banner + round strip */
+      .gameHud{
+        position:relative !important;
+        top:auto !important;
+        z-index:40 !important;
+        margin:0 0 6px !important;
+        padding-top:46px !important;
+        border-radius:0 0 16px 16px !important;
+        background:
+          linear-gradient(180deg,#f55aa8 0%,#ce2f86 54%,#6852c4 100%) !important;
+        border:0 !important;
+        box-shadow:0 6px 18px rgba(0,0,0,.28) !important;
+        overflow:visible !important;
+      }
+      .gameHud::before{
+        content:"初心者も安心！ かんたんルール" !important;
+        position:absolute !important;
+        left:0 !important;
+        right:0 !important;
+        top:0 !important;
+        height:46px !important;
+        display:grid !important;
+        place-items:center !important;
+        color:white !important;
+        font-family:"Hiragino Mincho ProN","Yu Mincho",serif !important;
+        font-size:clamp(20px,6.6vw,30px) !important;
+        font-weight:950 !important;
+        letter-spacing:.03em !important;
+        text-shadow:
+          0 2px 0 rgba(98,32,90,.65),
+          0 0 8px rgba(255,255,255,.45) !important;
+        background:transparent !important;
+        width:auto !important;
+        transform:none !important;
+        border:0 !important;
+      }
+      .gameHud::after{
+        display:none !important;
+      }
+      .hudRow{
+        min-height:44px !important;
+        display:grid !important;
+        grid-template-columns:1fr 1.3fr auto !important;
+        gap:0 !important;
+        padding:0 !important;
+        border-radius:0 0 14px 14px !important;
+        background:
+          linear-gradient(180deg,#fff9d7,#f4d88e 54%,#fff2c1) !important;
+        border:2px solid rgba(158,106,40,.55) !important;
+        color:#7d255d !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.75) !important;
+        overflow:hidden;
+      }
+      .hudItem{
+        min-width:0;
+        display:grid !important;
+        place-items:center !important;
+        padding:5px 4px !important;
+        border-right:1px solid rgba(158,106,40,.25);
+      }
+      .hudItem:nth-child(1){
+        background:linear-gradient(90deg,#e8fff1,#fff8d7) !important;
+      }
+      .hudItem:nth-child(2){
+        background:linear-gradient(90deg,#fff8d7,#fff1bf) !important;
+      }
+      .hudItem:nth-child(3){
+        display:grid !important;
+        background:linear-gradient(90deg,#fff1bf,#ffe6a0) !important;
+      }
+      .hudItem:nth-child(4){
+        display:none !important;
+      }
+      .hudLabel{
+        font-size:8px !important;
+        color:#409252 !important;
+        letter-spacing:.05em;
+        line-height:1 !important;
+      }
+      .hudValue{
+        font-family:"Hiragino Mincho ProN","Yu Mincho",serif !important;
+        font-size:16px !important;
+        line-height:1.1 !important;
+        font-weight:950 !important;
+        color:#9f2b71 !important;
+        text-shadow:0 1px 0 rgba(255,255,255,.75);
+      }
+      #hudRound{
+        font-size:19px !important;
+      }
+      .hudGear{
+        display:grid !important;
+        width:52px !important;
+        height:100% !important;
+        border-radius:10px !important;
+        margin:4px !important;
+        color:white !important;
+        background:linear-gradient(180deg,#7cc9eb,#368cc8) !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.42),0 2px 5px rgba(0,0,0,.18) !important;
+        font-size:0 !important;
+      }
+      .hudGear::before{
+        content:"メニュー";
+        font-size:11px;
+        font-weight:950;
+      }
+      .koiStatusBar{
+        display:none !important;
+      }
+
+      .battleNotice{
+        margin:6px 0 !important;
+        padding:5px 12px !important;
+        min-height:0 !important;
+        border-radius:999px !important;
+        border:1px solid rgba(255,255,255,.78) !important;
+        background:
+          linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,245,224,.78)) !important;
+        color:#8b294e !important;
+        font-family:"Hiragino Mincho ProN","Yu Mincho",serif !important;
+        font-size:14px !important;
+        line-height:1.2 !important;
+        text-shadow:0 1px 0 rgba(255,255,255,.8) !important;
+        box-shadow:0 3px 10px rgba(0,0,0,.14),inset 0 0 0 1px rgba(255,255,255,.65) !important;
+      }
+
+      .battleShell{
+        display:block !important;
+        gap:0 !important;
+      }
+      #battleView .battleTop{
+        display:block !important;
+        margin:0 0 6px !important;
+      }
+
+      /* compact opponent/player status bar */
+      #battleView .opponentPanel{
+        display:grid !important;
+        grid-template-columns:minmax(0,1fr) 58px !important;
+        min-height:54px !important;
+        border-radius:18px 18px 8px 8px !important;
+        border:2px solid rgba(180,137,70,.62) !important;
+        background:
+          linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,248,210,.92)) !important;
+        box-shadow:
+          0 4px 12px rgba(0,0,0,.18),
+          inset 0 0 0 1px rgba(255,255,255,.78) !important;
+        overflow:hidden !important;
+      }
+      #battleView .battlePortrait{
+        grid-column:2 !important;
+        grid-row:1 !important;
+        height:54px !important;
+        min-height:54px !important;
+        border-radius:12px !important;
+        margin:4px 5px 4px 0 !important;
+        border:2px solid rgba(255,255,255,.9);
+        background:linear-gradient(135deg,#f8e8ff,#ffe6c6) !important;
+        box-shadow:0 2px 8px rgba(0,0,0,.18);
+      }
+      #battleView .battlePortrait .charImg{
+        transform:none !important;
+        object-fit:cover !important;
+        object-position:center top !important;
+        padding:0 !important;
+      }
+      #battleView .opponentMeta{
+        grid-column:1 !important;
+        grid-row:1 !important;
+        padding:7px 10px !important;
+        border:0 !important;
+        background:transparent !important;
+        display:grid !important;
+        align-content:center !important;
+        min-width:0 !important;
+      }
+      #battleView .opponentMeta h2{
+        margin:0 !important;
+        font-family:"Hiragino Mincho ProN","Yu Mincho",serif !important;
+        font-size:17px !important;
+        color:#7c285b !important;
+        line-height:1.1 !important;
+        text-shadow:0 1px 0 rgba(255,255,255,.8);
+      }
+      #battleView .opponentMeta h2::before{
+        content:"親";
+        display:inline-grid;
+        place-items:center;
+        width:26px;
+        height:26px;
+        margin-right:7px;
+        border-radius:50%;
+        color:#7d255d;
+        background:radial-gradient(circle,#fff 0%,#ffe7b2 62%,#c89a46 100%);
+        border:1px solid rgba(145,91,42,.35);
+        font-size:13px;
+        vertical-align:middle;
+      }
+      #battleView .opponentMeta p,
+      #battleView .opponentMeta .badgeRow{
+        display:none !important;
+      }
+      #battleView .opponentMeta .talkBubble{
+        margin:4px 0 0 !important;
+        padding:0 !important;
+        background:transparent !important;
+        border:0 !important;
+        color:#6a5a4d !important;
+        font-size:10px !important;
+        line-height:1.25 !important;
+        -webkit-line-clamp:1 !important;
+        box-shadow:none !important;
+      }
+
+      .statePanel{
+        display:none !important;
+      }
+
+      /* main table panel */
+      .table{
+        position:relative !important;
+        padding:7px !important;
+        border-radius:20px !important;
+        border:2px solid rgba(255,255,255,.78) !important;
+        background:
+          linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.46)),
+          radial-gradient(circle at 20% 20%,rgba(255,255,255,.8),transparent 10rem) !important;
+        box-shadow:
+          0 9px 22px rgba(0,0,0,.22),
+          inset 0 0 0 1px rgba(180,145,98,.35) !important;
+        overflow:visible !important;
+      }
+      .table::before{
+        content:"";
+        position:absolute;
+        inset:8px;
+        border-radius:16px;
+        background:
+          radial-gradient(circle at 18% 20%,rgba(255,255,255,.65),transparent 5rem),
+          radial-gradient(circle at 84% 70%,rgba(255,255,255,.55),transparent 6rem);
+        opacity:.55;
+        pointer-events:none;
+      }
+
+      .opponentRail{
+        position:relative !important;
+        z-index:2 !important;
+        margin:0 0 6px !important;
+        padding:5px 6px !important;
+        border-radius:14px !important;
+        border:1px solid rgba(180,137,70,.42) !important;
+        background:
+          linear-gradient(90deg,rgba(255,245,235,.68),rgba(255,232,181,.64)) !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.55) !important;
+      }
+      .opponentRailHead{
+        display:grid !important;
+        grid-template-columns:1fr auto !important;
+        align-items:center !important;
+        gap:4px !important;
+        margin:0 0 4px !important;
+        color:#7d255d !important;
+        text-shadow:0 1px 0 rgba(255,255,255,.8) !important;
+      }
+      .opponentRailHead b{
+        font-size:10px !important;
+      }
+      .opponentRailHead span{
+        font-size:8px !important;
+        opacity:.8 !important;
+      }
+      .opponentBacks{
+        min-height:28px !important;
+        gap:2px !important;
+        justify-content:center !important;
+      }
+      .railBack{
+        width:20px !important;
+        height:29px !important;
+        border-radius:4px !important;
+      }
+      .lastPlayedBox{
+        min-width:82px !important;
+        grid-template-columns:auto 30px !important;
+        gap:4px !important;
+      }
+      .playedCardSlot{
+        width:28px !important;
+        height:40px !important;
+        border-radius:5px !important;
+        background:rgba(255,255,255,.42) !important;
+      }
+      .playedCardSlot .miniCard{
+        width:26px !important;
+        height:38px !important;
+      }
+
+      .zone{
+        position:relative !important;
+        z-index:2 !important;
+        margin:0 0 6px !important;
+        padding:6px !important;
+        border-radius:15px !important;
+        border:1px solid rgba(190,150,82,.45) !important;
+        background:
+          linear-gradient(90deg,rgba(255,255,255,.62),rgba(255,245,219,.55)) !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.55) !important;
+      }
+      .zoneHead{
+        display:flex !important;
+        flex-direction:row !important;
+        align-items:center !important;
+        justify-content:space-between !important;
+        margin:0 0 4px !important;
+        color:#765533 !important;
+        text-shadow:0 1px 0 rgba(255,255,255,.75);
+      }
+      .zoneHead b{
+        font-size:10px !important;
+      }
+      .zoneHead span{
+        font-size:8px !important;
+        opacity:.82 !important;
+      }
+      .cards{
+        min-height:98px !important;
+        gap:5px !important;
+        justify-content:center !important;
+        align-items:center !important;
+      }
+      #field.cards{
+        min-height:128px !important;
+      }
+      .card{
+        width:48px !important;
+        height:72px !important;
+        border-radius:6px !important;
+        box-shadow:0 3px 8px rgba(0,0,0,.22) !important;
+      }
+
+      /* player area like lower strip with fanned hand */
+      .playerZone{
+        margin:6px -2px 0 !important;
+        padding:7px 4px 10px !important;
+        border-radius:18px !important;
+        background:
+          linear-gradient(90deg,rgba(255,255,255,.70),rgba(255,234,205,.66)) !important;
+        border:2px solid rgba(255,255,255,.62) !important;
+      }
+      .playerZone .zoneHead{
+        padding:0 6px 3px !important;
+      }
+      .playerZone .cards{
+        min-height:102px !important;
+        padding:4px 4px 0 !important;
+        flex-wrap:nowrap !important;
+        justify-content:center !important;
+        overflow:visible !important;
+      }
+      .playerZone .card{
+        width:50px !important;
+        height:76px !important;
+        margin-left:-4px !important;
+        transform-origin:center bottom !important;
+      }
+      .playerZone .card:nth-child(1){transform:rotate(-10deg) translateY(8px) !important}
+      .playerZone .card:nth-child(2){transform:rotate(-7deg) translateY(4px) !important}
+      .playerZone .card:nth-child(3){transform:rotate(-4deg) translateY(1px) !important}
+      .playerZone .card:nth-child(4){transform:rotate(-1deg) !important}
+      .playerZone .card:nth-child(5){transform:rotate(1deg) !important}
+      .playerZone .card:nth-child(6){transform:rotate(4deg) translateY(1px) !important}
+      .playerZone .card:nth-child(7){transform:rotate(7deg) translateY(4px) !important}
+      .playerZone .card:nth-child(8){transform:rotate(10deg) translateY(8px) !important}
+      .playerZone .card.selected,
+      .playerZone .card:hover{
+        transform:translateY(-10px) scale(1.06) !important;
+        z-index:8 !important;
+      }
+
+      .card.canTake{
+        outline:2px solid rgba(255,85,170,.95) !important;
+        box-shadow:
+          0 0 0 4px rgba(255,85,170,.20),
+          0 5px 12px rgba(0,0,0,.24) !important;
+      }
+      .card.canTake::before{
+        content:"合札" !important;
+        top:-8px !important;
+        right:-4px !important;
+        font-size:8px !important;
+        padding:2px 5px !important;
+        background:linear-gradient(180deg,#ffeff8,#ff67ae) !important;
+        color:#8d1d56 !important;
+        border:1px solid rgba(255,255,255,.8);
+      }
+
+      /* bottom score / captures */
+      .scorePanel{
+        margin-top:7px !important;
+        padding:0 !important;
+        border:0 !important;
+        background:transparent !important;
+        box-shadow:none !important;
+      }
+      .scoreMini{
+        display:grid !important;
+        grid-template-columns:1fr 1fr !important;
+        gap:5px !important;
+        margin:0 0 6px !important;
+      }
+      .scoreBox{
+        border-radius:14px !important;
+        border:1px solid rgba(255,255,255,.68) !important;
+        background:
+          linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,240,212,.66)) !important;
+        color:#7c285b !important;
+        box-shadow:0 3px 9px rgba(0,0,0,.14),inset 0 0 0 1px rgba(255,255,255,.52) !important;
+      }
+      .scoreBox b{
+        font-size:18px !important;
+      }
+      .scoreBox span{
+        font-size:9px !important;
+      }
+      .scorePanel .heroActions{
+        display:grid !important;
+        grid-template-columns:1fr 1fr !important;
+        gap:5px !important;
+        margin-bottom:6px !important;
+      }
+      .scorePanel .btn{
+        padding:8px 8px !important;
+        border-radius:999px !important;
+        font-size:10px !important;
+      }
+      .captureToggle{
+        display:block !important;
+        border-radius:999px !important;
+        padding:9px 10px !important;
+        background:
+          linear-gradient(180deg,#ffffff,#f4e5c7) !important;
+        color:#8b294e !important;
+        border:1px solid rgba(180,137,70,.45) !important;
+        box-shadow:0 3px 10px rgba(0,0,0,.14),inset 0 0 0 1px rgba(255,255,255,.62) !important;
+      }
+      .captureDrawer.open{
+        margin-top:6px !important;
+        display:grid !important;
+        grid-template-columns:1fr 1fr !important;
+        gap:5px !important;
+      }
+      .captureDrawer.open .yakuBox{
+        display:block !important;
+        padding:6px !important;
+        border-radius:14px !important;
+        background:
+          linear-gradient(90deg,rgba(255,255,255,.68),rgba(255,240,220,.56)) !important;
+        border:1px solid rgba(190,150,82,.38) !important;
+      }
+      .captureDrawer.open .captured{
+        max-height:58px !important;
+      }
+      .captureDrawer.open .captured .miniCard{
+        width:24px !important;
+        height:36px !important;
+      }
+
+      .playerMiniPortrait,
+      .scorePanel > b,
+      .note{
+        display:none !important;
+      }
+
+      /* decision dialog, more like big center announcement */
+      .decision{
+        background:rgba(0,0,0,.52) !important;
+        backdrop-filter:blur(3px);
+      }
+      .decisionCard{
+        border-radius:28px !important;
+        background:
+          radial-gradient(circle at 50% 20%,rgba(255,255,255,.80),transparent 9rem),
+          linear-gradient(180deg,#fffdf6,#f4dfb4) !important;
+        border:2px solid rgba(255,255,255,.78) !important;
+      }
+      .decision h3{
+        color:#b21e58 !important;
+      }
+    }
+
+    @media(max-width:390px){
+      .app{
+        padding-left:5px;
+        padding-right:5px;
+      }
+      .card{
+        width:44px !important;
+        height:66px !important;
+      }
+      .playerZone .card{
+        width:45px !important;
+        height:68px !important;
+        margin-left:-5px !important;
+      }
+      #field.cards{
+        min-height:118px !important;
+      }
+      .hudValue{
+        font-size:14px !important;
+      }
+      #hudRound{
+        font-size:17px !important;
+      }
+    }
+
+  
+    /* v32: keep mobile layout, restore original uchikoi dark/burgundy/gold colors */
+    @media(max-width:720px){
+      body{
+        background:#15100f !important;
+      }
+      .app{
+        background:
+          radial-gradient(circle at 50% 18%,rgba(216,170,68,.15),transparent 13rem),
+          radial-gradient(circle at 10% 72%,rgba(107,27,43,.20),transparent 16rem),
+          linear-gradient(180deg,#251713 0%,#3b2d1d 45%,#201611 100%) !important;
+        box-shadow:0 0 0 1px rgba(216,170,68,.18),0 0 34px rgba(0,0,0,.62) !important;
+      }
+
+      .gameHud{
+        background:
+          linear-gradient(180deg,#7f1f22 0%,#5a151a 55%,#2a1011 100%) !important;
+        box-shadow:0 6px 18px rgba(0,0,0,.35), inset 0 0 0 1px rgba(216,170,68,.18) !important;
+      }
+      .gameHud::before{
+        content:"初心者も安心！ かんたんルール" !important;
+        color:#fff2b9 !important;
+        text-shadow:
+          0 2px 0 rgba(0,0,0,.48),
+          0 0 10px rgba(216,170,68,.32) !important;
+        background:
+          linear-gradient(90deg,rgba(0,0,0,.05),rgba(216,170,68,.12),rgba(0,0,0,.05)) !important;
+        border-bottom:1px solid rgba(216,170,68,.28) !important;
+      }
+      .hudRow{
+        background:
+          linear-gradient(180deg,#fff8df,#e8c774 54%,#fff0b7) !important;
+        border:2px solid rgba(216,170,68,.72) !important;
+        color:#5a151a !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.70),0 3px 12px rgba(0,0,0,.22) !important;
+      }
+      .hudItem:nth-child(1){
+        background:linear-gradient(90deg,#fffaf0,#f6df9b) !important;
+      }
+      .hudItem:nth-child(2){
+        background:linear-gradient(90deg,#f6df9b,#e7bd66) !important;
+      }
+      .hudItem:nth-child(3){
+        background:linear-gradient(90deg,#e7bd66,#d8aa44) !important;
+      }
+      .hudLabel{
+        color:#7f1f22 !important;
+      }
+      .hudValue{
+        color:#5a151a !important;
+      }
+      .hudGear{
+        background:linear-gradient(180deg,#7f1f22,#4b1216) !important;
+        color:#fff2b9 !important;
+        border:1px solid rgba(216,170,68,.45) !important;
+      }
+
+      .battleNotice{
+        background:
+          linear-gradient(180deg,rgba(255,250,242,.96),rgba(236,208,145,.84)) !important;
+        color:#5a151a !important;
+        border:1px solid rgba(216,170,68,.58) !important;
+        box-shadow:0 3px 10px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.62) !important;
+      }
+
+      #battleView .opponentPanel{
+        background:
+          linear-gradient(90deg,rgba(255,250,242,.95),rgba(238,205,146,.92)) !important;
+        border:2px solid rgba(216,170,68,.65) !important;
+        box-shadow:0 4px 12px rgba(0,0,0,.26),inset 0 0 0 1px rgba(255,255,255,.55) !important;
+      }
+      #battleView .battlePortrait{
+        background:
+          radial-gradient(circle at 50% 30%,rgba(255,255,255,.26),transparent 3rem),
+          linear-gradient(135deg,#3a101b,#7f1f22) !important;
+        border:2px solid rgba(216,170,68,.62) !important;
+      }
+      #battleView .opponentMeta h2{
+        color:#5a151a !important;
+      }
+      #battleView .opponentMeta h2::before{
+        color:#5a151a !important;
+        background:radial-gradient(circle,#fff8df 0%,#e8c774 62%,#a87428 100%) !important;
+        border:1px solid rgba(216,170,68,.55) !important;
+      }
+      #battleView .opponentMeta .talkBubble{
+        color:#6b4a2d !important;
+      }
+
+      .table{
+        background:
+          radial-gradient(circle at 50% 36%,rgba(216,170,68,.13),transparent 14rem),
+          linear-gradient(180deg,rgba(93,64,38,.92),rgba(54,37,22,.94)) !important;
+        border:2px solid rgba(216,170,68,.68) !important;
+        box-shadow:
+          0 9px 22px rgba(0,0,0,.34),
+          inset 0 0 0 1px rgba(255,255,255,.08),
+          inset 0 0 32px rgba(0,0,0,.18) !important;
+      }
+      .table::before{
+        background:
+          radial-gradient(circle at 18% 20%,rgba(216,170,68,.08),transparent 6rem),
+          radial-gradient(circle at 84% 70%,rgba(255,250,242,.07),transparent 7rem) !important;
+        opacity:1 !important;
+      }
+
+      .opponentRail{
+        background:
+          linear-gradient(90deg,rgba(47,29,20,.86),rgba(104,70,35,.70)) !important;
+        border:1px solid rgba(216,170,68,.42) !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.05) !important;
+      }
+      .opponentRailHead{
+        color:#fff2b9 !important;
+        text-shadow:0 2px 4px rgba(0,0,0,.45) !important;
+      }
+      .playedCardSlot{
+        background:rgba(255,250,242,.16) !important;
+        border-color:rgba(216,170,68,.38) !important;
+      }
+
+      .zone{
+        background:
+          linear-gradient(90deg,rgba(255,250,242,.16),rgba(216,170,68,.12)) !important;
+        border:1px solid rgba(216,170,68,.42) !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.05) !important;
+      }
+      .zoneHead{
+        color:#fff2b9 !important;
+        text-shadow:0 2px 4px rgba(0,0,0,.45) !important;
+      }
+
+      .playerZone{
+        background:
+          linear-gradient(90deg,rgba(255,250,242,.22),rgba(216,170,68,.14)) !important;
+        border:2px solid rgba(216,170,68,.48) !important;
+      }
+
+      .card.canTake{
+        outline:2px solid rgba(255,220,98,.96) !important;
+        box-shadow:
+          0 0 0 4px rgba(216,170,68,.22),
+          0 5px 12px rgba(0,0,0,.28) !important;
+      }
+      .card.canTake::before{
+        content:"合札" !important;
+        background:linear-gradient(180deg,#fff2b9,#d8aa44) !important;
+        color:#4b1216 !important;
+        border:1px solid rgba(255,255,255,.62) !important;
+      }
+
+      .scoreBox{
+        background:
+          linear-gradient(180deg,rgba(255,250,242,.92),rgba(229,194,125,.80)) !important;
+        color:#5a151a !important;
+        border:1px solid rgba(216,170,68,.55) !important;
+        box-shadow:0 3px 9px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.46) !important;
+      }
+      .captureToggle{
+        background:
+          linear-gradient(180deg,#fff8df,#d8aa44) !important;
+        color:#4b1216 !important;
+        border:1px solid rgba(216,170,68,.65) !important;
+        box-shadow:0 3px 10px rgba(0,0,0,.24),inset 0 0 0 1px rgba(255,255,255,.52) !important;
+      }
+      .captureDrawer.open .yakuBox{
+        background:
+          linear-gradient(90deg,rgba(255,250,242,.20),rgba(216,170,68,.12)) !important;
+        border:1px solid rgba(216,170,68,.40) !important;
+      }
+
+      .decisionCard{
+        background:
+          radial-gradient(circle at 50% 20%,rgba(255,255,255,.52),transparent 9rem),
+          linear-gradient(180deg,#fff8df,#d8aa44) !important;
+        border:2px solid rgba(216,170,68,.72) !important;
+      }
+      .decision h3{
+        color:#7f1f22 !important;
+      }
+    }
+
+  
+    /* v33: remove guide/ad-like top banner from mobile battle UI */
+    @media(max-width:720px){
+      .gameHud{
+        padding-top:0 !important;
+      }
+      .gameHud::before{
+        content:none !important;
+        display:none !important;
+        height:0 !important;
+        border:0 !important;
+        background:none !important;
+      }
+      .hudRow{
+        border-radius:14px !important;
+      }
+    }
+
+  
+    /* v34: mobile typography tuning */
+    @media(max-width:720px){
+      body{
+        font-size:13px !important;
+        -webkit-text-size-adjust:100%;
+      }
+
+      /* common mobile buttons */
+      .btn,
+      .homeBigBtn,
+      .selectConfirmBtn,
+      .resultCloseBtn,
+      .dealerStartBtn,
+      .choiceBtn{
+        letter-spacing:.02em;
+      }
+
+      /* top page */
+      .homeMenuHead small{
+        font-size:10px !important;
+      }
+      .homeMenuHead h2{
+        font-size:26px !important;
+        line-height:1.08 !important;
+      }
+      .homeMenuHead p{
+        font-size:12px !important;
+        line-height:1.55 !important;
+      }
+      .homeCurrentBox span{
+        font-size:10px !important;
+      }
+      .homeCurrentBox strong{
+        font-size:21px !important;
+      }
+      .homeCurrentBox em{
+        font-size:11px !important;
+      }
+      .homeBigBtn{
+        font-size:12px !important;
+        line-height:1.25 !important;
+      }
+      .matchSettings,
+      .selectMatchSettings{
+        font-size:11px !important;
+      }
+      .matchBtn{
+        font-size:11px !important;
+        line-height:1.15 !important;
+      }
+
+      /* select page */
+      #selectView .pageHead h1{
+        font-size:23px !important;
+        line-height:1.15 !important;
+      }
+      #selectView .pageHead p{
+        font-size:12px !important;
+        line-height:1.5 !important;
+      }
+      .selectRosterHead{
+        font-size:16px !important;
+        line-height:1.2 !important;
+      }
+      .selectOrderNote{
+        font-size:9px !important;
+        line-height:1 !important;
+      }
+      .charIconBtn span{
+        font-size:10px !important;
+        line-height:1.15 !important;
+      }
+      .selectPreviewInfo small{
+        font-size:10px !important;
+      }
+      .selectPreviewInfo h2{
+        font-size:27px !important;
+        line-height:1.05 !important;
+      }
+      .selectedPreview .badge{
+        font-size:9px !important;
+        line-height:1.1 !important;
+      }
+      .selectPreviewInfo p{
+        font-size:11.5px !important;
+        line-height:1.5 !important;
+      }
+      .selectedPreview .selectedLine{
+        font-size:11.5px !important;
+        line-height:1.45 !important;
+      }
+      .selectConfirmBtn{
+        font-size:12px !important;
+        line-height:1.2 !important;
+      }
+      .selectedText{
+        font-size:12px !important;
+      }
+
+      /* battle HUD */
+      .hudLabel{
+        font-size:9px !important;
+        line-height:1.05 !important;
+      }
+      .hudValue{
+        font-size:15px !important;
+        line-height:1.05 !important;
+      }
+      #hudRound{
+        font-size:18px !important;
+        line-height:1 !important;
+      }
+      .hudGear::before{
+        font-size:10px !important;
+      }
+
+      /* battle status text */
+      .battleNotice{
+        font-size:13px !important;
+        line-height:1.25 !important;
+      }
+      #battleView .opponentMeta h2{
+        font-size:16px !important;
+        line-height:1.12 !important;
+      }
+      #battleView .opponentMeta h2::before{
+        font-size:12px !important;
+      }
+      #battleView .opponentMeta .talkBubble{
+        font-size:10.5px !important;
+        line-height:1.3 !important;
+      }
+
+      /* rail / zones */
+      .opponentRailHead b,
+      .zoneHead b{
+        font-size:10.5px !important;
+        line-height:1.1 !important;
+      }
+      .opponentRailHead span,
+      .zoneHead span{
+        font-size:8.5px !important;
+        line-height:1.1 !important;
+      }
+      .railBack{
+        font-size:7px !important;
+      }
+      .playedCardSlot{
+        font-size:8px !important;
+      }
+
+      /* cards: keep fallback labels readable if image fails */
+      .card .m{
+        font-size:7.5px !important;
+        line-height:1.05 !important;
+      }
+      .card .n{
+        font-size:9.5px !important;
+        line-height:1.08 !important;
+      }
+      .card .k{
+        font-size:7.5px !important;
+        line-height:1.05 !important;
+      }
+      .card.canTake::before{
+        font-size:8px !important;
+        line-height:1 !important;
+        font-weight:950 !important;
+      }
+
+      /* score/capture */
+      .scoreBox span{
+        font-size:9.5px !important;
+        line-height:1.1 !important;
+      }
+      .scoreBox b{
+        font-size:18px !important;
+        line-height:1.05 !important;
+      }
+      .scorePanel .btn{
+        font-size:10.5px !important;
+        line-height:1.2 !important;
+      }
+      .captureToggle{
+        font-size:11.5px !important;
+        line-height:1.2 !important;
+      }
+      .yakuTitle b{
+        font-size:10.5px !important;
+      }
+      .yakuTitle strong{
+        font-size:13.5px !important;
+      }
+      .yakus{
+        font-size:10px !important;
+        line-height:1.35 !important;
+      }
+
+      /* decision modal */
+      .decision h3{
+        font-size:25px !important;
+        line-height:1.08 !important;
+      }
+      .decision p{
+        font-size:12px !important;
+        line-height:1.5 !important;
+      }
+      .decisionYaku{
+        font-size:12px !important;
+        line-height:1.45 !important;
+      }
+      .choiceBtn strong{
+        font-size:17px !important;
+        line-height:1.15 !important;
+      }
+      .choiceBtn span{
+        font-size:10.5px !important;
+        line-height:1.35 !important;
+      }
+
+      /* dealer */
+      .dealerLabel{
+        font-size:11px !important;
+      }
+      .dealerTitle{
+        font-size:clamp(28px,9vw,42px) !important;
+        line-height:1.05 !important;
+      }
+      .dealerText{
+        font-size:12px !important;
+        line-height:1.55 !important;
+      }
+      .dealerDrawName,
+      .dealerDrawMonth{
+        font-size:11px !important;
+      }
+      .dealerRule{
+        font-size:10.5px !important;
+        line-height:1.45 !important;
+      }
+      .dealerStartBtn{
+        font-size:12px !important;
+      }
+
+      /* cut-in */
+      .cutinWord{
+        line-height:.92 !important;
+      }
+      .cutinLine{
+        font-size:12.5px !important;
+        line-height:1.5 !important;
+      }
+      .cutinSub{
+        font-size:11px !important;
+        line-height:1.3 !important;
+      }
+
+      /* result */
+      .roundResultHead small{
+        font-size:10px !important;
+      }
+      .roundResultHead h2{
+        line-height:.95 !important;
+      }
+      .resultScoreLine{
+        font-size:12px !important;
+        line-height:1.3 !important;
+      }
+      .resultScoreLine strong{
+        font-size:24px !important;
+        line-height:1.05 !important;
+      }
+      .resultSummary{
+        font-size:11.5px !important;
+        line-height:1.45 !important;
+      }
+      .resultYakuItem{
+        font-size:11.5px !important;
+        line-height:1.25 !important;
+      }
+      .resultYakuItem span:last-child{
+        font-size:12.5px !important;
+      }
+      .resultComment{
+        font-size:11.5px !important;
+        line-height:1.45 !important;
+      }
+      .matchResultText{
+        font-size:12px !important;
+        line-height:1.55 !important;
+      }
+    }
+
+    @media(max-width:390px){
+      .hudValue{
+        font-size:14px !important;
+      }
+      #hudRound{
+        font-size:16px !important;
+      }
+      #battleView .opponentMeta h2{
+        font-size:15px !important;
+      }
+      .battleNotice{
+        font-size:12px !important;
+      }
+      .card.canTake::before{
+        font-size:7px !important;
+      }
+      .roundResultHead h2{
+        font-size:clamp(32px,12vw,52px) !important;
+      }
+    }
+
+  
+    /* v35: dealer order + PC first-view + mobile TOP button */
+    @media(min-width:721px){
+      #battleView .pageHead{
+        padding:14px 18px !important;
+        margin-bottom:10px !important;
+        border-radius:22px !important;
+      }
+      #battleView .pageHead h1{
+        font-size:28px !important;
+        line-height:1.05 !important;
+      }
+      #battleView .pageHead p{
+        font-size:13px !important;
+        line-height:1.35 !important;
+        margin-top:4px !important;
+      }
+      .gameHud{
+        margin-bottom:8px !important;
+      }
+      .hudRow{
+        min-height:46px !important;
+        padding:8px 14px !important;
+      }
+      .koiStatusBar{
+        padding:0 14px 8px !important;
+      }
+      #battleView .battleTop{
+        grid-template-columns:190px minmax(0,1fr) !important;
+        gap:8px !important;
+        margin-bottom:8px !important;
+      }
+      #battleView .battlePortrait{
+        height:128px !important;
+      }
+      #battleView .opponentMeta{
+        padding:8px 10px !important;
+      }
+      #battleView .opponentMeta h2{
+        font-size:20px !important;
+        line-height:1.1 !important;
+      }
+      #battleView .opponentMeta p{
+        font-size:11px !important;
+        line-height:1.35 !important;
+        -webkit-line-clamp:1 !important;
+      }
+      #battleView .opponentMeta .talkBubble{
+        margin-top:6px !important;
+        padding:7px 9px !important;
+        font-size:11px !important;
+        line-height:1.35 !important;
+        -webkit-line-clamp:1 !important;
+      }
+      #battleView .statePanel{
+        padding:8px !important;
+        gap:6px !important;
+        border-radius:20px !important;
+      }
+      #battleView .statePanel .step{
+        padding:7px !important;
+        border-radius:14px !important;
+      }
+      #battleView .statePanel .stepNum{
+        width:30px !important;
+        height:30px !important;
+        border-radius:10px !important;
+        font-size:12px !important;
+      }
+      #battleView .statePanel .step b{
+        font-size:13px !important;
+      }
+      #battleView .statePanel .step span{
+        font-size:11px !important;
+      }
+      #battleView .statePanel .message{
+        max-height:48px !important;
+        padding:7px 9px !important;
+        font-size:11px !important;
+        line-height:1.35 !important;
+      }
+      .moveLog{
+        padding:8px !important;
+        border-radius:14px !important;
+      }
+      .moveLogHead{
+        margin-bottom:4px !important;
+        font-size:10px !important;
+      }
+      .moveLogText{
+        font-size:11px !important;
+        line-height:1.35 !important;
+        min-height:0 !important;
+      }
+      .moveLogCards{
+        display:none !important;
+      }
+      .battleNotice{
+        margin-bottom:8px !important;
+        padding:10px !important;
+        font-size:24px !important;
+      }
+      .table{
+        padding:9px !important;
+      }
+    }
+
+    @media(max-width:720px){
+      /* 親決めも盤面と同じ：上＝対戦相手 / 下＝あなた */
+      .dealerDrawCards{
+        grid-template-columns:1fr !important;
+      }
+      #dealerCpuSide{
+        order:1;
+      }
+      .dealerDrawCards .dealerVs{
+        order:2;
+      }
+      #dealerPlayerSide{
+        order:3;
+      }
+      .dealerDrawSide{
+        min-height:138px !important;
+      }
+      .dealerDrawSide .card{
+        width:58px !important;
+        height:90px !important;
+      }
+
+      /* 盤面上のメニューはスマホではTOPへボタンにする */
+      .hudGear{
+        display:grid !important;
+        cursor:pointer !important;
+      }
+      .hudGear::before{
+        content:"TOPへ" !important;
+        font-size:10px !important;
+        font-weight:950 !important;
+      }
+    }
+
+  
+    /* v36: desktop move dialog area under the board */
+    @media(min-width:721px){
+      .battleShell{display:grid !important;grid-template-columns:220px minmax(0,1fr) 220px !important;gap:10px !important;align-items:start !important;}
+      .battleTop{grid-column:1 / 2 !important;display:block !important;margin:0 !important;}
+      .table{grid-column:2 / 3 !important;grid-row:1 !important;margin:0 !important;}
+      .scorePanel{grid-column:3 / 4 !important;grid-row:1 !important;margin:0 !important;}
+      .desktopBottomDialog{grid-column:1 / -1 !important;grid-row:2 !important;display:grid !important;grid-template-columns:minmax(0,1fr) 360px !important;gap:10px !important;align-items:start !important;margin-top:2px !important;}
+      .desktopBottomDialog .battleNotice{margin:0 !important;min-height:72px !important;display:flex !important;align-items:center !important;justify-content:center !important;border-radius:18px !important;}
+      .desktopBottomDialog .statePanel{margin:0 !important;min-height:72px !important;}
+      .desktopBottomDialog .moveLog{grid-column:1 / -1 !important;margin:0 !important;}
+    }
+
+  
+    /* v37: koi-koi timing and button safety */
+    .decision:not(.show) .choiceBtn{
+      pointer-events:none !important;
+    }
+
+  
+    /* v38: fix broken PC layout and lock dealer order */
+    @media(min-width:721px){
+      /* reset the broken 3-column assignment from v36 */
+      .battleShell{
+        display:grid !important;
+        grid-template-columns:minmax(0,1fr) 280px !important;
+        gap:14px !important;
+        align-items:start !important;
+      }
+
+      .battleShell > div:first-child{
+        display:grid !important;
+        grid-template-columns:240px minmax(620px,1fr) !important;
+        grid-template-rows:auto auto !important;
+        gap:12px !important;
+        align-items:start !important;
+        min-width:0 !important;
+      }
+
+      #battleView .battleTop{
+        display:contents !important;
+      }
+
+      #battleView .opponentPanel{
+        grid-column:1 !important;
+        grid-row:1 / span 2 !important;
+        width:auto !important;
+        min-width:0 !important;
+        margin:0 !important;
+        display:block !important;
+      }
+
+      #battleView .battlePortrait{
+        height:210px !important;
+        min-height:210px !important;
+      }
+
+      #battleView .battlePortrait .charImg{
+        width:100% !important;
+        height:100% !important;
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        transform:none !important;
+        padding:6px 6px 0 !important;
+      }
+
+      #battleView .opponentMeta{
+        padding:12px 12px !important;
+      }
+
+      #battleView .opponentMeta h2{
+        font-size:22px !important;
+        line-height:1.12 !important;
+      }
+
+      #battleView .opponentMeta p{
+        font-size:12px !important;
+        line-height:1.45 !important;
+        margin-top:5px !important;
+      }
+
+      #battleView .opponentMeta .talkBubble{
+        margin-top:8px !important;
+        padding:8px 10px !important;
+        font-size:12px !important;
+        line-height:1.45 !important;
+      }
+
+      #battleView .table{
+        grid-column:2 !important;
+        grid-row:1 !important;
+        width:100% !important;
+        min-width:0 !important;
+        margin:0 !important;
+        padding:12px !important;
+      }
+
+      #battleView .statePanel{
+        grid-column:2 !important;
+        grid-row:2 !important;
+        width:100% !important;
+        min-width:0 !important;
+        margin:0 !important;
+        display:grid !important;
+        grid-template-columns:minmax(220px,.68fr) minmax(0,1.32fr) !important;
+        grid-template-rows:auto auto !important;
+        gap:8px !important;
+        padding:10px !important;
+        border-radius:22px !important;
+      }
+
+      #battleView .statePanel .step{
+        grid-column:1 !important;
+        grid-row:1 !important;
+        margin:0 !important;
+        padding:8px !important;
+        border-radius:15px !important;
+      }
+
+      #battleView .statePanel .message{
+        grid-column:2 !important;
+        grid-row:1 / span 2 !important;
+        margin:0 !important;
+        min-height:78px !important;
+        max-height:110px !important;
+        overflow:auto !important;
+        padding:10px 12px !important;
+        font-size:12px !important;
+        line-height:1.55 !important;
+      }
+
+      #battleView .moveLog{
+        grid-column:1 !important;
+        grid-row:2 !important;
+        margin:0 !important;
+        padding:8px !important;
+        border-radius:15px !important;
+      }
+
+      #battleView .moveLogHead{
+        margin-bottom:4px !important;
+        font-size:10px !important;
+      }
+
+      #battleView .moveLogText{
+        min-height:0 !important;
+        font-size:11px !important;
+        line-height:1.4 !important;
+        display:-webkit-box !important;
+        -webkit-line-clamp:2 !important;
+        -webkit-box-orient:vertical !important;
+        overflow:hidden !important;
+      }
+
+      #battleView .moveLogCards{
+        display:none !important;
+      }
+
+      #battleView .scorePanel{
+        grid-column:2 !important;
+        grid-row:1 !important;
+        width:auto !important;
+        min-width:0 !important;
+        margin:0 !important;
+        position:sticky !important;
+        top:12px !important;
+      }
+
+      #battleView .battleNotice{
+        margin-bottom:10px !important;
+        padding:12px !important;
+        min-height:0 !important;
+        font-size:26px !important;
+      }
+
+      .cards{
+        justify-content:center !important;
+      }
+
+      #field.cards{
+        min-height:118px !important;
+      }
+
+      .playerZone .cards{
+        min-height:128px !important;
+      }
+
+      .card{
+        width:68px !important;
+        height:106px !important;
+      }
+
+      .miniCard{
+        width:35px !important;
+        height:52px !important;
+      }
+
+      /* dealer: PC left opponent, right player */
+      .dealerDrawCards{
+        grid-template-columns:1fr auto 1fr !important;
+      }
+
+      #dealerCpuSide{
+        order:1 !important;
+      }
+
+      .dealerDrawCards .dealerVs{
+        order:2 !important;
+      }
+
+      #dealerPlayerSide{
+        order:3 !important;
+      }
+    }
+
+    @media(min-width:721px) and (max-width:1120px){
+      .battleShell{
+        grid-template-columns:minmax(0,1fr) !important;
+      }
+      #battleView .scorePanel{
+        grid-column:1 !important;
+        grid-row:2 !important;
+        position:relative !important;
+        top:auto !important;
+      }
+      .battleShell > div:first-child{
+        grid-template-columns:220px minmax(0,1fr) !important;
+      }
+    }
+
+    @media(max-width:720px){
+      /* because dealer HTML is now CPU -> VS -> player */
+      #dealerCpuSide{
+        order:1 !important;
+      }
+      .dealerDrawCards .dealerVs{
+        order:2 !important;
+      }
+      #dealerPlayerSide{
+        order:3 !important;
+      }
+    }
+
+  
+    /* v39: slower opponent tempo + visible deck capture log + frame behind character art */
+    .cutinCard::before,
+    .roundResultCard::before,
+    .matchResultCard::before{
+      z-index:1 !important;
+    }
+    .cutinCard::after{
+      z-index:1 !important;
+      pointer-events:none !important;
+    }
+    .cutinPortrait,
+    .resultCharacterPane{
+      z-index:3 !important;
+    }
+    .cutinText,
+    .resultInfoPane,
+    .roundResultHead,
+    .resultComment{
+      z-index:6 !important;
+    }
+
+    .moveLogCards{
+      display:grid !important;
+      grid-template-columns:repeat(4,minmax(80px,1fr));
+      gap:8px !important;
+      align-items:stretch !important;
+    }
+    .logUnit{
+      min-width:0;
+      display:grid;
+      grid-template-rows:auto auto auto;
+      place-items:center;
+      gap:4px;
+      padding:7px 6px;
+      border-radius:14px;
+      border:1px solid rgba(216,170,68,.24);
+      background:rgba(255,255,255,.08);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .logUnit.draw,
+    .logUnit.drawTaken{
+      border-color:rgba(255,242,185,.42);
+      background:rgba(216,170,68,.12);
+    }
+    .logUnit.drawTaken{
+      box-shadow:0 0 0 2px rgba(216,170,68,.12), inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+    .logLabel{
+      font-size:10px;
+      font-weight:950;
+      color:#fff2b9;
+      line-height:1.1;
+      text-align:center;
+      white-space:nowrap;
+    }
+    .logCardName,
+    .logEmpty{
+      font-size:10px;
+      line-height:1.15;
+      color:rgba(255,255,255,.82);
+      text-align:center;
+      max-width:100%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .logEmpty{
+      opacity:.7;
+      padding:10px 0;
+    }
+
+    @media(max-width:720px){
+      .moveLogCards{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:5px !important;
+      }
+      .logUnit{
+        padding:5px 4px !important;
+        border-radius:10px !important;
+      }
+      .logLabel{
+        font-size:8.5px !important;
+      }
+      .logCardName,
+      .logEmpty{
+        font-size:8.5px !important;
+      }
+      .logUnit .miniCard{
+        width:24px !important;
+        height:36px !important;
+      }
+    }
+
+    @media(min-width:721px){
+      #battleView .moveLogCards{
+        display:grid !important;
+      }
+    }
+
+  
+    /* v40: mobile cut-in/result visual cleanup */
+    @media(max-width:720px){
+      /* cut-in: bigger transparent standee + readable horizontal text */
+      .cutin{
+        padding:12px !important;
+        align-items:center !important;
+        justify-content:center !important;
+      }
+
+      .cutinCard{
+        width:min(94vw,520px) !important;
+        height:min(76vh,660px) !important;
+        min-height:520px !important;
+        max-height:680px !important;
+        display:block !important;
+        position:relative !important;
+        overflow:hidden !important;
+        border-radius:32px !important;
+        border:3px solid rgba(216,170,68,.90) !important;
+      }
+
+      .cutinCard::before{
+        inset:15px !important;
+        border-radius:24px !important;
+        z-index:1 !important;
+      }
+
+      .cutinCard::after{
+        z-index:2 !important;
+        pointer-events:none !important;
+      }
+
+      .cutinPortrait{
+        position:absolute !important;
+        left:-16% !important;
+        right:auto !important;
+        top:auto !important;
+        bottom:-9% !important;
+        width:82% !important;
+        height:78% !important;
+        min-height:0 !important;
+        display:block !important;
+        overflow:visible !important;
+        background:transparent !important;
+        border:0 !important;
+        z-index:3 !important;
+        pointer-events:none !important;
+      }
+
+      .cutinPortrait .portraitInner{
+        width:100% !important;
+        height:100% !important;
+        display:grid !important;
+        place-items:end start !important;
+        overflow:visible !important;
+      }
+
+      .cutinPortrait .charImg{
+        width:100% !important;
+        height:100% !important;
+        max-width:none !important;
+        object-fit:contain !important;
+        object-position:left bottom !important;
+        padding:0 !important;
+        transform:scale(1.28) !important;
+        transform-origin:left bottom !important;
+        filter:drop-shadow(0 26px 36px rgba(0,0,0,.58)) !important;
+      }
+
+      .cutinPortrait .faceIcon{
+        font-size:120px !important;
+        align-self:end !important;
+        justify-self:start !important;
+        margin:0 0 24px 22px !important;
+      }
+
+      .cutinText{
+        position:absolute !important;
+        inset:0 !important;
+        width:100% !important;
+        height:100% !important;
+        z-index:6 !important;
+        padding:0 !important;
+        display:block !important;
+        text-align:right !important;
+        background:
+          linear-gradient(90deg,rgba(10,5,8,0) 0%,rgba(10,5,8,.20) 36%,rgba(10,5,8,.66) 100%) !important;
+        border-radius:32px !important;
+      }
+
+      .cutinWord{
+        position:absolute !important;
+        top:31% !important;
+        right:22px !important;
+        width:auto !important;
+        max-width:76% !important;
+        margin:0 !important;
+        display:block !important;
+        white-space:nowrap !important;
+        writing-mode:horizontal-tb !important;
+        text-orientation:mixed !important;
+        text-align:right !important;
+        font-size:clamp(48px,15vw,72px) !important;
+        line-height:.92 !important;
+        letter-spacing:.015em !important;
+        word-break:keep-all !important;
+        overflow-wrap:normal !important;
+        color:#fff2b9 !important;
+        text-shadow:
+          0 5px 0 rgba(0,0,0,.30),
+          0 0 22px rgba(255,222,132,.40) !important;
+      }
+
+      .cutinLine{
+        position:absolute !important;
+        top:54% !important;
+        right:22px !important;
+        width:54% !important;
+        max-width:250px !important;
+        margin:0 !important;
+        padding:0 !important;
+        text-align:right !important;
+        font-size:13.5px !important;
+        line-height:1.55 !important;
+        font-weight:900 !important;
+        color:rgba(255,255,255,.94) !important;
+        word-break:normal !important;
+        overflow-wrap:break-word !important;
+        text-shadow:0 2px 5px rgba(0,0,0,.42) !important;
+      }
+
+      .cutinSub{
+        position:absolute !important;
+        top:68% !important;
+        right:22px !important;
+        width:50% !important;
+        max-width:230px !important;
+        margin:0 !important;
+        text-align:right !important;
+        font-size:12px !important;
+        line-height:1.35 !important;
+        color:rgba(255,255,255,.78) !important;
+        font-weight:950 !important;
+        letter-spacing:.06em !important;
+        text-shadow:0 2px 5px rgba(0,0,0,.38) !important;
+      }
+
+      /* result: keep title horizontal and make standee more present */
+      .roundResultCard,
+      .matchResultCard{
+        width:min(94vw,540px) !important;
+        height:min(80vh,680px) !important;
+        min-height:540px !important;
+        max-height:700px !important;
+        border-radius:32px !important;
+        overflow:hidden !important;
+      }
+
+      .roundResultCard::before,
+      .matchResultCard::before{
+        inset:15px !important;
+        border-radius:24px !important;
+        z-index:1 !important;
+      }
+
+      .roundResultHead{
+        top:26px !important;
+        left:20px !important;
+        right:20px !important;
+        max-width:none !important;
+        width:auto !important;
+        text-align:right !important;
+        z-index:7 !important;
+      }
+
+      .roundResultHead small{
+        font-size:11px !important;
+        line-height:1 !important;
+        white-space:nowrap !important;
+      }
+
+      .roundResultHead h2{
+        font-size:clamp(36px,11.5vw,54px) !important;
+        line-height:.96 !important;
+        white-space:nowrap !important;
+        word-break:keep-all !important;
+        overflow-wrap:normal !important;
+        letter-spacing:.01em !important;
+        max-width:100% !important;
+      }
+
+      .richResultBody{
+        min-height:540px !important;
+      }
+
+      .resultCharacterPane{
+        position:absolute !important;
+        left:-12% !important;
+        right:auto !important;
+        top:auto !important;
+        bottom:-7% !important;
+        width:82% !important;
+        height:73% !important;
+        min-height:0 !important;
+        overflow:visible !important;
+        z-index:3 !important;
+      }
+
+      .resultCharacterArt{
+        width:100% !important;
+        height:100% !important;
+        display:grid !important;
+        place-items:end start !important;
+        overflow:visible !important;
+      }
+
+      .resultCharacterArt .charImg{
+        width:100% !important;
+        height:100% !important;
+        object-fit:contain !important;
+        object-position:left bottom !important;
+        padding:0 !important;
+        transform:scale(1.18) !important;
+        transform-origin:left bottom !important;
+        filter:drop-shadow(0 28px 40px rgba(0,0,0,.62)) !important;
+      }
+
+      .resultComment{
+        left:16px !important;
+        bottom:30px !important;
+        width:54% !important;
+        max-width:260px !important;
+        z-index:7 !important;
+        font-size:12px !important;
+        line-height:1.45 !important;
+        padding:10px 11px !important;
+        border-radius:16px !important;
+        display:-webkit-box !important;
+        -webkit-line-clamp:3 !important;
+        -webkit-box-orient:vertical !important;
+        overflow:hidden !important;
+      }
+
+      .resultInfoPane{
+        inset:0 0 0 auto !important;
+        width:61% !important;
+        min-height:100% !important;
+        padding:138px 18px 20px 38px !important;
+        justify-content:center !important;
+        z-index:6 !important;
+        border-radius:0 32px 32px 0 !important;
+      }
+
+      .resultScoreLine{
+        padding:10px 11px !important;
+      }
+
+      .resultScoreLine strong{
+        font-size:24px !important;
+        white-space:nowrap !important;
+      }
+
+      .resultSummary{
+        font-size:11.5px !important;
+        line-height:1.45 !important;
+        -webkit-line-clamp:3 !important;
+      }
+
+      .resultYakuList{
+        max-height:116px !important;
+      }
+
+      .resultYakuItem{
+        font-size:11px !important;
+        line-height:1.25 !important;
+        padding:7px 9px !important;
+      }
+
+      .resultYakuItem span:last-child{
+        font-size:12px !important;
+      }
+
+      .roundEndActions{
+        gap:7px !important;
+        margin-top:9px !important;
+      }
+
+      .resultCloseBtn{
+        padding:10px 12px !important;
+        font-size:12px !important;
+        line-height:1.15 !important;
+        border-radius:14px !important;
+      }
+
+      .matchScoreBig{
+        font-size:clamp(36px,13vw,64px) !important;
+        line-height:1 !important;
+        white-space:nowrap !important;
+      }
+
+      .matchResultText{
+        font-size:12px !important;
+        line-height:1.55 !important;
+      }
+    }
+
+    @media(max-width:390px){
+      .cutinCard{
+        width:95vw !important;
+        height:min(78vh,640px) !important;
+        min-height:500px !important;
+      }
+
+      .cutinPortrait{
+        left:-20% !important;
+        width:88% !important;
+        height:76% !important;
+      }
+
+      .cutinPortrait .charImg{
+        transform:scale(1.24) !important;
+      }
+
+      .cutinWord{
+        right:18px !important;
+        font-size:clamp(42px,14vw,60px) !important;
+      }
+
+      .cutinLine{
+        right:18px !important;
+        width:55% !important;
+        font-size:12.5px !important;
+      }
+
+      .cutinSub{
+        right:18px !important;
+        width:52% !important;
+        font-size:11px !important;
+      }
+
+      .roundResultHead h2{
+        font-size:clamp(32px,10.5vw,48px) !important;
+      }
+
+      .resultInfoPane{
+        width:63% !important;
+        padding-left:32px !important;
+        padding-right:14px !important;
+      }
+
+      .resultCharacterPane{
+        left:-16% !important;
+        width:86% !important;
+      }
+
+      .resultComment{
+        width:50% !important;
+        font-size:11px !important;
+      }
+    }
+
+  
+    /* v41: mobile cut-in/result dialogue no-clipping fix */
+    @media(max-width:720px){
+      /* カットイン：セリフを右下の読みやすい吹き出しへ */
+      .cutinLine{
+        top:auto !important;
+        right:16px !important;
+        bottom:82px !important;
+        width:min(64%,300px) !important;
+        max-width:none !important;
+        max-height:none !important;
+        min-height:auto !important;
+        padding:10px 12px !important;
+        display:block !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+        -webkit-box-orient:unset !important;
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:anywhere !important;
+        text-align:left !important;
+        font-size:13px !important;
+        line-height:1.55 !important;
+        border-radius:16px !important;
+        background:rgba(0,0,0,.34) !important;
+        border:1px solid rgba(255,242,185,.22) !important;
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),0 10px 28px rgba(0,0,0,.20) !important;
+      }
+
+      .cutinSub{
+        top:auto !important;
+        right:18px !important;
+        bottom:42px !important;
+        width:min(58%,260px) !important;
+        max-width:none !important;
+        max-height:none !important;
+        display:block !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+        -webkit-box-orient:unset !important;
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:anywhere !important;
+        text-align:right !important;
+        font-size:11.5px !important;
+        line-height:1.35 !important;
+      }
+
+      .cutinWord{
+        top:28% !important;
+        right:18px !important;
+        max-width:78% !important;
+      }
+
+      /* 長い役名・セリフでもカード外へ見切れないように少し余白を確保 */
+      .cutinCard{
+        height:min(78vh,680px) !important;
+        min-height:540px !important;
+      }
+
+      /* リザルト：コメントを広い下部吹き出しにして、省略しない */
+      .resultComment{
+        left:16px !important;
+        right:16px !important;
+        bottom:18px !important;
+        width:auto !important;
+        max-width:none !important;
+        max-height:none !important;
+        min-height:auto !important;
+        padding:11px 13px !important;
+        display:block !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+        -webkit-box-orient:unset !important;
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:anywhere !important;
+        text-align:left !important;
+        font-size:12px !important;
+        line-height:1.55 !important;
+        border-radius:18px !important;
+        background:rgba(0,0,0,.46) !important;
+        border:1px solid rgba(255,242,185,.26) !important;
+        z-index:9 !important;
+      }
+
+      /* コメント欄を下に広げたぶん、右側情報を少し上へ逃がす */
+      .resultInfoPane{
+        padding-bottom:110px !important;
+      }
+
+      .resultYakuList{
+        max-height:92px !important;
+      }
+
+      .roundEndActions{
+        margin-top:8px !important;
+      }
+
+      /* 全局リザルトの文章も省略しない */
+      .matchResultText{
+        display:block !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+        -webkit-box-orient:unset !important;
+        max-height:none !important;
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:anywhere !important;
+      }
+    }
+
+    @media(max-width:390px){
+      .cutinLine{
+        right:12px !important;
+        bottom:80px !important;
+        width:62% !important;
+        padding:9px 10px !important;
+        font-size:12px !important;
+        line-height:1.5 !important;
+      }
+
+      .cutinSub{
+        right:14px !important;
+        bottom:42px !important;
+        width:58% !important;
+        font-size:10.5px !important;
+      }
+
+      .resultComment{
+        left:12px !important;
+        right:12px !important;
+        bottom:14px !important;
+        padding:10px 11px !important;
+        font-size:11px !important;
+        line-height:1.5 !important;
+      }
+
+      .resultInfoPane{
+        padding-bottom:104px !important;
+      }
+    }
+
+  
+    /* v42: force result/cutin dialogue to wrap and stop clipping in portrait cards */
+    .resultComment,
+    .cutinLine,
+    .cutinSub,
+    .matchResultText{
+      white-space:normal !important;
+      word-break:break-word !important;
+      overflow-wrap:anywhere !important;
+      text-overflow:clip !important;
+      -webkit-line-clamp:unset !important;
+      line-clamp:unset !important;
+      -webkit-box-orient:unset !important;
+      overflow:visible !important;
+      max-height:none !important;
+    }
+
+    /* リザルトのコメントは、画面幅判定に関係なく下部ワイド吹き出しに固定 */
+    .roundResultCard .resultComment,
+    .matchResultCard .resultComment{
+      position:absolute !important;
+      left:24px !important;
+      right:24px !important;
+      bottom:26px !important;
+      width:auto !important;
+      max-width:none !important;
+      min-width:0 !important;
+      display:block !important;
+      padding:12px 14px !important;
+      box-sizing:border-box !important;
+      border-radius:18px !important;
+      background:rgba(0,0,0,.50) !important;
+      border:1px solid rgba(255,242,185,.28) !important;
+      color:#fff !important;
+      font-size:14px !important;
+      line-height:1.55 !important;
+      text-align:left !important;
+      z-index:20 !important;
+    }
+
+    /* コメント欄の分だけ、情報欄の下余白を増やす */
+    .roundResultCard .resultInfoPane,
+    .matchResultCard .resultInfoPane{
+      padding-bottom:128px !important;
+    }
+
+    /* 縦長カードでは特に強制。PCブラウザ上で縦カード表示になった時も効くようにする */
+    @media(max-aspect-ratio: 4/5){
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        left:16px !important;
+        right:16px !important;
+        bottom:18px !important;
+        font-size:12px !important;
+        line-height:1.55 !important;
+        padding:11px 13px !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:118px !important;
+      }
+
+      .roundResultCard,
+      .matchResultCard{
+        overflow:hidden !important;
+      }
+    }
+
+    @media(max-width:720px){
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        left:14px !important;
+        right:14px !important;
+        bottom:14px !important;
+        font-size:12px !important;
+        line-height:1.55 !important;
+        padding:11px 12px !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:116px !important;
+      }
+
+      .resultYakuList{
+        max-height:82px !important;
+      }
+
+      /* カットインのセリフも、細長すぎると切れるので少し幅を増やす */
+      .cutinLine{
+        width:min(70%,330px) !important;
+        right:14px !important;
+        bottom:82px !important;
+        font-size:12.5px !important;
+        line-height:1.55 !important;
+        padding:10px 12px !important;
+        box-sizing:border-box !important;
+      }
+
+      .cutinSub{
+        width:min(64%,300px) !important;
+        right:16px !important;
+        bottom:42px !important;
+      }
+    }
+
+    @media(max-width:390px){
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        left:10px !important;
+        right:10px !important;
+        bottom:10px !important;
+        font-size:11.2px !important;
+        line-height:1.5 !important;
+        padding:10px 11px !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:108px !important;
+      }
+
+      .cutinLine{
+        width:68% !important;
+        right:10px !important;
+        font-size:11.5px !important;
+      }
+    }
+
+  
+    /* v43: hard fix for dialogue clipping + larger PC opponent panel */
+
+    /* まず全体で、セリフ系を絶対に横一列で切らせない */
+    .resultComment,
+    .cutinLine,
+    .cutinSub,
+    .talkBubble,
+    .matchResultText{
+      white-space:normal !important;
+      word-break:break-all !important;
+      overflow-wrap:anywhere !important;
+      line-break:anywhere !important;
+      text-overflow:clip !important;
+      overflow:visible !important;
+      max-height:none !important;
+      -webkit-line-clamp:unset !important;
+      line-clamp:unset !important;
+      -webkit-box-orient:unset !important;
+    }
+
+    /* リザルトのセリフ欄：どの画面幅でも下部ワイド固定 */
+    .roundResultCard .resultComment,
+    .matchResultCard .resultComment{
+      position:absolute !important;
+      left:clamp(14px,4vw,28px) !important;
+      right:clamp(14px,4vw,28px) !important;
+      bottom:clamp(14px,3.5vh,28px) !important;
+      width:auto !important;
+      min-width:0 !important;
+      max-width:none !important;
+      min-height:54px !important;
+      max-height:122px !important;
+      display:block !important;
+      padding:12px 14px !important;
+      box-sizing:border-box !important;
+      border-radius:18px !important;
+      background:rgba(0,0,0,.54) !important;
+      border:1px solid rgba(255,242,185,.32) !important;
+      color:#fff !important;
+      font-size:clamp(11px,3.2vw,14px) !important;
+      line-height:1.55 !important;
+      text-align:left !important;
+      z-index:30 !important;
+      overflow:auto !important;
+    }
+
+    .roundResultCard .resultInfoPane,
+    .matchResultCard .resultInfoPane{
+      padding-bottom:150px !important;
+    }
+
+    .roundResultCard .resultYakuList{
+      max-height:78px !important;
+    }
+
+    /* カットインのセリフも複数行前提にする */
+    .cutinCard .cutinLine{
+      min-height:48px !important;
+      max-height:132px !important;
+      overflow:auto !important;
+    }
+
+    /* 縦長表示ではさらに確実に下部を確保 */
+    @media(max-aspect-ratio: 4/5){
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        left:14px !important;
+        right:14px !important;
+        bottom:14px !important;
+        font-size:12px !important;
+        line-height:1.55 !important;
+        min-height:58px !important;
+        max-height:126px !important;
+        padding:11px 13px !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:148px !important;
+      }
+    }
+
+    @media(max-width:720px){
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        left:12px !important;
+        right:12px !important;
+        bottom:12px !important;
+        font-size:12px !important;
+        line-height:1.55 !important;
+        min-height:58px !important;
+        max-height:130px !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:150px !important;
+      }
+
+      .roundResultCard .resultYakuList{
+        max-height:72px !important;
+      }
+    }
+
+    @media(max-width:390px){
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        left:10px !important;
+        right:10px !important;
+        bottom:10px !important;
+        font-size:11px !important;
+        line-height:1.48 !important;
+        min-height:56px !important;
+        max-height:124px !important;
+        padding:10px 11px !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:140px !important;
+      }
+    }
+
+    /* PC版：対戦相手欄を広げる。南帆側に近い存在感にする */
+    @media(min-width:721px){
+      .battleShell{
+        grid-template-columns:minmax(0,1fr) 300px !important;
+        gap:16px !important;
+      }
+
+      .battleShell > div:first-child{
+        grid-template-columns:300px minmax(620px,1fr) !important;
+        gap:14px !important;
+      }
+
+      #battleView .opponentPanel{
+        min-height:0 !important;
+        border-radius:28px !important;
+        overflow:hidden !important;
+      }
+
+      #battleView .battlePortrait{
+        height:320px !important;
+        min-height:320px !important;
+      }
+
+      #battleView .battlePortrait .charImg{
+        width:100% !important;
+        height:100% !important;
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        padding:10px 10px 0 !important;
+        transform:none !important;
+      }
+
+      #battleView .opponentMeta{
+        padding:15px 16px 18px !important;
+      }
+
+      #battleView .opponentMeta h2{
+        font-size:25px !important;
+        line-height:1.12 !important;
+        margin-bottom:5px !important;
+      }
+
+      #battleView .opponentMeta p{
+        display:block !important;
+        font-size:12px !important;
+        line-height:1.5 !important;
+        margin-top:5px !important;
+        max-height:none !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+      }
+
+      #battleView .opponentMeta .badgeRow{
+        margin-top:8px !important;
+        gap:6px !important;
+        flex-wrap:wrap !important;
+      }
+
+      #battleView .opponentMeta .talkBubble{
+        display:block !important;
+        margin-top:12px !important;
+        padding:12px 13px !important;
+        font-size:13px !important;
+        line-height:1.55 !important;
+        max-height:none !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+        background:rgba(255,255,255,.62) !important;
+      }
+
+      #battleView .scorePanel{
+        width:300px !important;
+      }
+
+      #battleView .scorePanel .playerMiniPortrait{
+        min-height:320px !important;
+        height:320px !important;
+      }
+
+      #battleView .scorePanel .playerMiniPortrait .charImg{
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        padding:10px 10px 0 !important;
+      }
+
+      /* 盤面下の説明・ログは横幅を取りすぎない */
+      #battleView .statePanel{
+        grid-template-columns:minmax(220px,.62fr) minmax(0,1.38fr) !important;
+      }
+    }
+
+    @media(min-width:721px) and (max-width:1180px){
+      .battleShell{
+        grid-template-columns:minmax(0,1fr) !important;
+      }
+
+      .battleShell > div:first-child{
+        grid-template-columns:260px minmax(0,1fr) !important;
+      }
+
+      #battleView .battlePortrait{
+        height:280px !important;
+        min-height:280px !important;
+      }
+
+      #battleView .scorePanel{
+        width:auto !important;
+      }
+    }
+
+    /* 次の背景画像用：images/bg_pc.png と images/bg_mobile.png を置けば反映される */
+    body{
+      background-image:
+        linear-gradient(180deg,rgba(255,250,242,.88),rgba(244,238,232,.88)),
+        url("images/bg_pc.png");
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+    }
+
+    @media(max-width:720px){
+      body{
+        background-image:
+          linear-gradient(180deg,rgba(21,16,15,.48),rgba(21,16,15,.72)),
+          url("images/bg_mobile.png");
+        background-size:cover;
+        background-position:center;
+        background-attachment:fixed;
+      }
+    }
+
+  
+    /* v44: centered cut-in/result dialogue + PC layout re-balance */
+
+    /* カットイン／リザルトのセリフは端寄せをやめて中央固定 */
+    .cutinCard .cutinLine,
+    .roundResultCard .resultComment,
+    .matchResultCard .resultComment{
+      position:absolute !important;
+      left:50% !important;
+      right:auto !important;
+      transform:translateX(-50%) !important;
+      width:min(82%,720px) !important;
+      min-width:0 !important;
+      max-width:none !important;
+      box-sizing:border-box !important;
+      display:block !important;
+      white-space:normal !important;
+      word-break:normal !important;
+      overflow-wrap:anywhere !important;
+      line-break:auto !important;
+      text-overflow:clip !important;
+      -webkit-line-clamp:unset !important;
+      line-clamp:unset !important;
+      -webkit-box-orient:unset !important;
+      overflow:visible !important;
+      max-height:none !important;
+      text-align:center !important;
+      z-index:40 !important;
+      background:rgba(0,0,0,.50) !important;
+      border:1px solid rgba(255,242,185,.30) !important;
+      color:#fff !important;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 12px 32px rgba(0,0,0,.22) !important;
+    }
+
+    .cutinCard .cutinLine{
+      bottom:76px !important;
+      top:auto !important;
+      padding:11px 14px !important;
+      border-radius:17px !important;
+      font-size:13px !important;
+      line-height:1.55 !important;
+    }
+
+    .cutinCard .cutinSub{
+      position:absolute !important;
+      left:50% !important;
+      right:auto !important;
+      transform:translateX(-50%) !important;
+      bottom:40px !important;
+      top:auto !important;
+      width:min(72%,520px) !important;
+      max-width:none !important;
+      display:block !important;
+      text-align:center !important;
+      white-space:normal !important;
+      overflow-wrap:anywhere !important;
+      word-break:normal !important;
+      overflow:visible !important;
+      max-height:none !important;
+      z-index:41 !important;
+    }
+
+    .roundResultCard .resultComment,
+    .matchResultCard .resultComment{
+      bottom:24px !important;
+      top:auto !important;
+      padding:12px 16px !important;
+      border-radius:18px !important;
+      font-size:13px !important;
+      line-height:1.55 !important;
+    }
+
+    .roundResultCard .resultInfoPane,
+    .matchResultCard .resultInfoPane{
+      padding-bottom:124px !important;
+    }
+
+    /* スマホ縦カードではさらに中央寄せを強制 */
+    @media(max-width:720px), (max-aspect-ratio: 4/5){
+      .cutinCard .cutinLine{
+        left:50% !important;
+        right:auto !important;
+        transform:translateX(-50%) !important;
+        bottom:82px !important;
+        width:86% !important;
+        padding:10px 12px !important;
+        font-size:12px !important;
+        line-height:1.5 !important;
+        text-align:center !important;
+        max-height:116px !important;
+        overflow:auto !important;
+      }
+
+      .cutinCard .cutinSub{
+        left:50% !important;
+        right:auto !important;
+        transform:translateX(-50%) !important;
+        bottom:42px !important;
+        width:78% !important;
+        text-align:center !important;
+        font-size:11px !important;
+      }
+
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        left:50% !important;
+        right:auto !important;
+        transform:translateX(-50%) !important;
+        bottom:14px !important;
+        width:86% !important;
+        padding:10px 12px !important;
+        font-size:11.5px !important;
+        line-height:1.5 !important;
+        text-align:center !important;
+        min-height:0 !important;
+        max-height:118px !important;
+        overflow:auto !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:134px !important;
+      }
+
+      .roundResultCard .resultYakuList{
+        max-height:70px !important;
+      }
+    }
+
+    @media(max-width:390px){
+      .cutinCard .cutinLine{
+        width:88% !important;
+        bottom:80px !important;
+        font-size:11px !important;
+      }
+
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        width:88% !important;
+        bottom:10px !important;
+        font-size:10.8px !important;
+        line-height:1.45 !important;
+        max-height:110px !important;
+      }
+
+      .roundResultCard .resultInfoPane,
+      .matchResultCard .resultInfoPane{
+        padding-bottom:126px !important;
+      }
+    }
+
+    /* PC版：盤面が右の南帆欄に被らないように再設計 */
+    @media(min-width:721px){
+      .battleShell{
+        grid-template-columns:minmax(0,1fr) 280px !important;
+        gap:18px !important;
+        align-items:start !important;
+      }
+
+      .battleShell > div:first-child{
+        grid-template-columns:280px minmax(0,1fr) !important;
+        grid-template-rows:auto auto !important;
+        gap:16px !important;
+        align-items:start !important;
+        min-width:0 !important;
+      }
+
+      #battleView .opponentPanel{
+        grid-column:1 !important;
+        grid-row:1 / span 2 !important;
+        width:280px !important;
+        max-width:280px !important;
+        min-width:0 !important;
+        margin:0 !important;
+        border-radius:28px !important;
+        overflow:hidden !important;
+        display:block !important;
+      }
+
+      #battleView .battlePortrait{
+        width:100% !important;
+        height:320px !important;
+        min-height:320px !important;
+        border-radius:0 !important;
+        overflow:hidden !important;
+        display:grid !important;
+        place-items:end center !important;
+      }
+
+      #battleView .battlePortrait .charImg{
+        width:100% !important;
+        height:100% !important;
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        padding:10px 10px 0 !important;
+        transform:none !important;
+      }
+
+      #battleView .opponentMeta{
+        padding:14px 15px 17px !important;
+      }
+
+      #battleView .opponentMeta h2{
+        font-size:24px !important;
+        line-height:1.12 !important;
+        margin:0 !important;
+      }
+
+      #battleView .opponentMeta p{
+        display:block !important;
+        margin-top:6px !important;
+        font-size:12px !important;
+        line-height:1.5 !important;
+        max-height:none !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+      }
+
+      #battleView .opponentMeta .badgeRow{
+        display:flex !important;
+        flex-wrap:wrap !important;
+        gap:6px !important;
+        margin-top:8px !important;
+      }
+
+      #battleView .opponentMeta .talkBubble{
+        display:block !important;
+        margin-top:12px !important;
+        padding:12px 13px !important;
+        font-size:13px !important;
+        line-height:1.55 !important;
+        max-height:none !important;
+        overflow:visible !important;
+        -webkit-line-clamp:unset !important;
+        background:rgba(255,255,255,.62) !important;
+        border-radius:16px !important;
+      }
+
+      #battleView .table{
+        grid-column:2 !important;
+        grid-row:1 !important;
+        width:100% !important;
+        min-width:0 !important;
+        max-width:100% !important;
+        margin:0 !important;
+        padding:12px !important;
+        box-sizing:border-box !important;
+      }
+
+      #battleView .scorePanel{
+        width:280px !important;
+        max-width:280px !important;
+        min-width:0 !important;
+        position:sticky !important;
+        top:12px !important;
+        box-sizing:border-box !important;
+      }
+
+      #battleView .scorePanel .playerMiniPortrait{
+        width:100% !important;
+        height:320px !important;
+        min-height:320px !important;
+        display:grid !important;
+        place-items:end center !important;
+        overflow:hidden !important;
+      }
+
+      #battleView .scorePanel .playerMiniPortrait .charImg{
+        width:100% !important;
+        height:100% !important;
+        object-fit:contain !important;
+        object-position:center bottom !important;
+        padding:10px 10px 0 !important;
+      }
+
+      #battleView .statePanel{
+        grid-column:2 !important;
+        grid-row:2 !important;
+        width:100% !important;
+        min-width:0 !important;
+        margin:0 !important;
+        display:grid !important;
+        grid-template-columns:minmax(220px,.64fr) minmax(0,1.36fr) !important;
+        gap:9px !important;
+        box-sizing:border-box !important;
+      }
+
+      .card{
+        width:clamp(56px,5.1vw,68px) !important;
+        height:clamp(88px,8vw,106px) !important;
+      }
+
+      .playerZone .cards,
+      #field.cards{
+        max-width:100% !important;
+      }
+    }
+
+    @media(min-width:721px) and (max-width:1180px){
+      .battleShell{
+        grid-template-columns:minmax(0,1fr) !important;
+      }
+
+      .battleShell > div:first-child{
+        grid-template-columns:250px minmax(0,1fr) !important;
+      }
+
+      #battleView .opponentPanel{
+        width:250px !important;
+        max-width:250px !important;
+      }
+
+      #battleView .battlePortrait{
+        height:280px !important;
+        min-height:280px !important;
+      }
+
+      #battleView .scorePanel{
+        width:auto !important;
+        max-width:none !important;
+        position:relative !important;
+        top:auto !important;
+      }
+
+      #battleView .scorePanel .playerMiniPortrait{
+        height:260px !important;
+        min-height:260px !important;
+      }
+    }
+
+    /* PC版リザルト／カットインでもセリフは中央へ */
+    @media(min-width:721px){
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment,
+      .cutinCard .cutinLine{
+        text-align:center !important;
+      }
+
+      .roundResultCard .resultComment,
+      .matchResultCard .resultComment{
+        bottom:28px !important;
+        width:min(76%,760px) !important;
+        max-height:96px !important;
+        overflow:auto !important;
+      }
+
+      .cutinCard .cutinLine{
+        width:min(72%,720px) !important;
+        bottom:82px !important;
+      }
+
+      .cutinCard .cutinSub{
+        bottom:42px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -3712,7 +6527,7 @@
     </div>
     <div class="selectStage">
       <div class="selectRosterPanel">
-        <div class="selectRosterHead">対戦相手</div>
+        <div class="selectRosterHead">対戦相手 <span class="selectOrderNote">易 → 難</span></div>
         <div class="selectGrid" id="selectGrid"></div>
       </div>
       <div class="selectedPreview" id="selectedPreview"></div>
@@ -3864,16 +6679,16 @@
       <div class="dealerTitle" id="dealerTitle">親を決めます</div>
       <p class="dealerText" id="dealerText">この局の先手を決めます。親になった方から札を出します。</p>
       <div class="dealerDrawCards">
-        <div class="dealerDrawSide" id="dealerPlayerSide">
-          <div class="dealerDrawName">あなた</div>
-          <div id="dealerPlayerCard"></div>
-          <div class="dealerDrawMonth" id="dealerPlayerMark">---</div>
-        </div>
-        <div class="dealerVs">若い月が親</div>
         <div class="dealerDrawSide" id="dealerCpuSide">
           <div class="dealerDrawName" id="dealerCpuName">相手</div>
           <div id="dealerCpuCard"></div>
           <div class="dealerDrawMonth" id="dealerCpuMark">---</div>
+        </div>
+        <div class="dealerVs">若い月が親</div>
+        <div class="dealerDrawSide" id="dealerPlayerSide">
+          <div class="dealerDrawName">あなた</div>
+          <div id="dealerPlayerCard"></div>
+          <div class="dealerDrawMonth" id="dealerPlayerMark">---</div>
         </div>
       </div>
       <div class="dealerRule">同じ月を引いた場合は引き直し。親がこの局の先手です。</div>
@@ -3943,12 +6758,17 @@
 
 <script>
 const OPPONENTS = {
-  akane:{key:"akane",name:"朱音",title:"攻守バランス型",icon:"🔥",class:"",diff:"★★★☆☆",desc:"基本に忠実。勝てる時は堅く、伸びる時だけ攻める。初心者にも遊びやすい標準の強さ。",line:"へえ、そこで取るんだ。いいじゃん、姫。"},
-  haruka:{key:"haruka",name:"悠",title:"防御・妨害型",icon:"🌙",class:"haruka",diff:"★★★★☆",desc:"南帆の役を静かに潰す防御寄り。自分の得点より、相手に渡さない札を優先する。",line:"……その札、渡したくないな。"},
-  masumi:{key:"masumi",name:"真澄",title:"高得点ロマン型",icon:"🪽",class:"masumi",diff:"★★☆☆☆〜★★★★★",desc:"猪鹿蝶・青短・赤短など美しい高得点役を狙う。爆発力は高いけど事故もする。",line:"綺麗な取り方するね。少し妬ける。"},
-  itsuki:{key:"itsuki",name:"斎",title:"鬼強・期待値型",icon:"☁️",class:"itsuki",diff:"★★★★★",desc:"かなり容赦ない。期待値・妨害・こいこい判断を強めに見て、普通に勝ちに来る。",line:"なるほど。では、そう来ますか。"},
-  hin:{key:"hin",name:"梁泫",title:"攪乱・勝負勘型",icon:"🪭",class:"hin",diff:"★★★☆☆〜★★★★☆",desc:"流れ読みと揺さぶり型。ときどき変な札を切るけど、勝負所だけ妙に鋭い。",line:"南帆小姐，睇住我個手。唔好淨係笑呀。"}
+  akane:{key:"akane",name:"朱音",title:"攻守バランス型",icon:"🔥",class:"",diff:"★★★☆☆",desc:"基本に忠実。勝てる時は堅く、伸びる時だけ攻める。初心者にも遊びやすい標準の強さ。",selectLine:"姫、俺にする？ いいよ。勝っても負けても、ちゃんと相手してやる。",line:"へえ、そこで取るんだ。いいじゃん、姫。"},
+  haruka:{key:"haruka",name:"悠",title:"防御・妨害型",icon:"🌙",class:"haruka",diff:"★★★★☆",desc:"南帆の役を静かに潰す防御寄り。自分の得点より、相手に渡さない札を優先する。",selectLine:"南帆、僕を選ぶんだね。……いいよ。君の手元、最初から最後まで見てる。",line:"……その札、渡したくないな。"},
+  masumi:{key:"masumi",name:"真澄",title:"高得点ロマン型",icon:"🪽",class:"masumi",diff:"★★☆☆☆〜★★★★★",desc:"猪鹿蝶・青短・赤短など美しい高得点役を狙う。爆発力は高いけど事故もする。",selectLine:"俺を選んでくれるんだ。じゃあ、ただ勝つだけじゃなくて綺麗な勝負にしよう。",line:"綺麗な取り方するね。少し妬ける。"},
+  itsuki:{key:"itsuki",name:"斎",title:"鬼強・期待値型",icon:"☁️",class:"itsuki",diff:"★★★★★",desc:"かなり容赦ない。期待値・妨害・こいこい判断を強めに見て、普通に勝ちに来る。",selectLine:"私をご指名ですか。よろしい。では、少しだけ理に沿ってお相手しましょう。",line:"なるほど。では、そう来ますか。"},
+  hin:{key:"hin",name:"梁泫",title:"攪乱・勝負勘型",icon:"🪭",class:"hin",diff:"★★★☆☆〜★★★★☆",desc:"流れ読みと揺さぶり型。ときどき変な札を切るけど、勝負所だけ妙に鋭い。",selectLine:"南帆小姐，選我呀？好啊。今日唔係上堂，係打牌。老師唔放水㗎。",line:"南帆小姐，睇住我個手。唔好淨係笑呀。"}
 };
+
+const SELECT_ORDER = ["masumi","akane","hin","haruka","itsuki"]; // 易しめ → 鬼強
+function selectOpponents(){
+  return SELECT_ORDER.map(key=>OPPONENTS[key]).filter(Boolean);
+}
 
 const CHARACTER_INFO = { minaho:{key:"minaho",name:"南帆",icon:"❄️",class:"minaho"} };
 const IMAGE_PATHS = {
@@ -4490,21 +7310,61 @@ function drawEnd(){
 }
 function afterPlayer(){
   const s=calc(G.playerCap).score;
-  if(s>G.playerDeclared&&s>0){G.phase="decision";G.turn="player";G.talk=pickTalk(G.opponentKey,"playerYaku");G.msg+=" 役ができました。勝負するか、こいこいするか選んでください。";render();showCutin("yaku","役成立",G.talk,`${s}文`,G.opponentKey,"normal");return}
-  if(G.playerHand.length===0&&G.cpuHand.length===0){drawEnd();return}
-  G.phase="cpu";G.turn="cpu";render();setTimeout(runCpu,520);
-}
-function runCpu(){
-  if(G.phase!=="cpu")return;
-  const m=cpuMove(); if(!m){drawEnd();return}
-  apply("cpu",m.h,m.f);
-  const s=calc(G.cpuCap).score;
-  if(s>G.cpuDeclared&&s>0){
-    if(cpuKoi(s)){G.cpuDeclared=s;G.cpuKoi++;G.phase="hand";G.turn="player";G.talk=pickTalk(G.opponentKey,"cpuKoi");G.msg+=` ${OPPONENTS[G.opponentKey].name}は、こいこい。あなたの手番です。`;render();showCutin("koi","こいこい！",G.talk,`${OPPONENTS[G.opponentKey].name}が続行`,G.opponentKey,"win");return}
-    finish("cpu");return;
+  if(s>G.playerDeclared&&s>0){
+    G.phase="decision";G.turn="player";G.talk=pickTalk(G.opponentKey,"playerYaku");
+    G.msg+=" 役ができました。勝負するか、こいこいするか選んでください。";
+    render();
+    showCutin("yaku","役成立",G.talk,`${s}文`,G.opponentKey,"normal");
+    return;
   }
   if(G.playerHand.length===0&&G.cpuHand.length===0){drawEnd();return}
-  G.phase="hand";G.turn="player";G.msg+=" あなたの手番です。";render();
+  G.phase="cpu";G.turn="cpu";
+  G.msg+=" 相手が札を考えています……";
+  render();
+  setTimeout(runCpu,980);
+}
+
+function runCpu(){
+  if(!G || G.phase!=="cpu")return;
+  const m=cpuMove();
+  if(!m){drawEnd();return}
+  const opName=OPPONENTS[G.opponentKey].name;
+  const card=G.cpuHand.find(c=>c.id===m.h);
+  G.pendingCpuMove=m;
+  G.msg=`${opName}が手札を選んでいます……${card?` ${card.month}月「${card.name}」を出そうとしています。`:""}`;
+  render();
+  setTimeout(()=>resolveCpuMove(m),920);
+}
+
+function resolveCpuMove(m){
+  if(!G || G.phase!=="cpu")return;
+  const opName=OPPONENTS[G.opponentKey].name;
+  apply("cpu",m.h,m.f);
+  G.msg+=` ${opName}の札が動きました。取り札を確認しています……`;
+  render();
+  setTimeout(afterCpuMove,1180);
+}
+
+function afterCpuMove(){
+  if(!G || G.phase!=="cpu")return;
+  const s=calc(G.cpuCap).score;
+  if(s>G.cpuDeclared&&s>0){
+    if(cpuKoi(s)){
+      G.cpuDeclared=s;G.cpuKoi++;
+      G.phase="hand";G.turn="player";
+      G.talk=pickTalk(G.opponentKey,"cpuKoi");
+      G.msg+=` ${OPPONENTS[G.opponentKey].name}は、こいこい。あなたの手番です。`;
+      render();
+      showCutin("koi","こいこい！",G.talk,`${OPPONENTS[G.opponentKey].name}が続行`,G.opponentKey,"win");
+      return;
+    }
+    setTimeout(()=>finish("cpu"),420);
+    return;
+  }
+  if(G.playerHand.length===0&&G.cpuHand.length===0){drawEnd();return}
+  G.phase="hand";G.turn="player";
+  G.msg+=" あなたの手番です。";
+  render();
 }
 function cardClass(c){return tag(c,"bright")?"bright":tag(c,"animal")?"animal":tag(c,"ribbon")?"ribbon":"chaff"}
 function cardHtml(c,mini=false,extra=""){
@@ -4531,19 +7391,36 @@ function cutinPortraitHtml(key,state){
 function miniCardForLog(c){
   return cardHtml(c,true,"");
 }
+function logUnit(label, card, tone=""){
+  if(!card) return `<div class="logUnit empty ${tone}"><span class="logLabel">${label}</span><span class="logEmpty">なし</span></div>`;
+  return `<div class="logUnit ${tone}"><span class="logLabel">${label}</span>${miniCardForLog(card)}<span class="logCardName">${card.month}月 ${card.name}</span></div>`;
+}
+function moveLogCardsHtml(m){
+  if(!m) return "";
+  const units=[
+    logUnit("出した札",m.hand,"played"),
+    m.fieldTaken ? logUnit("手札で取った札",m.fieldTaken,"taken") : logUnit("手札の結果",null,"field")
+  ];
+  if(m.draw){
+    units.push(logUnit("山札から引いた札",m.draw,"draw"));
+    if(m.drawTaken) units.push(logUnit("山札で取った札",m.drawTaken,"drawTaken"));
+    else units.push(logUnit("山札の結果",null,"field"));
+  }
+  return units.join("");
+}
 function moveLogSummary(){
-  if(!G || !G.lastMove) return {owner:"---", text:"まだ札は動いていません。", cards:[]};
+  if(!G || !G.lastMove) return {owner:"---", text:"まだ札は動いていません。", html:""};
   const m=G.lastMove;
   const who=m.owner==="player"?"あなた":OPPONENTS[G.opponentKey].name;
   let parts=[];
   parts.push(`${who}：${m.hand.month}月「${m.hand.name}」を出した`);
-  if(m.fieldTaken) parts.push(`場の「${m.fieldTaken.name}」を取った`);
-  else parts.push("場に置いた");
+  if(m.fieldTaken) parts.push(`手札で場の「${m.fieldTaken.name}」を取った`);
+  else parts.push("手札は場に置いた");
   if(m.draw){
-    if(m.drawTaken) parts.push(`山札「${m.draw.name}」で「${m.drawTaken.name}」も取った`);
-    else parts.push(`山札「${m.draw.name}」は場へ`);
+    if(m.drawTaken) parts.push(`山札は${m.draw.month}月「${m.draw.name}」→ 場の「${m.drawTaken.name}」を取った`);
+    else parts.push(`山札は${m.draw.month}月「${m.draw.name}」→ 場に出た`);
   }
-  return {owner:who, text:parts.join(" / "), cards:m.captured||[]};
+  return {owner:who, text:parts.join(" / "), html:moveLogCardsHtml(m)};
 }
 
 
@@ -4592,13 +7469,13 @@ function renderSelect(){
         <h2>${selected.icon} ${selected.name}</h2>
         <div class="badgeRow"><span class="badge">${selected.title}</span><span class="badge">難易度：${selected.diff}</span><span class="badge">対戦 ${matchLabel()}</span></div>
         <p>${selected.desc}</p>
-        <div class="selectedLine">「${selected.line}」</div>
+        <div class="selectedLine">「${selected.selectLine||selected.line}」</div>
         <button class="selectConfirmBtn" id="previewStartBattle">この相手で対戦開始</button>
       </div>`;
     const startBtn=$("previewStartBattle");
     if(startBtn) startBtn.onclick=()=>startBattle(selectedOpponent);
   }
-  $("selectGrid").innerHTML=Object.values(OPPONENTS).map(op=>`
+  $("selectGrid").innerHTML=selectOpponents().map(op=>`
     <button class="charIconBtn ${selectedOpponent===op.key?"selected":""}" data-op="${op.key}" aria-label="${op.name}">
       <div class="charIconPortrait portrait ${op.class}">${portraitHtml(op)}</div>
       <span>${op.name}</span>
@@ -4694,7 +7571,7 @@ function render(){
   const ml=moveLogSummary();
   $("moveLogOwner").textContent=ml.owner;
   $("moveLogText").textContent=ml.text;
-  $("moveLogCards").innerHTML=ml.cards.map(c=>miniCardForLog(c)).join("");
+  $("moveLogCards").innerHTML=ml.html||"";
   const logEl=$("moveLog");
   if(logEl && logEl.dataset.nonce !== String(G.lastMoveNonce||0)){
     logEl.dataset.nonce=String(G.lastMoveNonce||0);
@@ -4868,6 +7745,8 @@ function init(){
 
   on("backTop1",()=>show("topView"));
   on("backTop2",()=>show("topView"));
+  const hudGearBtn=document.querySelector(".hudGear");
+  if(hudGearBtn) hudGearBtn.onclick=()=>show("topView");
   on("backSelect",()=>{renderSelect();show("selectView")});
   on("startBattle",()=>startBattle(selectedOpponent));
 
@@ -4896,18 +7775,21 @@ function init(){
     afterPlayer();
   });
 
-  on("winBtn",()=>finish("player"));
+  on("winBtn",()=>{
+    if(!G || G.phase!=="decision" || G.turn!=="player") return;
+    finish("player");
+  });
   on("koiBtn",()=>{
-    if(!G)return;
+    if(!G || G.phase!=="decision" || G.turn!=="player") return;
     G.playerDeclared=calc(G.playerCap).score;
     G.playerKoi++;
     G.phase="cpu";
     G.turn="cpu";
     G.talk=pickTalk(G.opponentKey,"playerKoi");
-    G.msg="あなたは、こいこいを選びました。勝負続行です。";
+    G.msg="あなたは、こいこいを選びました。勝負続行です。カットイン後に相手の手番へ移ります。";
     render();
     showCutin("koi","こいこい！",pickPlayerTalk("koi"),"あなたが続行","minaho","win");
-    setTimeout(runCpu,820);
+    setTimeout(runCpu,cutinDuration("koi")+450);
   });
 
   document.addEventListener("keydown",(e)=>{
@@ -4932,6 +7814,51 @@ function init(){
   });
 }
 init();
+
+  function rearrangeDesktopBattleUI(){
+    const shell = document.querySelector('.battleShell');
+    if(!shell) return;
+    const table = shell.querySelector('.table');
+    const top = shell.querySelector('.battleTop');
+    const score = shell.querySelector('.scorePanel');
+    const notice = shell.querySelector('.battleNotice');
+    const state = shell.querySelector('.statePanel');
+    const moveLog = shell.querySelector('.moveLog');
+    const desktop = window.matchMedia('(min-width:721px)').matches;
+    if(desktop){
+      let bottom = shell.querySelector('.desktopBottomDialog');
+      if(!bottom){
+        bottom = document.createElement('div');
+        bottom.className = 'desktopBottomDialog';
+      }
+      if(table && !bottom.isConnected){
+        table.insertAdjacentElement('afterend', bottom);
+      }
+      if(notice) bottom.appendChild(notice);
+      if(state) bottom.appendChild(state);
+      if(moveLog) bottom.appendChild(moveLog);
+    }else{
+      const bottom = shell.querySelector('.desktopBottomDialog');
+      if(bottom){
+        if(top){
+          const stateEl = bottom.querySelector('.statePanel');
+          if(stateEl) top.appendChild(stateEl);
+        }
+        if(table){
+          const noticeEl = bottom.querySelector('.battleNotice');
+          if(noticeEl) table.insertAdjacentElement('beforebegin', noticeEl);
+          const moveLogEl = bottom.querySelector('.moveLog');
+          if(moveLogEl && score) score.insertAdjacentElement('afterend', moveLogEl);
+        }
+        bottom.remove();
+      }
+    }
+  }
+  window.addEventListener('resize', rearrangeDesktopBattleUI);
+  setTimeout(rearrangeDesktopBattleUI, 0);
+  setTimeout(rearrangeDesktopBattleUI, 300);
+  document.addEventListener('DOMContentLoaded', rearrangeDesktopBattleUI);
+
 </script>
 </body>
 </html>
